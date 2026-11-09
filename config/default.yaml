@@ -1,0 +1,14 @@
+# Safe local default: never send traffic to Groq unless provider is changed.
+provider: standin
+request_timeout_s: 30
+stream: true
+
+groq:
+  base_url: https://api.groq.com/openai/v1
+  api_key_env: GROQ_API_KEY
+  # Set only after decision 0002 is approved; no model is selected yet.
+  model: null
+
+standin:
+  base_url: http://127.0.0.1:8000/v1
+  # A local simulator is not running until its server module is implemented.
