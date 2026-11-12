@@ -1,0 +1,62 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T10:05:55.389Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T10:07:55.388Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How do self-attention and recurrent layers compare in sequential operations and maximum path length, according to Table 1?",
+  "question_id": "Q16",
+  "request_id": "E6-20261111T100355343523Z-00004",
+  "retrieved_chunk_ids": [
+    "6143a7ff3078f7f3",
+    "eac40583e85e0ca5",
+    "050e57abcb002f28"
+  ],
+  "scenario": "steady",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 950.7070002146065,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 98,
+      "start_ms": 0.6055422127246857,
+      "status": "ok",
+      "tokens_in": 116,
+      "tokens_out": 100,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 960.9537501819432,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 950.922166928649,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1804.9134169705212,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 104,
+      "start_ms": 961.111709009856,
+      "status": "ok",
+      "tokens_in": 826,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+request_id,scenario,source,start_time,first_token_ms,total_ms,status,retries,tokens_in,tokens_out,retrieval_setting,answer_grade
+20261111T074651688845Z-R2-openai_gpt_oss_120b-Q24,E5-model-selection-R2-openai_gpt_oss_120b,real,2026-11-11T07:46:51.718Z,1313.607,1313.610,ok,0,1709,205,R2,
+20261111T074651688845Z-R2-openai_gpt_oss_120b-Q28,E5-model-selection-R2-openai_gpt_oss_120b,real,2026-11-11T07:46:53.145Z,1201.745,1201.747,ok,0,1792,175,R2,
+20261111T074651688845Z-R2-openai_gpt_oss_120b-Q31,E5-model-selection-R2-openai_gpt_oss_120b,real,2026-11-11T07:46:54.348Z,2479.769,2479.772,ok,0,1426,185,R2,

@@ -1,0 +1,18 @@
+{
+  "source_url": "https://console.groq.com/docs/models",
+  "price_date": "2026-11-11",
+  "models": {
+    "openai/gpt-oss-120b": {
+      "input_usd_per_million": 0.15,
+      "output_usd_per_million": 0.60
+    },
+    "openai/gpt-oss-20b": {
+      "input_usd_per_million": 0.075,
+      "output_usd_per_million": 0.30
+    },
+    "qwen/qwen3.8-27b": {
+      "input_usd_per_million": 0.80,
+      "output_usd_per_million": 4.00
+    }
+  }
+}

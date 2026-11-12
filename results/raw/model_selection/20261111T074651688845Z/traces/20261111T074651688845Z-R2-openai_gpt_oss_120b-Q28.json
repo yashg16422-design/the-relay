@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:46:53.145Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:48:53.145Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How does H-Net’s routing module turn adjacent-vector similarity into a compressed sequence?",
+  "question_id": "Q28",
+  "request_id": "20261111T074651688845Z-R2-openai_gpt_oss_120b-Q28",
+  "retrieved_chunk_ids": [
+    "eb4694b00448f6f3",
+    "55f2d76d2b98c678",
+    "b442289c4f7e2e01",
+    "524d77021815f4a6"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 504.68087522313,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 33,
+      "start_ms": 0.10475004091858864,
+      "status": "ok",
+      "tokens_in": 109,
+      "tokens_out": 55,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 507.6568331569433,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 504.73941629752517,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1201.6786253079772,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 104,
+      "start_ms": 507.8631662763655,
+      "status": "ok",
+      "tokens_in": 1683,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

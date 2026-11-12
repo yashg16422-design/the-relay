@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:46:31.651Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:48:31.651Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What limitation of dGSLM does Moshi address, and what design choice does it use to address it?",
+  "question_id": "Q17",
+  "request_id": "20261111T074631611792Z-R2-qwen_qwen3_8_27b-Q17",
+  "retrieved_chunk_ids": [
+    "157e2d5964ab0a4a",
+    "8d1886770c119dce",
+    "4ec36e934bb80d9a",
+    "adbc61e9fb1af78a"
+  ],
+  "scenario": "E5-model-selection-R2-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 630.7886247523129,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.034833792597055435,
+      "status": "ok",
+      "tokens_in": 61,
+      "tokens_out": 18,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 633.712959010154,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 631.3843335956335,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1101.9454170018435,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 633.8904998265207,
+      "status": "ok",
+      "tokens_in": 1615,
+      "tokens_out": 69,
+      "ttft_ms": null
+    }
+  ]
+}

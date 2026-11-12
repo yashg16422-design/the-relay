@@ -1,0 +1,5 @@
+# Policy defaults are hypotheses, not provider limits. Calibrate from E1-E4 and S1-S3.
+max_attempts: 3 # UNVERIFIED; includes the initial attempt
+base_delay_s: 0.25 # UNVERIFIED; initial full-jitter window
+max_delay_s: 4.0 # UNVERIFIED; full-jitter cap
+global_retry_limit: 20 # UNVERIFIED; shared process-wide retry budget

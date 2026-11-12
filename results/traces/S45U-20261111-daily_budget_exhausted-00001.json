@@ -1,0 +1,90 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-10T19:44:32.555Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-10T19:44:37.555Z",
+  "gave_up": false,
+  "level": "lite",
+  "question": "Load case 014: Explain the Transformer sequence processing and cite the relevant passage.",
+  "question_id": null,
+  "request_id": "S45U-20261111-daily_budget_exhausted-00001",
+  "retrieved_chunk_ids": [
+    "3e2c7913f35cc0cd",
+    "085f6864895837a5",
+    "d2fd4c5156741fe4"
+  ],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1.5433337539434433,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.5010835379362106,
+      "kind": "work",
+      "model": "standin",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 1.6217497177422047,
+      "status": "ok",
+      "tokens_in": 73,
+      "tokens_out": 27,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.0002495516091585,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 2.5166247505694628,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.064833676442504,
+      "kind": "work",
+      "model": "standin",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 4.044458735734224,
+      "status": "ok",
+      "tokens_in": 906,
+      "tokens_out": 17,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.148249678313732,
+      "kind": "work",
+      "model": null,
+      "name": "draft_attempt_1",
+      "reasoning_tokens": null,
+      "start_ms": 5.100374575704336,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

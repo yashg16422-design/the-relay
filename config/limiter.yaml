@@ -1,0 +1,15 @@
+# AIMD policy knobs are UNVERIFIED defaults; tune from E1-E4 and S1-S3.
+aimd_additive_step: 0.1 # UNVERIFIED; recovery increment after a successful response
+aimd_multiplicative_decrease: 0.5 # UNVERIFIED; factor applied after HTTP 429
+snapshot_freshness_s: 60 # UNVERIFIED display/admission freshness; stale header values become unknown
+
+# Provider limits stay unknown until returned by headers or measured in E2-E3.
+unverified_defaults:
+  rpm: null # UNVERIFIED
+  tpm: null # UNVERIFIED
+  rpd: null # UNVERIFIED
+  tpd: null # UNVERIFIED
+
+# Public documentation reference for preflight estimates only. This is not an
+# account-specific limit and is not used to reserve or throttle API capacity.
+public_free_plan_tpd_reference: 200000 # docs snapshot checked 2026-11-11; verify account Limits page

@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:35:34.103Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:37:34.103Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What compression target N₀ did the one-stage H-Net language-model experiment use?",
+  "question_id": "Q10",
+  "request_id": "20261111T073534072957Z-R2-qwen_qwen3_8_27b-Q10",
+  "retrieved_chunk_ids": [
+    "cbb2146fb30725d9",
+    "524d77021815f4a6",
+    "bbd57651bd41ebea",
+    "08d7274be5c0e19d"
+  ],
+  "scenario": "E5-model-selection-R2-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1206.227459013462,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.027708709239959717,
+      "status": "ok",
+      "tokens_in": 55,
+      "tokens_out": 17,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1210.988416802138,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 1207.3577917180955,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1617.9355001077056,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 1211.1301249824464,
+      "status": "ok",
+      "tokens_in": 1557,
+      "tokens_out": 63,
+      "ttft_ms": null
+    }
+  ]
+}

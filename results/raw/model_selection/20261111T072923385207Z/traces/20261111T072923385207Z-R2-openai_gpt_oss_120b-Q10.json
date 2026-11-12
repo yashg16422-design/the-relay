@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:29:26.145Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:31:26.145Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What compression target N₀ did the one-stage H-Net language-model experiment use?",
+  "question_id": "Q10",
+  "request_id": "20261111T072923385207Z-R2-openai_gpt_oss_120b-Q10",
+  "retrieved_chunk_ids": [
+    "cbb2146fb30725d9",
+    "524d77021815f4a6",
+    "bbd57651bd41ebea",
+    "08d7274be5c0e19d"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 441.2626251578331,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 61,
+      "start_ms": 0.0638328492641449,
+      "status": "ok",
+      "tokens_in": 110,
+      "tokens_out": 89,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 443.6674169264734,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 441.3661668077111,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1170.670541934669,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 443.79120785743,
+      "status": "ok",
+      "tokens_in": 1499,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

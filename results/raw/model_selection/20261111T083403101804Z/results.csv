@@ -1,0 +1,2 @@
+request_id,scenario,source,start_time,first_token_ms,total_ms,status,retries,tokens_in,tokens_out,retrieval_setting,answer_grade
+20261111T083403101804Z-R3-openai_gpt_oss_20b-Q13,E5-model-selection-R3-openai_gpt_oss_20b,real,2026-11-11T08:34:03.124Z,1883.579,1883.582,ok,0,3664,220,R3,

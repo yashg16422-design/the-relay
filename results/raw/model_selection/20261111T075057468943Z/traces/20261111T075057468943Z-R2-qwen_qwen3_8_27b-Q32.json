@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:50:57.502Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:52:57.502Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "Which languages does Moshi officially support, and how many are supported?",
+  "question_id": "Q32",
+  "request_id": "20261111T075057468943Z-R2-qwen_qwen3_8_27b-Q32",
+  "retrieved_chunk_ids": [
+    "00803f7321c212b5",
+    "522b7353203ae2eb",
+    "b894477ad50a5bab",
+    "157e2d5964ab0a4a"
+  ],
+  "scenario": "E5-model-selection-R2-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2241.432209033519,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.04620896652340889,
+      "status": "ok",
+      "tokens_in": 52,
+      "tokens_out": 17,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2247.4173340015113,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 2242.6311252638698,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3690.126500092447,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 2247.6015840657055,
+      "status": "ok",
+      "tokens_in": 1520,
+      "tokens_out": 47,
+      "ttft_ms": null
+    }
+  ]
+}

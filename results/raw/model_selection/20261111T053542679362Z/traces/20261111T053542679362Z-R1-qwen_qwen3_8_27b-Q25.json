@@ -1,0 +1,62 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T05:35:42.707Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T05:37:42.707Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How do Helium, Mimi, and Moshi's token streams work together to support full-duplex dialogue?",
+  "question_id": "Q25",
+  "request_id": "20261111T053542679362Z-R1-qwen_qwen3_8_27b-Q25",
+  "retrieved_chunk_ids": [
+    "94e9779702c36b47",
+    "5878f9d89acdc1ca",
+    "bd12e8ef0494d928"
+  ],
+  "scenario": "E5-model-selection-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 462.04254124313593,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.024833250790834427,
+      "status": "ok",
+      "tokens_in": 62,
+      "tokens_out": 25,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 465.5061662197113,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 462.16020826250315,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 895.5989582464099,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 465.7220831140876,
+      "status": "ok",
+      "tokens_in": 748,
+      "tokens_out": 83,
+      "ttft_ms": null
+    }
+  ]
+}

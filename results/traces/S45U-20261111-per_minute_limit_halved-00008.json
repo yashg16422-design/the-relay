@@ -1,0 +1,19 @@
+{
+  "answer": "2 H-Net Architecture\n2 H-Net Architecture\nH-Nets are defined as hierarchical U-Net-like networks, but with data-dependent dynamic subsampling that is learned\nend-to-end together with the rest of the model. [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 4, §2 H-Net Architecture]",
+  "arrival": "2026-11-10T19:44:26.635Z",
+  "cache_hit": true,
+  "coalesced": false,
+  "deadline": "2026-11-10T19:44:31.635Z",
+  "gave_up": false,
+  "level": "lite",
+  "question": "Load case 001: Explain the Transformer sequence processing and cite the relevant passage.",
+  "question_id": null,
+  "request_id": "S45U-20261111-per_minute_limit_halved-00008",
+  "retrieved_chunk_ids": [
+    "3e2c7913f35cc0cd",
+    "085f6864895837a5",
+    "d2fd4c5156741fe4"
+  ],
+  "scenario": "per_minute_limit_halved",
+  "spans": []
+}

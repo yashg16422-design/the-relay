@@ -30,11 +30,13 @@ def test_default_config_selects_local_standin() -> None:
     assert config.api_key is None
 
 
-def test_groq_provider_requires_a_selected_model() -> None:
+def test_groq_provider_can_be_loaded_before_model_discovery() -> None:
     raw = sample_config(provider="groq")
 
-    with pytest.raises(ValidationError, match="decision 0002"):
-        AppConfig.model_validate(raw)
+    config = AppConfig.model_validate(raw)
+
+    assert config.provider == "groq"
+    assert config.groq.model is None
 
 
 @pytest.mark.parametrize(
@@ -77,6 +79,23 @@ def test_groq_provider_fails_on_missing_or_blank_key(
         monkeypatch.setenv("TEST_GROQ_KEY", key)
 
     with pytest.raises(RuntimeError, match="Missing TEST_GROQ_KEY"):
+        _ = config.api_key
+
+
+def test_groq_example_key_placeholder_is_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
+    config = AppConfig.model_validate(
+        sample_config(
+            provider="groq",
+            groq={
+                "base_url": "https://api.groq.com/openai/v1",
+                "api_key_env": "TEST_GROQ_KEY",
+                "model": "test-model",
+            },
+        )
+    )
+    monkeypatch.setenv("TEST_GROQ_KEY", "put-your-key-in-.env-not-here")
+
+    with pytest.raises(RuntimeError, match="example placeholder"):
         _ = config.api_key
 
 

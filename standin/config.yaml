@@ -1,0 +1,29 @@
+# Simulation settings used by the published stand-in runs. Do not retune these
+# numbers after the fact: the saved rows were produced with the values below.
+# Header evidence from 2026-11-11 supports RPD 1000 and TPM 8000. This file
+# already uses RPD 1000. It still uses TPM 30000 and RPM 60 because those were
+# the placeholders for the published runs, not a calibrated replacement.
+# The five real steady calls (TTFT 1330.4 to 3174.9 ms, n=5) are too few to
+# replace base_delay_ms, stream delay, or a latency distribution.
+# Simulation settings only. Every value below stays UNVERIFIED as a latency fit.
+seed: 17 # UNVERIFIED: deterministic simulation seed; not a service measurement.
+token_bytes_per_token: 4 # UNVERIFIED: stand-in token-count approximation; calibrate from usage data.
+base_delay_ms: 0 # UNVERIFIED: set from measured base latency (E1); zero disables this delay.
+load_delay_per_inflight_ms: 0 # UNVERIFIED: set from measured concurrency slowdown (E4).
+slow_success_probability: 0.0 # UNVERIFIED: set from measured slow-success frequency (E1/E4).
+slow_success_extra_ms: 500 # UNVERIFIED: set from the measured slow-success tail (E1).
+failure_5xx_probability: 0.0 # UNVERIFIED: set from observed 5xx frequency; zero disables injected 5xxs.
+failure_5xx_status: 503 # UNVERIFIED: stand-in injection status; not a measured provider value.
+hang_probability: 0.0 # UNVERIFIED: set from observed hangs/timeouts; zero disables injected hangs.
+hang_duration_ms: 30000 # UNVERIFIED: simulation hang duration; tune against measured client patience.
+chunk_chars: 8 # UNVERIFIED: stand-in SSE chunk width; not a measured provider token size.
+stream_chunk_delay_ms: 0 # UNVERIFIED: per-chunk delay; calibrate from measured token arrival spacing (E1).
+reply_prefix: "Stand-in reply: " # UNVERIFIED: deterministic simulation text, not model output.
+
+# Placeholder ceilings permit local load experiments. They do not represent
+# Groq limits. Replace each value from E2/E3 or label it UNVERIFIED in reports.
+limits:
+  requests_per_minute: 60 # UNVERIFIED: replace with measured E2 request window.
+  tokens_per_minute: 30000 # UNVERIFIED: replace with measured E3 token window.
+  requests_per_day: 1000 # UNVERIFIED: replace with observed account RPD header/limit.
+  tokens_per_day: 1000000 # UNVERIFIED: replace only if a daily token limit is observed.

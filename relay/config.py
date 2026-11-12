@@ -8,7 +8,7 @@ from typing import Literal
 from urllib.parse import urlsplit
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -62,14 +62,6 @@ class AppConfig(BaseModel):
     groq: GroqConfig
     standin: ProviderConfig
 
-    @model_validator(mode="after")
-    def require_selected_model_for_groq(self) -> AppConfig:
-        if self.provider == "groq" and not self.groq.model:
-            raise ValueError(
-                "Set groq.model only after decision 0002 selects a model."
-            )
-        return self
-
     @property
     def api_key(self) -> str | None:
         """Read a key from the configured environment variable, never YAML."""
@@ -79,6 +71,10 @@ class AppConfig(BaseModel):
         if not key:
             raise RuntimeError(
                 f"Missing {self.groq.api_key_env}; add it to the ignored .env file."
+            )
+        if key.casefold().startswith("put-your-key-"):
+            raise RuntimeError(
+                f"{self.groq.api_key_env} still contains the example placeholder."
             )
         return key
 

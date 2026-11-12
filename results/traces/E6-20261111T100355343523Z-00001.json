@@ -1,0 +1,62 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T10:04:25.382Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T10:06:25.382Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": "Q04",
+  "request_id": "E6-20261111T100355343523Z-00001",
+  "retrieved_chunk_ids": [
+    "e3581c8aaf44ce7d",
+    "c5cafd620215036b",
+    "0cbfae0d4019333a"
+  ],
+  "scenario": "steady",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 658.7418331764638,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 54,
+      "start_ms": 0.3637499175965786,
+      "status": "ok",
+      "tokens_in": 104,
+      "tokens_out": 75,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 662.8228751942515,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 658.8683328591287,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1330.3343751467764,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 662.9784582182765,
+      "status": "ok",
+      "tokens_in": 921,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Retrieval choices are candidates; the winning setting must be measured on gold questions.
+semantic_model: BAAI/bge-small-en-v1.5 # UNVERIFIED; download/use only for RRF comparison
+reranker_model: cross-encoder/ms-marco-MiniLM-L-6-v2 # UNVERIFIED; compare latency and quality
+rrf_k: 60 # UNVERIFIED initial fusion constant; retain as a setting for comparison
+candidate_multiplier: 3 # UNVERIFIED initial candidate depth before fusion/reranking

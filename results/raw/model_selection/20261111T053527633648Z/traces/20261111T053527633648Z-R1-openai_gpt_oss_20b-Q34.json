@@ -1,0 +1,62 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T05:35:29.022Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T05:37:29.022Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What exact GPU model did the H-Net authors use for XL training, and how many wall-clock hours did that run take?",
+  "question_id": "Q34",
+  "request_id": "20261111T053527633648Z-R1-openai_gpt_oss_20b-Q34",
+  "retrieved_chunk_ids": [
+    "f4efe59e0c17d89b",
+    "e2bcf07a198c85bf",
+    "c486e14dc3f43a72"
+  ],
+  "scenario": "E5-model-selection-R1-openai_gpt_oss_20b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 432.1562498807907,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 98,
+      "start_ms": 0.043709296733140945,
+      "status": "ok",
+      "tokens_in": 118,
+      "tokens_out": 100,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 435.7910421676934,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 432.219167239964,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1058.3734172396362,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 96,
+      "start_ms": 435.85645919665694,
+      "status": "ok",
+      "tokens_in": 993,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 0003 — Citation format for answers
 
-- Status: proposed
+- Status: accepted (with verification outstanding)
 - Date: 2026-11-09
 - Phase / gate: A
 

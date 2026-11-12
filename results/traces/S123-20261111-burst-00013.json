@@ -1,0 +1,34 @@
+{
+  "answer": "2 Dechunking\nThe dechunking layer (Dechunk in equation (3)) consists of a smoothing module and upsampler, as illustrated in Figure 1-\n( top-right ). [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 6, §2.2.2 Dechunking]",
+  "arrival": "2026-11-10T19:39:31.953Z",
+  "cache_hit": false,
+  "coalesced": true,
+  "deadline": "2026-11-10T19:39:39.953Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What problem does Dynamic Chunking study?",
+  "question_id": null,
+  "request_id": "S123-20261111-burst-00013",
+  "retrieved_chunk_ids": [
+    "a70741935f0c7653",
+    "e51eeacc0d3f0322",
+    "9d458a9022c1a938"
+  ],
+  "scenario": "burst",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 30.553792137652636,
+      "kind": "wait",
+      "model": null,
+      "name": "coalesced_wait",
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "coalesced",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

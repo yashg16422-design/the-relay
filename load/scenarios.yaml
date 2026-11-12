@@ -1,0 +1,68 @@
+# These are local workload designs, not measured provider limits or performance.
+# The stand-in's numeric ceilings remain explicitly UNVERIFIED in standin/config.yaml.
+# The queue uses lower numeric priorities for more urgent synthetic requests.
+seed: 20261109 # Scenario RNG seed; chosen for reproducibility, not measured.
+retrieval_setting: R1 # Local baseline setting; change after retrieval comparison.
+results_path: results/results.csv # Append-only contract output.
+trace_dir: results/traces # One append-only JSON file per request_id.
+questions:
+  - How does the Transformer handle sequence processing?
+  - What does the Moshi paper describe about real-time dialogue?
+  - What problem does Dynamic Chunking study?
+  - Which passages explain the paper's main architecture?
+
+scenarios:
+  steady:
+    arrival_mode: poisson
+    max_requests: 20 # UNVERIFIED workload size; local scenario choice.
+    rate_per_minute: 30 # UNVERIFIED offered rate; local scenario choice.
+    duration_seconds: 30 # UNVERIFIED duration; local scenario choice.
+    patience_ms: 5000 # UNVERIFIED local user patience assumption.
+    deadline_ms: 8000 # UNVERIFIED local request deadline assumption.
+    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    urgent_fraction: 0.2 # UNVERIFIED synthetic request-class mix for queue priority tests.
+
+  burst:
+    arrival_mode: burst
+    max_requests: 40 # UNVERIFIED burst size; intended to exceed placeholder stand-in RPM.
+    burst_spread_ms: 0 # UNVERIFIED spread; zero offers all requests at once.
+    patience_ms: 5000 # UNVERIFIED local user patience assumption.
+    deadline_ms: 8000 # UNVERIFIED local request deadline assumption.
+    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    urgent_fraction: 0.2 # UNVERIFIED synthetic request-class mix for queue priority tests.
+
+  sustained_overload:
+    arrival_mode: poisson
+    max_requests: 80 # UNVERIFIED workload size; local scenario choice.
+    rate_per_minute: 480 # UNVERIFIED offered rate; local scenario choice.
+    duration_seconds: 10 # UNVERIFIED duration; local scenario choice.
+    patience_ms: 3000 # UNVERIFIED local user patience assumption.
+    deadline_ms: 5000 # UNVERIFIED local request deadline assumption.
+    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    urgent_fraction: 0.2 # UNVERIFIED synthetic request-class mix for queue priority tests.
+
+  per_minute_limit_halved:
+    arrival_mode: poisson
+    max_requests: 30 # UNVERIFIED workload size; local scenario choice.
+    rate_per_minute: 180 # UNVERIFIED offered rate; local scenario choice.
+    duration_seconds: 10 # UNVERIFIED duration; local scenario choice.
+    patience_ms: 3000 # UNVERIFIED local user patience assumption.
+    deadline_ms: 5000 # UNVERIFIED local request deadline assumption.
+    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    limit_changes:
+      - at_seconds: 3 # UNVERIFIED transition time; local scenario choice.
+        limits:
+          requests_per_minute: 30 # UNVERIFIED; halves stand-in's 60 RPM placeholder only.
+
+  daily_budget_exhausted:
+    arrival_mode: poisson
+    max_requests: 20 # UNVERIFIED workload size; local scenario choice.
+    rate_per_minute: 240 # UNVERIFIED offered rate; local scenario choice.
+    duration_seconds: 8 # UNVERIFIED duration; local scenario choice.
+    patience_ms: 3000 # UNVERIFIED local user patience assumption.
+    deadline_ms: 5000 # UNVERIFIED local request deadline assumption.
+    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    limit_changes:
+      - at_seconds: 2 # UNVERIFIED transition time; local scenario choice.
+        limits:
+          requests_per_day: 5 # UNVERIFIED local ceiling to force exhaustion; not a Groq limit.

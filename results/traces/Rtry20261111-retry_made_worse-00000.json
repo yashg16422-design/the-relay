@@ -1,0 +1,58 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T18:28:44.745Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T18:28:49.744Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How does the Transformer handle sequence processing?",
+  "question_id": null,
+  "request_id": "Rtry20261111-retry_made_worse-00000",
+  "retrieved_chunk_ids": [],
+  "scenario": "retry_made_worse",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.098750185221434,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_1",
+      "reasoning_tokens": null,
+      "start_ms": 0.02345908433198929,
+      "status": "http_503",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 355.28345918282866,
+      "kind": "retry",
+      "model": null,
+      "name": "understand_retry_backoff",
+      "reasoning_tokens": null,
+      "start_ms": 4.120875149965286,
+      "status": "retry",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 2,
+      "cached_tokens": null,
+      "end_ms": 357.86387510597706,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_2",
+      "reasoning_tokens": null,
+      "start_ms": 355.34708434715867,
+      "status": "http_503",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

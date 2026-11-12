@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:49:20.867Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:51:20.867Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "Which languages does Moshi officially support, and how many are supported?",
+  "question_id": "Q32",
+  "request_id": "20261111T074920835500Z-R2-openai_gpt_oss_120b-Q32",
+  "retrieved_chunk_ids": [
+    "b4feb2abcba6a89b",
+    "e6aa8682aaacc300",
+    "35060eb5340b9d96",
+    "8d1886770c119dce"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4162.69366722554,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 66,
+      "start_ms": 0.026499852538108826,
+      "status": "ok",
+      "tokens_in": 107,
+      "tokens_out": 89,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4167.707500047982,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 4164.176709018648,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5081.336624920368,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 58,
+      "start_ms": 4167.850541882217,
+      "status": "ok",
+      "tokens_in": 1110,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

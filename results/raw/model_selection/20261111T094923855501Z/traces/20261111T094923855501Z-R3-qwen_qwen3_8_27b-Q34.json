@@ -1,0 +1,65 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T09:49:23.879Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T09:51:23.879Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What exact GPU model did the H-Net authors use for XL training, and how many wall-clock hours did that run take?",
+  "question_id": "Q34",
+  "request_id": "20261111T094923855501Z-R3-qwen_qwen3_8_27b-Q34",
+  "retrieved_chunk_ids": [
+    "50fe52a8aa401c7c",
+    "236f0d6524f98d59",
+    "d9ae9f7458fd4229",
+    "c99b5be09de24bf5",
+    "15cd54b2300e4901",
+    "418ec6a963b1218f"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 354.81924982741475,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.03216695040464401,
+      "status": "ok",
+      "tokens_in": 64,
+      "tokens_out": 18,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 718.0857500061393,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 355.87937477976084,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1387.7765419892967,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 718.1898327544332,
+      "status": "ok",
+      "tokens_in": 4030,
+      "tokens_out": 60,
+      "ttft_ms": null
+    }
+  ]
+}

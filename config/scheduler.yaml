@@ -1,0 +1,8 @@
+# Values are UNVERIFIED policy defaults until calibrated with E1-E4 and S1-S3.
+queue_capacity: 200 # UNVERIFIED; validate against arrival and wait-time measurements
+unverified_concurrency_ceiling: 10 # UNVERIFIED; calibrate with E4 and stand-in runs
+patient_wait_s: 5 # UNVERIFIED; measure against observed user patience
+degradation:
+  full_latency_s: 6.0 # UNVERIFIED stand-in planning estimate; replace with measured full-pipeline p95
+  lite_latency_s: 3.0 # UNVERIFIED stand-in planning estimate; replace with measured no-repair p95
+  extractive_latency_s: 0.5 # UNVERIFIED stand-in planning estimate; replace with retrieval-only p95

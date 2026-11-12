@@ -1,0 +1,93 @@
+{
+  "answer": "The chunking layer in H-Net consists of a routing module that dynamically defines chunk boundaries and a downsampler that selectively retains vectors based on these boundary indicators [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 3, §1 −'!\"$]. [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 5]",
+  "arrival": "2026-11-11T09:44:33.821Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T09:46:33.821Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What modules make up H-Net's chunking layer?",
+  "question_id": "Q06",
+  "request_id": "20261111T094433797377Z-R3-qwen_qwen3_8_27b-Q06",
+  "retrieved_chunk_ids": [
+    "2958fa6a656a0a7c",
+    "f8d2807c6b74426f",
+    "1d915a0609ce4a05",
+    "169cd62a1c6e1539",
+    "38037fdac71d29f5",
+    "8f9a83c6742b9d39"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1222.7323330007493,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.03154110163450241,
+      "status": "ok",
+      "tokens_in": 50,
+      "tokens_out": 12,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1617.2285410575569,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 1222.8533327579498,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2182.1632077917457,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 1617.3182907514274,
+      "status": "ok",
+      "tokens_in": 2317,
+      "tokens_out": 95,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2659.5140830613673,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "reasoning_tokens": null,
+      "start_ms": 2182.3976249434054,
+      "status": "ok",
+      "tokens_in": 2338,
+      "tokens_out": 70,
+      "ttft_ms": 343.8567500561476
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2660.2703747339547,
+      "kind": "work",
+      "model": null,
+      "name": "sentence_gate",
+      "reasoning_tokens": null,
+      "start_ms": 2659.5713328570127,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

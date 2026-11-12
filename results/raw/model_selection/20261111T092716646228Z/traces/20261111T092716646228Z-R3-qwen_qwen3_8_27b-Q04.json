@@ -1,0 +1,93 @@
+{
+  "answer": "The three main components of Moshi's architecture are a bespoke text language model backbone (Helium), a neural audio codec with residual vector quantization and distilled semantic knowledge (Mimi), and the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, including time-aligned text tokens for Moshi when using Inner Monologue [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6].",
+  "arrival": "2026-11-11T09:27:16.670Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T09:29:16.670Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": "Q04",
+  "request_id": "20261111T092716646228Z-R3-qwen_qwen3_8_27b-Q04",
+  "retrieved_chunk_ids": [
+    "882feb53d30cf778",
+    "3e0af0b355fafac3",
+    "583793135d089d46",
+    "c246143b4dade4b5",
+    "8701153e918ed278",
+    "5ecb3a2fabb4d432"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 450.3251248970628,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.04504155367612839,
+      "status": "ok",
+      "tokens_in": 49,
+      "tokens_out": 13,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 808.896292001009,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 451.4841246418655,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1277.7845417149365,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 808.9794996194541,
+      "status": "ok",
+      "tokens_in": 2117,
+      "tokens_out": 77,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1755.258958786726,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "reasoning_tokens": null,
+      "start_ms": 1278.0111669562757,
+      "status": "ok",
+      "tokens_in": 2138,
+      "tokens_out": 87,
+      "ttft_ms": 310.4172917082906
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1756.6437497735023,
+      "kind": "work",
+      "model": null,
+      "name": "sentence_gate",
+      "reasoning_tokens": null,
+      "start_ms": 1755.3180418908596,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

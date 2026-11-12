@@ -1,0 +1,18 @@
+# Values are the candidate settings implemented in library/ingest.py.
+# They describe configuration, not a measured quality winner.
+retrieval_settings:
+  R1:
+    piece_size_chars: 900
+    overlap_chars: 90
+    top_k: 3
+    rerank: false
+  R2:
+    piece_size_chars: 1600
+    overlap_chars: 160
+    top_k: 4
+    rerank: false
+  R3:
+    piece_size_chars: 2600
+    overlap_chars: 260
+    top_k: 6
+    rerank: true

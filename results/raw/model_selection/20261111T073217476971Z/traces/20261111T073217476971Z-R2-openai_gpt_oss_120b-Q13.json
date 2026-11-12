@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:32:17.508Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:34:17.508Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How many Mimi RVQ quantizers and codebook entries per quantizer correspond to the reported 1.1 kbps bitrate at 12.5 Hz?",
+  "question_id": "Q13",
+  "request_id": "20261111T073217476971Z-R2-openai_gpt_oss_120b-Q13",
+  "retrieved_chunk_ids": [
+    "eba56f1e2313646a",
+    "c8e4825ddf7c72a0",
+    "16ff3ff7c93769e6",
+    "04ed3098dd211ac8"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 847.9049997404218,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 77,
+      "start_ms": 0.024625100195407867,
+      "status": "ok",
+      "tokens_in": 125,
+      "tokens_out": 100,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 853.2318747602403,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 849.2192081175745,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1701.8512501381338,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 853.380958084017,
+      "status": "ok",
+      "tokens_in": 1953,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

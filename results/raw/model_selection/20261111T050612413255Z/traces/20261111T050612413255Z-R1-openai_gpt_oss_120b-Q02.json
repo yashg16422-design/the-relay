@@ -1,0 +1,30 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T05:06:12.470Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T05:08:12.470Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How many identical layers are in the Transformer encoder stack?",
+  "question_id": "Q02",
+  "request_id": "20261111T050612413255Z-R1-openai_gpt_oss_120b-Q02",
+  "retrieved_chunk_ids": [],
+  "scenario": "E5-model-selection-R1-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 15.240791020914912,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand_attempt_1",
+      "reasoning_tokens": null,
+      "start_ms": 0.026208115741610527,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

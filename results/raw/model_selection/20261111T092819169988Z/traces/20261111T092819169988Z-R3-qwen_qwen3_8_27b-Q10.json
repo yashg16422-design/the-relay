@@ -1,0 +1,93 @@
+{
+  "answer": "The one-stage H-Net language-model experiment used a compression target of $N_0 = 6$ [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 11, §1024 , 1536 , 2048].",
+  "arrival": "2026-11-11T09:28:19.192Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T09:30:19.192Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What compression target N₀ did the one-stage H-Net language-model experiment use?",
+  "question_id": "Q10",
+  "request_id": "20261111T092819169988Z-R3-qwen_qwen3_8_27b-Q10",
+  "retrieved_chunk_ids": [
+    "c99b5be09de24bf5",
+    "15cd54b2300e4901",
+    "9e400484e3c3f886",
+    "236f0d6524f98d59",
+    "fa4e9ad4a9958e3a",
+    "169cd62a1c6e1539"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 474.0131669677794,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.035250093787908554,
+      "status": "ok",
+      "tokens_in": 55,
+      "tokens_out": 17,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 830.1955419592559,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 474.1385420784354,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1386.7729580961168,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 830.3038328886032,
+      "status": "ok",
+      "tokens_in": 3402,
+      "tokens_out": 64,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2934.1286248527467,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "reasoning_tokens": null,
+      "start_ms": 1387.0381671003997,
+      "status": "ok",
+      "tokens_in": 3423,
+      "tokens_out": 39,
+      "ttft_ms": 1454.0349156595767
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2934.844166971743,
+      "kind": "work",
+      "model": null,
+      "name": "sentence_gate",
+      "reasoning_tokens": null,
+      "start_ms": 2934.1790420003235,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

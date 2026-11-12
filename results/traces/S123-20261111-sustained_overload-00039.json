@@ -1,0 +1,19 @@
+{
+  "answer": "Front matter\nUSER: Hello, I wanted to talk to you about The Three Musketeers. [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 63]",
+  "arrival": "2026-11-10T19:39:37.354Z",
+  "cache_hit": true,
+  "coalesced": false,
+  "deadline": "2026-11-10T19:39:42.354Z",
+  "gave_up": false,
+  "level": "lite",
+  "question": "What does the Moshi paper describe about real-time dialogue?",
+  "question_id": null,
+  "request_id": "S123-20261111-sustained_overload-00039",
+  "retrieved_chunk_ids": [
+    "a19a4f259c93ac2a",
+    "528b467194ab31d6",
+    "41fced27cd1e9df3"
+  ],
+  "scenario": "sustained_overload",
+  "spans": []
+}

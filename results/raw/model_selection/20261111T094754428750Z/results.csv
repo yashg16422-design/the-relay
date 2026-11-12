@@ -1,0 +1,2 @@
+request_id,scenario,source,start_time,first_token_ms,total_ms,status,retries,tokens_in,tokens_out,retrieval_setting,answer_grade
+20261111T094754428750Z-R3-qwen_qwen3_8_27b-Q25,E5-model-selection-R3-qwen_qwen3_8_27b,real,2026-11-11T09:47:54.453Z,2185.544,2185.547,ok,0,5059,400,R3,

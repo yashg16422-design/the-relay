@@ -1,0 +1,65 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T08:50:55.127Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T08:52:55.127Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How does the Transformer decoder prevent a position from using future output positions?",
+  "question_id": "Q24",
+  "request_id": "20261111T085055103553Z-R3-qwen_qwen3_8_27b-Q24",
+  "retrieved_chunk_ids": [
+    "4b0c9e36816101f2",
+    "7a58d4ed8872113f",
+    "34a762ce5baebd32",
+    "eddddb661d1edbc9",
+    "6909d5ea3832aa59",
+    "3f9d92b7392a13f6"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 519.3634168244898,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.029624905437231064,
+      "status": "ok",
+      "tokens_in": 52,
+      "tokens_out": 20,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 875.8243327029049,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 520.4377919435501,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1501.7195828258991,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 875.903541687876,
+      "status": "ok",
+      "tokens_in": 2243,
+      "tokens_out": 74,
+      "ttft_ms": null
+    }
+  ]
+}

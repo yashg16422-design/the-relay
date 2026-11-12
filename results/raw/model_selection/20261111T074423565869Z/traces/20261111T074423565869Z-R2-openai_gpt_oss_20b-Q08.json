@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:44:25.039Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:46:25.039Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What BLEU score did the big Transformer report on WMT 2014 English-to-German?",
+  "question_id": "Q08",
+  "request_id": "20261111T074423565869Z-R2-openai_gpt_oss_20b-Q08",
+  "retrieved_chunk_ids": [
+    "4c7abc7896305562",
+    "2c55f51270211fe0",
+    "423aa2c75fe9aba3",
+    "46088815a23df0f5"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_20b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 940.2829585596919,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 80,
+      "start_ms": 0.0566667877137661,
+      "status": "ok",
+      "tokens_in": 113,
+      "tokens_out": 100,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 944.84145892784,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 940.3972919099033,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1553.1700416468084,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 102,
+      "start_ms": 944.9716247618198,
+      "status": "ok",
+      "tokens_in": 1378,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

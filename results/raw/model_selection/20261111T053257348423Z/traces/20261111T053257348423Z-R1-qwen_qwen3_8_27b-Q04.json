@@ -1,0 +1,90 @@
+{
+  "answer": "The three main components that make up Moshi's architecture are the Helium text language model backbone, the Mimi neural audio codec, and the streaming hierarchical generation of semantic and acoustic tokens [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6].",
+  "arrival": "2026-11-11T05:32:58.888Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T05:34:58.888Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": "Q04",
+  "request_id": "20261111T053257348423Z-R1-qwen_qwen3_8_27b-Q04",
+  "retrieved_chunk_ids": [
+    "e3581c8aaf44ce7d",
+    "c5cafd620215036b",
+    "0cbfae0d4019333a"
+  ],
+  "scenario": "E5-model-selection-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 355.65154114738107,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.05541602149605751,
+      "status": "ok",
+      "tokens_in": 49,
+      "tokens_out": 11,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 360.9329159371555,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 355.72824999690056,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 982.0259162224829,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 361.094375140965,
+      "status": "ok",
+      "tokens_in": 900,
+      "tokens_out": 69,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1344.6018327958882,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "reasoning_tokens": null,
+      "start_ms": 982.1795411407948,
+      "status": "ok",
+      "tokens_in": 921,
+      "tokens_out": 56,
+      "ttft_ms": 228.32850040867925
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1345.2099161222577,
+      "kind": "work",
+      "model": null,
+      "name": "sentence_gate",
+      "reasoning_tokens": null,
+      "start_ms": 1344.6497498080134,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

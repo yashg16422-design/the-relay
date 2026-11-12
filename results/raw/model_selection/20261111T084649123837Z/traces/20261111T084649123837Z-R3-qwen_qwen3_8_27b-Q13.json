@@ -1,0 +1,65 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T08:46:49.153Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T08:48:49.153Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How many Mimi RVQ quantizers and codebook entries per quantizer correspond to the reported 1.1 kbps bitrate at 12.5 Hz?",
+  "question_id": "Q13",
+  "request_id": "20261111T084649123837Z-R3-qwen_qwen3_8_27b-Q13",
+  "retrieved_chunk_ids": [
+    "604549401bc30bca",
+    "acf082c011d2449a",
+    "e4d3e4459d53e503",
+    "a92aacd2f69d97a9",
+    "5d821bccba432c9b",
+    "91666a3e72339130"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 555.0351249985397,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.02745911478996277,
+      "status": "ok",
+      "tokens_in": 72,
+      "tokens_out": 34,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 911.9867091067135,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 555.9532502666116,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1568.688292056322,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 912.0703749358654,
+      "status": "ok",
+      "tokens_in": 3748,
+      "tokens_out": 92,
+      "ttft_ms": null
+    }
+  ]
+}

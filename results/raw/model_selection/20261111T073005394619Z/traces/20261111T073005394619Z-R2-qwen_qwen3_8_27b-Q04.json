@@ -1,0 +1,77 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:30:07.493Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:32:07.493Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": "Q04",
+  "request_id": "20261111T073005394619Z-R2-qwen_qwen3_8_27b-Q04",
+  "retrieved_chunk_ids": [
+    "1fbaab722c7966cb",
+    "d719bdeab314c216",
+    "8892b4b0d6e4ea7a",
+    "157e2d5964ab0a4a"
+  ],
+  "scenario": "E5-model-selection-R2-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 289.4577500410378,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.07225014269351959,
+      "status": "ok",
+      "tokens_in": 49,
+      "tokens_out": 12,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 292.22033405676484,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 289.5343340933323,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 728.467124979943,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 292.49962512403727,
+      "status": "ok",
+      "tokens_in": 1713,
+      "tokens_out": 73,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 824.6887498535216,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft_attempt_1",
+      "reasoning_tokens": null,
+      "start_ms": 728.6580419167876,
+      "status": "http_429",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "answer": "2 Dechunking\nThe dechunking layer (Dechunk in equation (3)) consists of a smoothing module and upsampler, as illustrated in Figure 1-\n( top-right ). [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 6, §2.2.2 Dechunking]",
+  "arrival": "2026-11-10T19:39:38.368Z",
+  "cache_hit": true,
+  "coalesced": false,
+  "deadline": "2026-11-10T19:39:43.368Z",
+  "gave_up": false,
+  "level": "lite",
+  "question": "What problem does Dynamic Chunking study?",
+  "question_id": null,
+  "request_id": "S123-20261111-sustained_overload-00044",
+  "retrieved_chunk_ids": [
+    "a70741935f0c7653",
+    "e51eeacc0d3f0322",
+    "9d458a9022c1a938"
+  ],
+  "scenario": "sustained_overload",
+  "spans": []
+}

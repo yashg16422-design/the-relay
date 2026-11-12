@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:29:43.338Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:31:43.338Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How many identical layers are in the Transformer encoder stack?",
+  "question_id": "Q02",
+  "request_id": "20261111T072943312315Z-R2-openai_gpt_oss_20b-Q02",
+  "retrieved_chunk_ids": [
+    "19debc4478a36ec3",
+    "ff9be586d606eea4",
+    "b54e76bd5c346049",
+    "bcd16fc541b59f0b"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_20b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 703.4505000337958,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 58,
+      "start_ms": 0.022666994482278824,
+      "status": "ok",
+      "tokens_in": 104,
+      "tokens_out": 79,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 706.9377917796373,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 703.5909588448703,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1265.027292072773,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 96,
+      "start_ms": 707.0539589039981,
+      "status": "ok",
+      "tokens_in": 1131,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

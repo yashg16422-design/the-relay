@@ -1,0 +1,6 @@
+# Output limits are provisional; validate with model selection and Phase 1 measurements.
+understand_max_completion_tokens: 100 # UNVERIFIED; small query rewrite budget
+judge_max_completion_tokens: 120 # UNVERIFIED; small answerability budget
+draft_max_completion_tokens: 400 # UNVERIFIED; tune against answer quality and latency
+repair_max_completion_tokens: 400 # UNVERIFIED; one bounded repair pass
+max_repairs: 1 # UNVERIFIED policy default; prevents answer-repair loops

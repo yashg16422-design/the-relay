@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:32:20.622Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:34:20.622Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What does the H-Net pooling ablation suggest about fixed-width chunking?",
+  "question_id": "Q19",
+  "request_id": "20261111T073217476971Z-R2-openai_gpt_oss_120b-Q19",
+  "retrieved_chunk_ids": [
+    "90ac59195b160e60",
+    "37eb3cc6d9d4c14c",
+    "4640172a132a4050",
+    "bbd57651bd41ebea"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 668.7657092697918,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 60,
+      "start_ms": 0.08720904588699341,
+      "status": "ok",
+      "tokens_in": 108,
+      "tokens_out": 82,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 671.1799590848386,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 668.830250389874,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1432.2826671414077,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 671.2874174118042,
+      "status": "ok",
+      "tokens_in": 1281,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

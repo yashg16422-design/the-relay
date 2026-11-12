@@ -1,0 +1,3 @@
+# Local cache policy hypotheses, not provider-derived limits.
+ttl_seconds: 60 # UNVERIFIED; compare cache hit rate and freshness before changing.
+max_entries: 1000 # UNVERIFIED process memory cap; tune from measured workload.

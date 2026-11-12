@@ -1,0 +1,44 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-10T19:44:35.574Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-10T19:44:40.574Z",
+  "gave_up": false,
+  "level": "lite",
+  "question": "Load case 020: Explain the Transformer sequence processing and cite the relevant passage.",
+  "question_id": null,
+  "request_id": "S45U-20261111-daily_budget_exhausted-00010",
+  "retrieved_chunk_ids": [],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.7700324319303036,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.267198499292135,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_1",
+      "reasoning_tokens": null,
+      "start_ms": 4.117782460525632,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

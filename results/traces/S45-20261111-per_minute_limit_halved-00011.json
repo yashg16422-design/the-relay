@@ -1,0 +1,19 @@
+{
+  "answer": "1 How does our model behave in terms of producing toxic content? [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 35, §1 How does our model behave in terms of producing toxic content?]",
+  "arrival": "2026-11-10T19:41:01.197Z",
+  "cache_hit": true,
+  "coalesced": false,
+  "deadline": "2026-11-10T19:41:06.197Z",
+  "gave_up": false,
+  "level": "lite",
+  "question": "How does the Transformer handle sequence processing?",
+  "question_id": null,
+  "request_id": "S45-20261111-per_minute_limit_halved-00011",
+  "retrieved_chunk_ids": [
+    "088a8f2fe12d22ec",
+    "165489a52d333f89",
+    "41c6ef0f0645ef67"
+  ],
+  "scenario": "per_minute_limit_halved",
+  "spans": []
+}

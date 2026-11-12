@@ -1,0 +1,383 @@
+# 35 source-verified evaluation questions. Accepted with eval/gold_answers.md on 2026-11-11. Type labels remain as written there.
+questions:
+- id: Q01
+  question: What architecture did the authors propose, and which common operations
+    does it dispense with?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 1
+    excerpt: We propose a new simple network architecture, the Transformer, based
+      solely on attention mechanisms, dispensing with recurrence and convolutions
+      entirely.
+- id: Q02
+  question: How many identical layers are in the Transformer encoder stack?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: The encoder is composed of a stack of N = 6 identical layers.
+- id: Q03
+  question: What additional sub-layer does each Transformer decoder layer have beyond
+    the encoder's two sub-layers?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: the decoder inserts a third sub-layer, which performs multi-head attention
+      over the output of the encoder stack.
+- id: Q04
+  question: What three main components make up Moshi's architecture?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 6
+    excerpt: 'The main components of Moshi’s architecture are: a bespoke text language
+      model backbone (Helium, see Section 3.2); a neural audio codec with residual
+      vector quantization and with semantic knowledge distilled from a self-supervised
+      speech model (Mimi, Section 3.3); the streaming, hierarchical generation of
+      semantic and acoustic tokens for both the user and Moshi, along with time-aligned
+      text tokens for Moshi when using Inner Monologue (Section 3.4).'
+- id: Q05
+  question: Which spoken-conversation behaviors do the authors say turn-based models
+    miss?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 2
+    excerpt: it falls short in modeling aspects of spoken conversations such as interruptions,
+      overlapping speech— which amounts for 10 to 20% of spoken time (C¸etin and Shriberg,
+      2006) —and backchanneling (i.e. non-interrupting interjections such as “OK”
+      or “I see”).
+- id: Q06
+  question: What modules make up H-Net's chunking layer?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 6
+    excerpt: The chunking layer (Chunk in equation (2)) contains a routing module
+      and downsampler,
+- id: Q07
+  question: What modules make up H-Net's dechunking layer?
+  type: direct_fact
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 6
+    excerpt: The dechunking layer (Dechunk in equation (3)) consists of a smoothing
+      module and upsampler,
+- id: Q08
+  question: What BLEU score did the big Transformer report on WMT 2014 English-to-German?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 8
+    excerpt: establishing a new state-of-the-art BLEU score of 28.4.
+- id: Q09
+  question: What hardware and training duration did the paper report for the base
+    Transformer?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 7
+    excerpt: We trained our models on one machine with 8 NVIDIA P100 GPUs. For our
+      base models using the hyperparameters described throughout the paper, each training
+      step took about 0.4 seconds. We trained the base models for a total of 100,000
+      steps or 12 hours.
+- id: Q10
+  question: What compression target N₀ did the one-stage H-Net language-model experiment
+    use?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 11
+    excerpt: H-Net (1-stage) is our full H-Net method with DC learned end-to-end (Section
+      2.2) with compression target 𝑁0 = 6.
+- id: Q11
+  question: Approximately how many bytes per chunk did the paper report for learned
+    dynamic chunking?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 3
+    excerpt: a similar resolution as BPE tokenizers (4.5-5 bytes/chunk)
+- id: Q12
+  question: At what training-data sizes did H-Net (space), H-Net (1-stage), and H-Net
+    (2-stage) cross over the tokenized Transformer in the XL comparison?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized
+      Transformer after just 200B bytes, 100B bytes, and 30B bytes respectively.
+- id: Q13
+  question: How many Mimi RVQ quantizers and codebook entries per quantizer correspond
+    to the reported 1.1 kbps bitrate at 12.5 Hz?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 11
+    excerpt: use Q = 8 quantizers, each with a codebook size of NA = 2048. At 12.5Hz,
+      this represents a bitrate of 1.1kbps.
+- id: Q14
+  question: What theoretical latency did Moshi report, and what natural-conversation
+    average did it compare against?
+  type: numeric_method
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 2
+    excerpt: 160 ms—lower than the 230 ms average in natural conversations measured
+      over 10 languages (Stivers et al., 2009).
+- id: Q15
+  question: Why do the Transformer authors say scaled dot-product attention is faster
+    and more space-efficient than additive attention in practice?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 4
+    excerpt: dot-product attention is much faster and more space-efficient in practice,
+      since it can be implemented using highly optimized matrix multiplication code.
+- id: Q16
+  question: How do self-attention and recurrent layers compare in sequential operations
+    and maximum path length, according to Table 1?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 6
+    excerpt: 'LayerType | ComplexityperLayer | Sequential
+
+      Operations | MaximumPathLength
+
+      Self -Attention
+
+      Recurrent
+
+      Convolutional
+
+      Self -Attention (restricted) | O( n2 ·d)
+
+      O( n·d2)
+
+      O(k ·n·d2)
+
+      O( r·n·d) | O(1)
+
+      O( n)
+
+      O(1)
+
+      O(1) | O(1)
+
+      O( n)
+
+      O(logk( n))
+
+      O( n/ r)'
+- id: Q17
+  question: What limitation of dGSLM does Moshi address, and what design choice does
+    it use to address it?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 6
+    excerpt: 'While dGSLM is full-duplex, it remains a proof-of-concept: it does not
+      run in an online fashion, it does not benefit from the knowledge of a text language
+      model, and it does not model acoustic information as it only models semantic
+      tokens. Moshi addresses these limitations altogether: by modeling two streams
+      of semantic and acoustic tokens hierarchically, Moshi is full duplex and can
+      exploit all the information from the user (linguistic and non-linguistic) while
+      producing speech in real time.'
+- id: Q18
+  question: How did Moshi's streaming TTS WER compare with Vall-E and NaturalSpeech
+    3, and what lookahead did Moshi need?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 31
+    excerpt: Our streaming TTS model obtains 4.7% of WER on LibriSpeech test-clean,
+      which outperforms Vall-E’s 5.9% WER but is worse than NaturalSpeech 3 (Ju et
+      al., 2024) with 1.81%. Yet, Moshi only requires 2 seconds of lookahead
+- id: Q19
+  question: What does the H-Net pooling ablation suggest about fixed-width chunking?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: H-Net (pool) is much worse than all other H-Net variants, validating
+      that fixed-width chunking is not effective.
+- id: Q20
+  question: At Large and XL scales, how did SpaceByte++ and H-Net variants compare
+    with the BPE Transformer on average downstream performance?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: SpaceByte++, H-Net (space), and H-Net (1-stage) all have similar performance
+      to the BPE Transformer at Large scale, and slightly outperform it at the XL
+      scale, consistent with their close training curves (and possibly reflecting
+      some noise in the evaluations). H-Net (2-stage) consistently achieves the highest
+      performance across most tasks, outperforming 2.2% and 2.6% over the Transformer
+      baseline at Large and XL scales respectively.
+- id: Q21
+  question: How did the Transformer big model compare with earlier reported models
+    on WMT 2014 English-to-French?
+  type: comparison_synthesis
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 8
+    excerpt: On the WMT 2014 English-to-French translation task, our big model achieves
+      a BLEU score of 41.0, outperforming all of the previously published single models,
+      at less than 1/4 the training cost of the previous state-of-the-art model.
+- id: Q22
+  question: Why does the Transformer add positional encodings, and what functions
+    does this paper use?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 6
+    excerpt: Since our model contains no recurrence and no convolution, in order for
+      the model to make use of the order of the sequence, we must inject some information
+      about the relative or absolute position of the tokens in the sequence.
+  - paper_id: 1706.03762v7
+    page_number: 6
+    excerpt: 'In this work, we use sine and cosine functions of different frequencies:'
+- id: Q23
+  question: How does scaled dot-product attention turn a query and keys into weights
+    on values?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 4
+    excerpt: We compute the dot products of the query with all keys, divide each by
+      √dk, and apply a softmax function to obtain the weights on the values.
+- id: Q24
+  question: How does the Transformer decoder prevent a position from using future
+    output positions?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 5
+    excerpt: We need to prevent leftward information flow in the decoder to preserve
+      the auto-regressive property. We implement this inside of scaled dot-product
+      attention by masking out (setting to −∞) all values in the input of the softmax
+      which correspond to illegal connections.
+- id: Q25
+  question: How do Helium, Mimi, and Moshi's token streams work together to support
+    full-duplex dialogue?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 6
+    excerpt: a bespoke text language model backbone (Helium, see Section 3.2); a neural
+      audio codec with residual vector quantization and with semantic knowledge distilled
+      from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical
+      generation of semantic and acoustic tokens for both the user and Moshi
+  - paper_id: 2410.00037v1
+    page_number: 6
+    excerpt: 'Moshi addresses these limitations altogether: by modeling two streams
+      of semantic and acoustic tokens hierarchically, Moshi is full duplex and can
+      exploit all the information from the user (linguistic and non-linguistic) while
+      producing speech in real time.'
+- id: Q26
+  question: How does Inner Monologue use text during generation, and what effect do
+    the authors report?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 15
+    excerpt: having Moshi also model the textual representation of its own speech
+      is providing a scaffolding that increases the linguistic quality of its generation.
+  - paper_id: 2410.00037v1
+    page_number: 15
+    excerpt: it acts as a prefix to the generation of semantic tokens.
+- id: Q27
+  question: How do the delayed streams and teacher-forced inputs differ between Moshi's
+    streaming TTS and ASR?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 31
+    excerpt: we train a streaming TTS model by delaying audio tokens by 2 seconds,
+      giving some lookahead to the text tokens, and teacher forcing text tokens at
+      inference. Similarly, we train a streaming ASR model by delaying text tokens
+      by 2 seconds, allowing the model to listen to audio content before generating
+      text tokens. In that case, at inference we teacher force the audio tokens.
+- id: Q28
+  question: How does H-Net’s routing module turn adjacent-vector similarity into a
+    compressed sequence?
+  type: multi_hop
+  answerable: true
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 6
+    excerpt: The routing module implements this intuition through cosine similarity
+      between adjacent encoder outputs.
+  - paper_id: 2507.07955v2
+    page_number: 6
+    excerpt: 'vectors where 𝑏𝑡= 1 are retained
+
+      in the compressed sequence 𝑥𝑠+1, while those where 𝑏𝑡= 0 are discarded.'
+- id: Q29
+  question: How many kilograms of CO₂ did the Transformer training run emit?
+  type: unanswerable
+  answerable: false
+  gold_passages: []
+- id: Q30
+  question: What dollar amount did the Transformer authors pay for the training run?
+  type: unanswerable
+  answerable: false
+  gold_passages: []
+- id: Q31
+  question: What was the Transformer big model's inference latency on a specified
+    GPU?
+  type: unanswerable
+  answerable: false
+  gold_passages: []
+- id: Q32
+  question: Which languages does Moshi officially support, and how many are supported?
+  type: unanswerable
+  answerable: false
+  gold_passages: []
+- id: Q33
+  question: What exact GPU model and VRAM did the authors use to serve Moshi?
+  type: unanswerable
+  answerable: false
+  gold_passages: []
+- id: Q34
+  question: What exact GPU model did the H-Net authors use for XL training, and how
+    many wall-clock hours did that run take?
+  type: unanswerable
+  answerable: false
+  gold_passages: []
+- id: Q35
+  question: How many kilowatt-hours of electricity did the Transformer training run
+    consume?
+  type: unanswerable
+  answerable: false
+  gold_passages: []

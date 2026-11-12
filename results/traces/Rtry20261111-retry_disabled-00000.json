@@ -1,0 +1,30 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T18:28:45.107Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T18:28:50.107Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How does the Transformer handle sequence processing?",
+  "question_id": null,
+  "request_id": "Rtry20261111-retry_disabled-00000",
+  "retrieved_chunk_ids": [],
+  "scenario": "retry_disabled",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.18404084444046,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_1",
+      "reasoning_tokens": null,
+      "start_ms": 0.053999945521354675,
+      "status": "http_503",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

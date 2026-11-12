@@ -1,0 +1,65 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T08:35:54.438Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T08:37:54.438Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How does the Transformer decoder prevent a position from using future output positions?",
+  "question_id": "Q24",
+  "request_id": "20261111T083554415401Z-R3-openai_gpt_oss_20b-Q24",
+  "retrieved_chunk_ids": [
+    "4b0c9e36816101f2",
+    "7a58d4ed8872113f",
+    "34a762ce5baebd32",
+    "eddddb661d1edbc9",
+    "6909d5ea3832aa59",
+    "3f9d92b7392a13f6"
+  ],
+  "scenario": "E5-model-selection-R3-openai_gpt_oss_20b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 842.9988748393953,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 98,
+      "start_ms": 0.03191595897078514,
+      "status": "ok",
+      "tokens_in": 107,
+      "tokens_out": 100,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1198.4313330613077,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 843.6101251281798,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1636.0619580373168,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 1198.5101657919586,
+      "status": "ok",
+      "tokens_in": 2215,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

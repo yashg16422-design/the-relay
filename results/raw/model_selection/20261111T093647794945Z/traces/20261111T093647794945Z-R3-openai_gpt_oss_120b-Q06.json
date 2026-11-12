@@ -1,0 +1,65 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T09:36:47.822Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T09:38:47.822Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What modules make up H-Net's chunking layer?",
+  "question_id": "Q06",
+  "request_id": "20261111T093647794945Z-R3-openai_gpt_oss_120b-Q06",
+  "retrieved_chunk_ids": [
+    "2958fa6a656a0a7c",
+    "f8d2807c6b74426f",
+    "1d915a0609ce4a05",
+    "169cd62a1c6e1539",
+    "38037fdac71d29f5",
+    "8f9a83c6742b9d39"
+  ],
+  "scenario": "E5-model-selection-R3-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 989.2643331550062,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 38,
+      "start_ms": 0.03408314660191536,
+      "status": "ok",
+      "tokens_in": 104,
+      "tokens_out": 61,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1352.096791844815,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 990.5183329246938,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2206.6025831736624,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 1352.179375011474,
+      "status": "ok",
+      "tokens_in": 2260,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

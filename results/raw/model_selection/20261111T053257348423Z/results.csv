@@ -1,0 +1,4 @@
+request_id,scenario,source,start_time,first_token_ms,total_ms,status,retries,tokens_in,tokens_out,retrieval_setting,answer_grade
+20261111T053257348423Z-R1-qwen_qwen3_8_27b-Q02,E5-model-selection-R1-qwen_qwen3_8_27b,real,2026-11-11T05:32:57.372Z,1514.250,1514.252,ok,0,2638,126,R1,
+20261111T053257348423Z-R1-qwen_qwen3_8_27b-Q04,E5-model-selection-R1-qwen_qwen3_8_27b,real,2026-11-11T05:32:58.888Z,1345.237,1345.240,ok,0,1870,136,R1,
+20261111T053257348423Z-R1-qwen_qwen3_8_27b-Q10,E5-model-selection-R1-qwen_qwen3_8_27b,real,2026-11-11T05:33:00.235Z,749.171,749.174,ok,0,1054,90,R1,

@@ -1,0 +1,62 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T05:43:57.811Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T05:45:57.811Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What was the Transformer big model's inference latency on a specified GPU?",
+  "question_id": "Q31",
+  "request_id": "20261111T054355267377Z-R1-openai_gpt_oss_20b-Q31",
+  "retrieved_chunk_ids": [
+    "8dc73886cdd181d5",
+    "a78b0aca8137b889",
+    "f47b858bc3507135"
+  ],
+  "scenario": "E5-model-selection-R1-openai_gpt_oss_20b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 492.8293749690056,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "understand",
+      "reasoning_tokens": 72,
+      "start_ms": 0.05791708827018738,
+      "status": "ok",
+      "tokens_in": 107,
+      "tokens_out": 92,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 497.32962530106306,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 492.9030421189964,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1050.041708163917,
+      "kind": "work",
+      "model": "openai/gpt-oss-20b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 497.4945420399308,
+      "status": "ok",
+      "tokens_in": 540,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

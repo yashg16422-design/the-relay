@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:44:08.358Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:46:08.358Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What limitation of dGSLM does Moshi address, and what design choice does it use to address it?",
+  "question_id": "Q17",
+  "request_id": "20261111T074404702334Z-R2-openai_gpt_oss_120b-Q17",
+  "retrieved_chunk_ids": [
+    "157e2d5964ab0a4a",
+    "00803f7321c212b5",
+    "0b38df5820e596f1",
+    "e6dc73e221a396ed"
+  ],
+  "scenario": "E5-model-selection-R2-openai_gpt_oss_120b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 711.8482920341194,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand",
+      "reasoning_tokens": 98,
+      "start_ms": 0.048875343054533005,
+      "status": "ok",
+      "tokens_in": 116,
+      "tokens_out": 100,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 716.8661672621965,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 711.9259173050523,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1552.1128750406206,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "decide_answerability",
+      "reasoning_tokens": 118,
+      "start_ms": 717.0052924193442,
+      "status": "ok",
+      "tokens_in": 1973,
+      "tokens_out": 120,
+      "ttft_ms": null
+    }
+  ]
+}

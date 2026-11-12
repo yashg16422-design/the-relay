@@ -1,0 +1,91 @@
+{
+  "answer": "Moshi employs Helium as its 7B parameter text language model backbone to drive the system's reasoning and dialogue generation [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6] [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 41, §7 Conclusion]. Mimi functions as a semantic-acoustic neural audio codec that encodes audio into discrete units with low frame rates, ensuring compatibility with real-time generation [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 41, §7 Conclusion]. To support full-duplex dialogue, Moshi utilizes a hierarchical multi-stream architecture that models both the user’s and the system’s speech as separate, parallel streams of semantic and acoustic tokens [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6] [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 1, §Abstract]. This parallel streaming approach eliminates the need for explicit speaker turns, enabling the system to handle overlapping speech, interruptions, and interjections inherent in real-time conversations [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 1, §Abstract].",
+  "arrival": "2026-11-11T07:39:59.766Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:41:59.766Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "How do Helium, Mimi, and Moshi's token streams work together to support full-duplex dialogue?",
+  "question_id": "Q25",
+  "request_id": "20261111T073959735447Z-R2-qwen_qwen3_8_27b-Q25",
+  "retrieved_chunk_ids": [
+    "157e2d5964ab0a4a",
+    "882f44a3ae642279",
+    "1d566325fd8f8a0c",
+    "3cbf93e112b9ea20"
+  ],
+  "scenario": "E5-model-selection-R2-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4801.199458073825,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.023791100829839706,
+      "status": "ok",
+      "tokens_in": 62,
+      "tokens_out": 18,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4807.077249977738,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 4802.989375311881,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 6419.172875117511,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 4807.212207932025,
+      "status": "ok",
+      "tokens_in": 1441,
+      "tokens_out": 65,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9851.031583268195,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "reasoning_tokens": null,
+      "start_ms": 6419.4348328746855,
+      "status": "ok",
+      "tokens_in": 1462,
+      "tokens_out": 235,
+      "ttft_ms": 1182.062791660428
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9852.142750285566,
+      "kind": "work",
+      "model": null,
+      "name": "sentence_gate",
+      "reasoning_tokens": null,
+      "start_ms": 9851.07950028032,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

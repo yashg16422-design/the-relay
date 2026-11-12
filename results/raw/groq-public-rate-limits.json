@@ -1,0 +1,27 @@
+{
+  "kind": "public_documentation",
+  "source_url": "https://console.groq.com/docs/rate-limits",
+  "checked_date": "2026-11-11",
+  "account_limits_page_opened": false,
+  "note": "Display strings are copied from the published free-plan summary. The page prints RPM as 30, RPD as 1K, TPM as 8K, and TPD as 200K. The table code may scale a trailing K by 1000 only after this page's 1K and 8K match the RPD and TPM response headers saved in budget_ledger.csv. The account-specific limits page was not opened. No RPM or TPD 429 was observed.",
+  "models": {
+    "openai/gpt-oss-120b": {
+      "rpm_display": "30",
+      "rpd_display": "1K",
+      "tpm_display": "8K",
+      "tpd_display": "200K"
+    },
+    "openai/gpt-oss-20b": {
+      "rpm_display": "30",
+      "rpd_display": "1K",
+      "tpm_display": "8K",
+      "tpd_display": "200K"
+    },
+    "qwen/qwen3.8-27b": {
+      "rpm_display": "30",
+      "rpd_display": "1K",
+      "tpm_display": "8K",
+      "tpd_display": "200K"
+    }
+  }
+}

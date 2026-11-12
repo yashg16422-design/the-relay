@@ -1,0 +1,93 @@
+{
+  "answer": "The H-Net pooling ablation suggests that fixed-width chunking is not effective, as the H-Net (pool) variant, which utilizes fixed-width chunking, performs much worse than other H-Net variants [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 12, §3.1 Language Modeling]. This outcome reinforces the inherent limitation of content-agnostic fixed-size chunking, which creates arbitrary separations that can split meaningful semantic units, thereby limiting model expressivity [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 32].",
+  "arrival": "2026-11-11T08:49:57.459Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T08:51:57.459Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What does the H-Net pooling ablation suggest about fixed-width chunking?",
+  "question_id": "Q19",
+  "request_id": "20261111T084957434790Z-R3-qwen_qwen3_8_27b-Q19",
+  "retrieved_chunk_ids": [
+    "4220f9304a59ee7d",
+    "f8d2807c6b74426f",
+    "c775966478c65ab1",
+    "38037fdac71d29f5",
+    "d9ae9f7458fd4229",
+    "0926df782d0ee6d2"
+  ],
+  "scenario": "E5-model-selection-R3-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 558.0811249092221,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.041833147406578064,
+      "status": "ok",
+      "tokens_in": 54,
+      "tokens_out": 16,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 917.2645001672208,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 559.8540832288563,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2746.165417134762,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 917.3643328249454,
+      "status": "ok",
+      "tokens_in": 3575,
+      "tokens_out": 81,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4667.670832946897,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "reasoning_tokens": null,
+      "start_ms": 2746.326417196542,
+      "status": "ok",
+      "tokens_in": 3596,
+      "tokens_out": 111,
+      "ttft_ms": 1678.3672077581286
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4668.637167196721,
+      "kind": "work",
+      "model": null,
+      "name": "sentence_gate",
+      "reasoning_tokens": null,
+      "start_ms": 4667.770749889314,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

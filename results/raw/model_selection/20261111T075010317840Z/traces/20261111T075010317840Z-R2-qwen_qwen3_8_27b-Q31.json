@@ -1,0 +1,63 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-11T07:50:10.350Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-11T07:52:10.350Z",
+  "gave_up": false,
+  "level": "full",
+  "question": "What was the Transformer big model's inference latency on a specified GPU?",
+  "question_id": "Q31",
+  "request_id": "20261111T075010317840Z-R2-qwen_qwen3_8_27b-Q31",
+  "retrieved_chunk_ids": [
+    "4c7abc7896305562",
+    "2f07273bd8327ed9",
+    "d8a39d4d89c13536",
+    "e44f51eb3e960324"
+  ],
+  "scenario": "E5-model-selection-R2-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1456.6082921810448,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "reasoning_tokens": null,
+      "start_ms": 0.023667234927415848,
+      "status": "ok",
+      "tokens_in": 52,
+      "tokens_out": 11,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1460.7003750279546,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "reasoning_tokens": null,
+      "start_ms": 1457.387249916792,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2657.881709281355,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "decide_answerability",
+      "reasoning_tokens": null,
+      "start_ms": 1460.8147921971977,
+      "status": "ok",
+      "tokens_in": 1265,
+      "tokens_out": 50,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,216 @@
+seed: 20261109
+retrieval_setting: R1
+results_path: results/results.csv
+trace_dir: results/traces
+questions:
+- 'Load case 001: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 002: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 003: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 004: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 005: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 006: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 007: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 008: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 009: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 010: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 011: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 012: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 013: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 014: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 015: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 016: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 017: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 018: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 019: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 020: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 021: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 022: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 023: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 024: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 025: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 026: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 027: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 028: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 029: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 030: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 031: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 032: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 033: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 034: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 035: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 036: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 037: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 038: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 039: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 040: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 041: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 042: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 043: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 044: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 045: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 046: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 047: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 048: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 049: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 050: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 051: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 052: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 053: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 054: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 055: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 056: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 057: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 058: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 059: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 060: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 061: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 062: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 063: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 064: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 065: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 066: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 067: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 068: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 069: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 070: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 071: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 072: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 073: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 074: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 075: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 076: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 077: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 078: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 079: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+- 'Load case 080: Explain the Transformer sequence processing and cite the relevant
+  passage.'
+scenarios:
+  steady:
+    arrival_mode: poisson
+    max_requests: 20
+    rate_per_minute: 30
+    duration_seconds: 30
+    patience_ms: 5000
+    deadline_ms: 8000
+    zipf_exponent: 1.1
+    urgent_fraction: 0.2
+  burst:
+    arrival_mode: burst
+    max_requests: 40
+    burst_spread_ms: 0
+    patience_ms: 5000
+    deadline_ms: 8000
+    zipf_exponent: 1.1
+    urgent_fraction: 0.2
+  sustained_overload:
+    arrival_mode: poisson
+    max_requests: 80
+    rate_per_minute: 480
+    duration_seconds: 10
+    patience_ms: 3000
+    deadline_ms: 5000
+    zipf_exponent: 1.1
+    urgent_fraction: 0.2
+  per_minute_limit_halved:
+    arrival_mode: poisson
+    max_requests: 30
+    rate_per_minute: 180
+    duration_seconds: 10
+    patience_ms: 3000
+    deadline_ms: 5000
+    zipf_exponent: 1.1
+    limit_changes:
+    - at_seconds: 1.0
+      limits:
+        requests_per_minute: 30
+  daily_budget_exhausted:
+    arrival_mode: poisson
+    max_requests: 20
+    rate_per_minute: 240
+    duration_seconds: 8
+    patience_ms: 3000
+    deadline_ms: 5000
+    zipf_exponent: 1.1
+    limit_changes:
+    - at_seconds: 0.05
+      limits:
+        requests_per_day: 5
