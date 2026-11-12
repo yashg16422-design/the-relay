@@ -48,7 +48,7 @@ Teacher AI’s clarifying questions and reviewable prompt/tool diff stood out. M
 
 My prompts set the objective across quality, latency, limits, and cost; required comparable questions and a budget check before real calls; and defined first-token time and reproducible tables. I used an LLM for direction, while the engineering requirements and system write-up were mine. I caught a cost summary that omitted known usage from repair attempts ending in 429 by reconciling traces. I overruled a stand-in-only comparison: after the reset, I required budgeted real R2 runs on both days and then R3, keeping failures visible. I approved the assistant-proposed trace audit because it made answers and evidence reviewable. My contribution was setting and enforcing those measurement and decision constraints.
 
-Implementation and measurement detail that does not fit this summary is in the accompanying additionaldetil.pdf.
+Implementation and measurement detail that does not fit this summary is in the accompanying additionaldetil.pdf. The system design, control plane, and decision records are in README.md.
 
 <!-- BEGIN GENERATED RESULTS TABLES -->
 
