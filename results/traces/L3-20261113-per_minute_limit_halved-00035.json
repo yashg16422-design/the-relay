@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 28 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ate differences on Web Questions and Llama Questions can be explained by training on audio data and thus reducing the amount of parameters dedicated to textual knowledge, the very large difference on Trivia QA incites us to inspect more thoroughly patterns of errors. We find in particular that multiple-sentence questions (e.g. “The Terror of the Monster was an early title for a best- selling novel which inspired one of the highest-grossing movies of the mid-70’s. Under what name did it eventually terrify the reading and film going public?”) or ones with specific syntactic structure (e.g. “On the human body, a keloid is a type of what?”) are particu- larly challenging for Moshi, due to it being finetuned on oral-style conversations that do not display such patterns. We thus hypothesize that covering more syntactic scenarios during finetuning could reduce this gap.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 30]\n\n\"Front matter F.2 Misspelling USER: I’d like to learn about Danyh Amendol? MOSHI: Sorry, I’m not sure what you’re referring to. USER: Oh, Danyh Amendola, the football player. The former football player. MOSHI: Okay, I know who Danny Amendola is. He is a former professional football wide receiver who played for the New England Patriots. He also played for the Miami Dolphins, Detroit Lions, and Houston Texans. USER: Okay, MOSHI: He was drafted by the New England Patriots in 2010. USER: and how about his college football MOSHI: He played college football for the Texas Tech Red Raiders. His career in the NFL, USER: okay, MOSHI: he was named an alternate for the 2011 Pro Bowl. USER: yeah, MOSHI: He also appeared in three Super Bowls, winning two. USER: yeah. USER: I’d like to learn about Maroom? MOSHI: I’m sorry, I did not catch that. USER: I’d like to learn about Maroon. MOSHI: Oh, Marron.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 64]",
+  "arrival": "2026-11-12T19:23:31.332Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:23:39.517Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 27.735,
+    "lite_wait_s": 14.24,
+    "reason": "limit",
+    "slack_s": 8.183
+  },
+  "level": "extractive",
+  "question": "What exact GPU model and VRAM did the authors use to serve Moshi?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-per_minute_limit_halved-00035",
+  "retrieved_chunk_ids": [
+    "e2bcf07a198c85bf",
+    "41fced27cd1e9df3",
+    "3e6337e7750062ca"
+  ],
+  "scenario": "per_minute_limit_halved",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.6330980472266674,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.183473229408264,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.6853480376303196,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 14 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"a cascaded pipeline and models both the user’s and the system’s speech into a single token stream, which is challenging in presence of significant overlap. The only previous full-duplex dialogue system is dGSLM (Nguyen et al., 2023), which models user and system speech as separate audio token streams and pro- poses a Siamese architecture to process both streams jointly. While dGSLM is full-duplex, it remains a proof-of-concept: it does not run in an online fashion, it does not benefit from the knowledge of a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6]\n\n\"Front matter Moshi is built on top of Helium, a text LLM which we build from scratch (Section 3.2), relying on high-quality text data to provide strong reasoning abilities to the model. We also propose Inner Monologue (Section 3.4.4), a training and inference procedure in which we jointly model text and audio tokens. This allows the model to fully exploit the knowledge imparted from the text modality, while remaining a speech-to-speech system. To enable real-time dialogue, we also design Moshi as a multi-stream architecture from the get-go (Section 3.4.3): The model is able to both speak and listen to the user at the same time, and does not need to explicitly model speaker turns. In addition, to capture the input user audio and output Moshi’s voice with high quality and in an efficient manner, we propose Mimi (Section 3.3), a neural audio codec combining semantic and acoustic\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 7]",
+  "arrival": "2026-11-12T19:10:25.099Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:10:33.494Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 4534,
+    "full_wait_s": 13.522,
+    "lite_wait_s": 6.774,
+    "reason": "limit",
+    "slack_s": 8.394
+  },
+  "level": "extractive",
+  "question": "A cascaded voice system understands and speaks through text, and it assumes clean turns. What information does that drop, and which spoken-conversation behaviors does it fail to model?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-burst_cache_on-00017",
+  "retrieved_chunk_ids": [
+    "94e9779702c36b47",
+    "4c82e690b46f42f9",
+    "41c6ef0f0645ef67"
+  ],
+  "scenario": "burst_cache_on",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.290000207722187,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.484625231474638,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.324833068996668,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

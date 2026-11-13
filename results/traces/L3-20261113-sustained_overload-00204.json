@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 27 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ssed representations. Inference. For inference, H-Net generates raw bytes (or whatever the outermost modality is) autoregressively with a modified procedure to handle its hierarchical structure. Generation with a prompt proceeds as follows: 9We later realized that SpaceByte also followed muP LR scaling (Yang and Hu 2020) to account for model dimension 𝐷𝑠(Slagle 2024, Appendix B.2) (but did not account for batch size scaling, as we do). Our reimplementation did not do this and therefore is not fully faithful to the original SpaceByte. 9\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 9, §2.4 Autoregressive Training and Inference]\n\n\"cases may happen, such as unlucky batches of sequences that are too long and overflow the device memory. Relatedly, one difficulty with stepping H-Net in batched mode is that different tokens in the batch may require different amounts of compute. We believe that such considerations are not fundamental and will be an important subject of future work; just as how related dynamic sparsity and conditional compute methods such as Mixture-of-Experts and speculative decoding (Leviathan, Kalman, and Matias 2023; Chen et al. 2023) benefited from years of dedicated engineering improvements. Deeper Hierarchies. H-Net is the first dynamic hierarchical model that can recursively nest its chunking strategy (see Table 6 and Appendix A). In this paper, we showed that iterating H-Net from 0 stages (i.e. an isotropic model) to 1 stage and from 1 stage to 2 stages consistently improves performance. We did\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 22, §4 Discussion]",
+  "arrival": "2026-11-12T19:28:45.949Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:28:57.595Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 2408,
+    "full_wait_s": 26.614,
+    "lite_wait_s": 19.865,
+    "reason": "limit",
+    "slack_s": 11.644
+  },
+  "level": "extractive",
+  "question": "What exact GPU model did the H-Net authors use for XL training, and how many wall-clock hours did that run take?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-sustained_overload-00204",
+  "retrieved_chunk_ids": [
+    "f4efe59e0c17d89b",
+    "1e2c13d247e08965",
+    "9dbaf0a8081d920f"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.651568830013275,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 8.84444359689951,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.696985706686974,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

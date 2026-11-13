@@ -1,0 +1,62 @@
+{
+  "answer": "The model service is at its rate limit, so I could not finish a checked answer for you in time. Nothing was guessed. Please ask again in about a minute.",
+  "arrival": "2026-11-12T19:00:01.367Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:00:14.331Z",
+  "decide": {
+    "gate": "strict",
+    "mode": "precheck_abstain",
+    "outcome": "rate_limited"
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": {
+    "committed_tokens": 0,
+    "ladder": "off",
+    "slack_s": 12.963
+  },
+  "level": "full",
+  "question": "What modules make up H-Net's chunking layer?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-retry_disciplined-00100",
+  "retrieved_chunk_ids": [],
+  "scenario": "retry_disciplined",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.5190596245229244,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.794809803366661,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_1",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.644975833594799,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 13 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"Front matter Table 13: Regurgitation of training data with condition-free generation from differ- ent models. We measure how many times each model generates the most frequent duplicate segment audio in the training data, for different values of the temperature. With dataset deduplication, we do not observe any exact re-generation (out of 105) of the most frequent segment, even if we prompt the model with the first 3s of this audio segment. prompted (3s) deduplicated fine-tuned temp. regurgitation rate (%) single-stream 0 0.00 0.6 0.13 0.8 0.19 1.0 0.16 ✓ 0 100.00 ✓ 0.8 98.40 ✓ 0 0.00 ✓ 0 0.00 ✓ ✓ 0 0.00 ✓ ✓ 0.8 0.00 multi-stream ✓ 0.8 0.00 ✓ ✓ 0.8 0.00 ✓ ✓ 0.8 0.00 ✓ ✓ ✓ 0.8 0.00 seconds of the most frequent audio segment and measure how many times the continuation is identical to this training set audio. Table 13 reports these regurgitation results. Results & Impact of fine-tuning. We\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 37]",
+  "arrival": "2026-11-12T18:54:29.572Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T18:54:37.433Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 2267,
+    "full_wait_s": 12.723,
+    "lite_wait_s": 5.978,
+    "slack_s": 7.86
+  },
+  "level": "extractive",
+  "question": "How many kilograms of CO₂ did the Transformer training run emit?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-sustained_overload-00002",
+  "retrieved_chunk_ids": [
+    "c486e14dc3f43a72",
+    "ca9d52c485be1ca5",
+    "35a9905ff6fd2e24"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.2471798583865166,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.831346683204174,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.290804870426655,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

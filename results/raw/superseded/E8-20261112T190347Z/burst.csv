@@ -1,0 +1,9 @@
+request_id,scenario,source,start_time,first_token_ms,total_ms,status,retries,tokens_in,tokens_out,retrieval_setting,answer_grade
+E8-20261112T190347Z-burst-00005,burst,real,2026-11-12T19:03:48.140Z,,23.055,timeout,0,,,R1,
+E8-20261112T190347Z-burst-00001,burst,real,2026-11-12T19:03:48.140Z,,764.468,rate_limited,0,,,R1,
+E8-20261112T190347Z-burst-00003,burst,real,2026-11-12T19:03:48.140Z,,768.594,rate_limited,0,,,R1,
+E8-20261112T190347Z-burst-00002,burst,real,2026-11-12T19:03:48.140Z,,771.002,rate_limited,0,,,R1,
+E8-20261112T190347Z-burst-00000,burst,real,2026-11-12T19:03:48.140Z,,1100.805,rate_limited,0,,,R1,
+E8-20261112T190347Z-burst-00004,burst,real,2026-11-12T19:03:48.140Z,,2524.033,rate_limited,1,,,R1,
+E8-20261112T190347Z-burst-00007,burst,real,2026-11-12T19:03:48.140Z,,2540.649,rate_limited,0,,,R1,
+E8-20261112T190347Z-burst-00006,burst,stand-in,2026-11-12T19:03:48.140Z,,11967.546,timeout,0,,,R1,not_graded

@@ -1,0 +1,66 @@
+{
+  "answer": "The model service is at its rate limit, so I could not finish a checked answer for you in time. Nothing was guessed. Please ask again in about a minute.",
+  "arrival": "2026-11-12T19:02:28.014Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:02:35.947Z",
+  "decide": {
+    "gate": "strict",
+    "mode": "precheck_abstain",
+    "outcome": "rate_limited"
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "lite",
+    "committed_tokens": 2267,
+    "full_wait_s": 8.568,
+    "lite_wait_s": 1.819,
+    "promised_tokens": 1367,
+    "slack_s": 7.932
+  },
+  "level": "lite",
+  "question": "Which spoken-conversation behaviors do the authors say turn-based models miss?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-sustained_overload-00149",
+  "retrieved_chunk_ids": [],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1823.0765210464597,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1823.2884802855551,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_1",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 1823.1774382293224,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

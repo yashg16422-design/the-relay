@@ -1,0 +1,20 @@
+# Output limits are provisional; validate with model selection and Phase 1 measurements.
+understand_max_completion_tokens: 300 # was 100; real replies hit it (p95 100 of 100, reasoning median 77)
+judge_max_completion_tokens: 512 # was 120; 71 of 96 wrong refusals were at that cap (used only when decide_mode is llm_judge)
+draft_max_completion_tokens: 700 # was 400; leaves room for reasoning plus the answer (real draft p95 306)
+repair_max_completion_tokens: 700 # was 400; real repair p95 397 of 400
+max_repairs: 1 # UNVERIFIED policy default; prevents answer-repair loops
+
+# --- Decide step (decision record 0006, status: proposed) -------------------
+# llm_judge        = one model call judges answerability (three-state parse, one retry).
+# precheck_abstain = no judge call; a zero-token retrieval check, then the drafter
+#                    either answers with citations or replies NOT_IN_PAPERS.
+decide_mode: precheck_abstain # builder's recommendation in record 0006 (proposed); llm_judge is one word away
+precheck_min_bm25: 0.0 # UNVERIFIED; 0 disables the check. Tune offline on Aloo's questions.
+gate_strict: true # false = the lexical gate used for every run up to 2026-11-11
+scope_to_named_papers: true # retrieve and cite only from the paper(s) the question names
+judge_retry_options: {} # e.g. {response_format: {type: json_object}} once E0 shows it is accepted
+options_by_step: {} # e.g. {understand: {reasoning_effort: low}} once E0 shows it is accepted
+
+# --- Retrieval query (decision record 0011, status: proposed) ---------------
+content_word_query: true # strip question words before BM25; measured in results/naive_retriever_report.json

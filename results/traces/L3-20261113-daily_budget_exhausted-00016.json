@@ -1,0 +1,66 @@
+{
+  "answer": "Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 8 minutes.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"a cascaded pipeline and models both the user’s and the system’s speech into a single token stream, which is challenging in presence of significant overlap. The only previous full-duplex dialogue system is dGSLM (Nguyen et al., 2023), which models user and system speech as separate audio token streams and pro- poses a Siamese architecture to process both streams jointly. While dGSLM is full-duplex, it remains a proof-of-concept: it does not run in an online fashion, it does not benefit from the knowledge of a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6]",
+  "arrival": "2026-11-12T19:19:54.961Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:19:58.511Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpd",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 460.412,
+    "lite_wait_s": 71.612,
+    "reason": "limit",
+    "slack_s": 3.549
+  },
+  "level": "extractive",
+  "question": "What architecture did the authors propose, and which common operations does it dispense with?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-daily_budget_exhausted-00016",
+  "retrieved_chunk_ids": [
+    "94e9779702c36b47",
+    "e2bcf07a198c85bf",
+    "4c82e690b46f42f9"
+  ],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.9903423748910427,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9.009425528347492,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.057342652231455,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

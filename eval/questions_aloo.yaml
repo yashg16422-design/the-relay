@@ -1,0 +1,470 @@
+# Evaluation questions and gold answers. T*/M*/H* written by Aloo (2026-11-12/13); U1-U5 (unanswerable) written by
+# the claude.ai review session at Aloo's request on 2026-11-13 and accepted by him -- disclose this in the write-up.
+# Provenance: questions, gold_answer_aloo, and must_include facts are Aloo's (must_include condensed from his gold
+# answers). gold_passages excerpts were located and checked verbatim against library/chunks/R1-R3 (R1-R3 extraction)
+# by the claude.ai review session on 2026-11-13; every must_include fact appears on the stated page.
+#
+# Grading rule (Aloo to confirm): `correct` only if EVERY must_include fact is stated and each is cited to a passage
+# that supports it; extra claims must also be correct. Missing a required fact or any unsupported claim = `wrong`.
+#
+# Scored set (scored: true): T2 T5 T6 M2 M4 M5 M6 H3 H4 H5 + U1-U5 = 15 questions (10 answerable, 5 unanswerable).
+# The other 8 answerable questions (scored: false) are the reserve pool for stand-in load runs.
+# Grading rule above is PROPOSED -- Aloo confirms it before grading starts.
+#
+# Retriever findings noticed while locating excerpts (evidence for HANDOVER P0.6, mechanism 2):
+#  - H4: the key sentence crosses the p2->p3 page break and a figure caption is spliced into it in the extracted text
+#    ("Linear in equation (3) and STE ... omitted ... language model: with a single stage of dynamic chunking ...").
+#  - Section headings are duplicated in chunk text ("3.1 Encoder and Decoder Stacks 3.1 Encoder and Decoder Stacks").
+#  - Table cells are detected as section titles (e.g. Transformer p8 "1.0 · 1020" stored as a section name).
+questions:
+- id: T1
+  question: The Transformer is attention only, with recurrence and convolution both removed. On WMT 2014 English-to-German,
+    what BLEU did they report, and by how much did it beat the previous best, ensembles included?
+  answerable: true
+  author: Aloo
+  must_include:
+  - 28.4 BLEU
+  - more than 2 BLEU above the previous best, ensembles included
+  gold_answer_aloo: 28.4 BLEU, more than 2 BLEU above the previous best results, including ensembles. The paper
+    also says these models are better in quality, more parallelizable, and take significantly less time to train.
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 1
+    excerpt: Our model achieves 28.4 BLEU on the WMT 2014 English- to-German translation task, improving over the
+      existing best results, including ensembles, by over 2 BLEU.
+  scored: false
+- id: T2
+  question: Inside a single training example, why does a recurrent net have to step through positions one by one,
+    and what gets worse as the sequence gets longer?
+  answerable: true
+  author: Aloo
+  must_include:
+  - h_t depends on h_(t-1) and the input at t, so computation is sequential and cannot be parallelized within an
+    example
+  - 'longer sequences: memory limits batching across examples'
+  gold_answer_aloo: Each hidden state h_t is computed from the previous state h_{t−1} and the input at position
+    t, so the positions are locked to steps in time. That sequential dependence blocks parallelization within the
+    example. At longer sequences, memory also limits how much you can batch across examples. Factorization tricks
+    and conditional computation improved efficiency, and conditional computation improved performance as well.
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 2
+    excerpt: This inherently sequential nature precludes parallelization within training examples, which becomes
+      critical at longer sequence lengths, as memory constraints limit batching across examples.
+  scored: true
+- id: T3
+  question: How many layers are in the encoder, what are the two sub-layers in each one, and what output size do
+    those sub-layers and the embeddings use?
+  answerable: true
+  author: Aloo
+  must_include:
+  - N = 6 layers
+  - multi-head self-attention + position-wise fully connected feed-forward network
+  - d_model = 512
+  gold_answer_aloo: N = 6 identical layers. Each layer is multi-head self-attention, then a position-wise fully
+    connected feed-forward network. A residual connection and layer normalization wrap each sub-layer, so the output
+    is LayerNorm(x + Sublayer(x)). Every sub-layer and the embeddings output d_model = 512.
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: 'Encoder: The encoder is composed of a stack of N = 6 identical layers.'
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: The first is a multi-head self-attention mechanism, and the second is a simple, position- wise fully
+      connected feed-forward network.
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers,
+      produce outputs of dimension dmodel = 512.
+  scored: false
+- id: T4
+  question: The decoder is also six layers. What third sub-layer does each one add, and how is a position stopped
+    from using future outputs?
+  answerable: true
+  author: Aloo
+  must_include:
+  - 'third sub-layer: multi-head attention over the encoder stack output'
+  - masked self-attention (plus outputs offset by one position)
+  gold_answer_aloo: The third sub-layer is multi-head attention over the encoder stack output. Decoder self-attention
+    is masked so a position cannot attend to later positions. That mask, plus output embeddings shifted by one position,
+    means the prediction at position i depends only on known outputs before i. Residuals and layer norm are used
+    around the decoder sub-layers too.
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which
+      performs multi-head attention over the output of the encoder stack.
+  - paper_id: 1706.03762v7
+    page_number: 3
+    excerpt: This masking, combined with fact that the output embeddings are offset by one position, ensures that
+      the predictions for position i can depend only on the known outputs at positions less than i.
+  scored: false
+- id: T5
+  question: Dot-product attention and additive attention have about the same theoretical cost. Why is scaled dot-product
+    still preferred in practice, and why divide by √d_k when d_k is large?
+  answerable: true
+  author: Aloo
+  must_include:
+  - faster and more space-efficient via optimized matrix multiplication
+  - large d_k pushes softmax into regions with extremely small gradients, so scale by 1/sqrt(d_k)
+  gold_answer_aloo: Dot-product attention is faster and more space-efficient in practice because it can use highly
+    optimized matrix multiplication. At small d_k the two mechanisms perform similarly. At large d_k, additive attention
+    beats dot-product attention if you do not scale. The reason given is that large dot products push the softmax
+    into regions with extremely small gradients, so the dot products are scaled by 1/√d_k.
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 4
+    excerpt: While the two are similar in theoretical complexity, dot-product attention is much faster and more
+      space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code.
+  - paper_id: 1706.03762v7
+    page_number: 4
+    excerpt: We suspect that for large values of dk, the dot products grow large in magnitude, pushing the softmax
+      function into regions where it has extremely small gradients 4.
+  scored: true
+- id: T6
+  question: How many attention heads are used, what is d_k for each head, and in encoder-decoder attention where
+    do the queries, keys, and values come from?
+  answerable: true
+  author: Aloo
+  must_include:
+  - h = 8 heads
+  - d_k = d_v = 64
+  - queries from the previous decoder layer; keys and values from the encoder output
+  gold_answer_aloo: h = 8 heads, with d_k = d_v = d_model/h = 64. Because each head is smaller, the total cost stays
+    similar to one full-dimension head. The model uses multi-head attention in three ways. In encoder-decoder attention,
+    queries come from the previous decoder layer and the keys and values come from the encoder output, so every
+    decoder position can attend over all positions in the input.
+  gold_passages:
+  - paper_id: 1706.03762v7
+    page_number: 5
+    excerpt: In this work we employ h = 8 parallel attention layers, or heads.
+  - paper_id: 1706.03762v7
+    page_number: 5
+    excerpt: For each of these we use dk = dv = dmodel/h = 64.
+  - paper_id: 1706.03762v7
+    page_number: 5
+    excerpt: In "encoder-decoder attention" layers, the queries come from the previous decoder layer, and the memory
+      keys and values come from the output of the encoder.
+  scored: true
+- id: M1
+  question: A cascaded voice system understands and speaks through text, and it assumes clean turns. What information
+    does that drop, and which spoken-conversation behaviors does it fail to model?
+  answerable: true
+  author: Aloo
+  must_include:
+  - drops paralinguistic information (emotion, accent) and non-speech audio
+  - misses interruptions, overlapping speech and backchannels
+  gold_answer_aloo: 'It ignores anything that is not written: paralinguistic cues such as emotion and accent, and
+    non-speech audio such as sounds around the speaker. Turn-taking also misses interruptions, overlapping speech,
+    and backchannels such as “OK” or “I see”. Overlap accounts for 10 to 20% of spoken time.'
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 2
+    excerpt: This goes from paralinguistic information, such as emotion and accent, to non-speech audio, such as
+      surrounding acoustic events.
+  - paper_id: 2410.00037v1
+    page_number: 2
+    excerpt: While this paradigm is suited to text dialogue, it falls short in modeling aspects of spoken conversations
+      such as interruptions, overlapping speech— which amounts for 10 to 20% of spoken time (C¸etin and Shriberg,
+      2006) —and backchanneling (i.e. non-interrupting interjections such as “OK” or “I see”).
+  scored: false
+- id: M2
+  question: Moshi keeps a text LLM and adds a smaller audio model. What does that audio model read and predict,
+    and what theoretical latency does the streaming design claim against ordinary conversation?
+  answerable: true
+  author: Aloo
+  must_include:
+  - audio model ingests and predicts discrete audio units
+  - 160 ms theoretical latency vs 230 ms average in natural conversation
+  gold_answer_aloo: The audio model ingests and predicts discrete audio units, so both understanding and generation
+    stay in audio while the text LLM’s knowledge is still used. The architecture is streaming and hierarchical.
+    Theoretical latency is 160 ms, lower than the 230 ms average measured over 10 languages.
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 2
+    excerpt: Moshi augments a text LLM backbone with a smaller audio language model (Borsos et al., 2022; Yang et
+      al., 2023) that ingests and predicts discrete audio units.
+  - paper_id: 2410.00037v1
+    page_number: 2
+    excerpt: We extend previous work on audio language models and design a streaming, hierarchical architecture,
+      with a theo- retical latency of 160 ms—lower than the 230 ms average in natural conversations measured over
+      10 languages (Stivers et al., 2009).
+  scored: true
+- id: M3
+  question: Moshi is a full-duplex, multi-stream speech-to-speech Transformer. What are its three main components?
+  answerable: true
+  author: Aloo
+  must_include:
+  - Helium text LM backbone
+  - Mimi neural audio codec (RVQ, distilled semantic knowledge)
+  - streaming hierarchical generation of semantic+acoustic tokens (with Inner Monologue text tokens)
+  gold_answer_aloo: Helium, a text language-model backbone. Mimi, a neural audio codec with residual vector quantization
+    and semantic knowledge distilled from a self-supervised speech model. Streaming hierarchical generation of semantic
+    and acoustic tokens for both the user and Moshi, plus time-aligned text tokens for Moshi when Inner Monologue
+    is used.
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 6
+    excerpt: 'The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see
+      Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled
+      from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic
+      and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using
+      Inner Monologue (Section 3.4). been proposed by Wang et al. (2024), with an ASR system running in parallel
+      to a text generator that feeds into a streaming TTS.'
+  scored: false
+- id: M4
+  question: dGSLM was already full-duplex. Which three limits does the paper still charge it with, and what does
+    Moshi do differently?
+  answerable: true
+  author: Aloo
+  must_include:
+  - 'dGSLM: not online, no text-LM knowledge, semantic tokens only'
+  - 'Moshi: hierarchical semantic+acoustic streams in real time'
+  gold_answer_aloo: dGSLM does not run online, does not use a text language model’s knowledge, and models only semantic
+    tokens, so acoustic information is missing. Moshi models two hierarchical streams of semantic and acoustic tokens,
+    which lets it use both linguistic and non-linguistic information from the user and still produce speech in real
+    time. Text pretraining and Inner Monologue give it Helium’s knowledge.
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 6
+    excerpt: 'While dGSLM is full-duplex, it remains a proof-of-concept: it does not run in an online fashion, it
+      does not benefit from the knowledge of a text language model, and it does not model acoustic information as
+      it only models semantic tokens.'
+  scored: true
+- id: M5
+  question: How does Mimi reach 1.1 kbps at 12.5 Hz, what dimensions does it project around the quantizer, and how
+    often is quantization actually applied in training?
+  answerable: true
+  author: Aloo
+  must_include:
+  - 8 quantizers x 2048 codebook = 1.1 kbps at 12.5 Hz
+  - 512-dim latent projected to 256 before RVQ and back to 512
+  - quantization applied only 50% of the time during training
+  gold_answer_aloo: Q = 8 quantizers, each with a codebook of 2048, which is 1.1 kbps at 12.5 Hz. The latent size
+    is 512; embeddings are projected to 256 before the residual vector quantizer and back to 512 before the decoder.
+    Quantizer dropout is used so the bitrate can scale. Quantization is applied only 50% of the time, per sequence,
+    because skipping it with some probability improved audio quality.
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 11
+    excerpt: We use Q = 8 quantizers, each with a codebook size of NA = 2048.
+  - paper_id: 2410.00037v1
+    page_number: 11
+    excerpt: While the latent dimension is 512, we project embeddings to 256 dimensions before applying the RVQ,
+      and project back to 512 before the decoder.
+  - paper_id: 2410.00037v1
+    page_number: 11
+    excerpt: More precisely, we only apply quantization 50% of the time, on a per-sequence basis, during training.
+  scored: true
+- id: M6
+  question: On LibriSpeech test-clean, how does Moshi’s streaming TTS word error compare with Vall-E and NaturalSpeech
+    3, how much lookahead does Moshi need, and what word error does the streaming ASR get?
+  answerable: true
+  author: Aloo
+  must_include:
+  - TTS 4.7% WER vs Vall-E 5.9% and NaturalSpeech 3 1.81%
+  - 2 seconds lookahead
+  - ASR 5.7% WER
+  gold_answer_aloo: Streaming TTS is 4.7% word error, better than Vall-E at 5.9% and worse than NaturalSpeech 3
+    at 1.81%. Moshi needs 2 seconds of lookahead; Vall-E and NaturalSpeech 3 need the whole sequence. Streaming
+    ASR is 5.7% word error, against 3.6% for a Streaming FastConformer with a similar lookahead. The ASR alignments
+    are precise to 80 ms, the Temporal Transformer’s frame rate.
+  gold_passages:
+  - paper_id: 2410.00037v1
+    page_number: 31
+    excerpt: Our streaming TTS model obtains 4.7% of WER on LibriSpeech test-clean, which outperforms Vall-E’s 5.9%
+      WER but is worse than NaturalSpeech 3 (Ju et al., 2024) with 1.81%.
+  - paper_id: 2410.00037v1
+    page_number: 31
+    excerpt: Our ASR system yields 5.7% WER, while a Streaming FastConformer (Noroozi et al., 2024) gets 3.6% with
+      a similar look-ahead.
+  scored: true
+- id: H1
+  question: With compute and data matched, how does a one-stage byte-level H-Net compare with a BPE Transformer,
+    and what changes when you add more stages?
+  answerable: true
+  author: Aloo
+  must_include:
+  - 1-stage H-Net outperforms a strong BPE Transformer
+  - 'more stages: scales better and matches a token-based Transformer twice its size'
+  gold_answer_aloo: One stage outperforms a strong Transformer that reads BPE tokens. More stages model extra levels
+    of abstraction, scale better with data, and match a token-based Transformer of twice the size. H-Nets pretrained
+    on English are also more robust at the character level, and they learn data-dependent chunks with no heuristics
+    and no explicit supervision.
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 1
+    excerpt: When compute- and data- matched, an H-Net with one stage of hierarchy operating at the byte level outperforms
+      a strong Transformer language model operating over BPE tokens.
+  - paper_id: 2507.07955v2
+    page_number: 1
+    excerpt: Iterating the hierarchy to multiple stages further increases its performance by modeling multiple levels
+      of abstraction, demonstrating significantly better scaling with data and matching the token-based Transformer
+      of twice its size.
+  scored: false
+- id: H2
+  question: H-Net is described as an autoregressive U-Net. What are the three processing steps, and what do the
+    outer stages model compared with the inner ones?
+  answerable: true
+  author: Aloo
+  must_include:
+  - encoder on raw data -> downsample to main network on chunks -> upsample to decoder
+  - outer stages fine-grained; inner stages coarse, token-like
+  gold_answer_aloo: A small encoder processes the raw data, the sequence is downsampled into a main network that
+    runs on compressed chunks, then it is upsampled into a decoder at the original resolution. Outer stages capture
+    fine-grained patterns. Inner stages operate on coarse representations, like traditional tokens.
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 2
+    excerpt: 'H-Net … resembling an autoregressive U-Net (Ronneberger, Fischer, and Brox 2015): (i) raw data is
+      processed by a small encoder network, (ii) then downsampled and passed through a main network operating on
+      compressed chunks, (iii) and finally upsampled before being passed through a decoder network operating on
+      the original resolution.'
+  - paper_id: 2507.07955v2
+    page_number: 2
+    excerpt: This modularity creates a natural processing hierarchy where outer stages capture fine-grained patterns
+      while inner stages operate on coarse representations akin to traditional tokens.
+  scored: false
+- id: H3
+  question: Dynamic chunking has to pick boundaries and still train with ordinary gradients. What do the routing
+    module and the smoothing module each do, and what is the auxiliary loss for?
+  answerable: true
+  author: Aloo
+  must_include:
+  - routing module predicts boundaries from similarity of adjacent elements
+  - smoothing module interpolates using router outputs
+  - auxiliary loss targets a desired downsampling ratio
+  gold_answer_aloo: The routing module predicts boundaries between adjacent elements from a similarity score. The
+    smoothing module interpolates representations using the router’s outputs, which softens uncertain boundaries
+    and makes them easier to learn. The auxiliary loss targets the downsampling ratio they want. Together with gradient-based
+    learning of discrete choices, the model learns how to compress the data end to end.
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 2
+    excerpt: 'DC is composed of two complementary new techniques: (i) a routing module which predicts boundaries
+      between adjacent elements through a similarity score (ii) and a smoothing module which interpolates representations
+      using the router’s outputs, attenuating the effect of uncertain boundaries and significantly improving learnability.'
+  - paper_id: 2507.07955v2
+    page_number: 2
+    excerpt: By combining these with a new auxiliary loss function that targets desired downsampling ratios, and
+      modern techniques for gradient-based learning of discrete choices (Fedus, Zoph, and Shazeer 2022; Bengio,
+      Léonard, and Courville 2013), DC lets an H-Net learn how to compress data in a fully end-to-end fashion.
+  scored: true
+- id: H4
+  question: A single stage of dynamic chunking is trained on raw bytes. Above what size does it match a strong BPE
+    Transformer, and about how many bytes land in one learned chunk?
+  answerable: true
+  author: Aloo
+  must_include:
+  - above 1B parameters it matches the BPE Transformer
+  - about 4.5-5 bytes per chunk
+  gold_answer_aloo: Above 1B parameters it matches that Transformer’s perplexity and downstream performance. Learned
+    chunks sit at a similar resolution to BPE, about 4.5–5 bytes per chunk, and the boundaries are meaningful without
+    external supervision or heuristics. The segmentation is learned jointly with the backbone. The paper calls H-Net
+    the first truly end-to-end, tokenizer-free language model.
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 3
+    excerpt: with a single stage of dynamic chunking, a byte-level H-Net matches the perplexity and downstream performance
+      of a strong BPE-tokenized Transformer at sizes exceeding 1B parameters.
+  - paper_id: 2507.07955v2
+    page_number: 3
+    excerpt: Empirically, the dynamic chunking module naturally compresses data to a similar resolution as BPE tokenizers
+      (4.5-5 bytes/chunk) and qualitatively learns meaningful boundaries, all without any external supervision or
+      heuristics.
+  - paper_id: 2507.07955v2
+    page_number: 2
+    excerpt: H-Net represents the first truly end-to-end, tokenizer-free
+  scored: true
+- id: H5
+  question: At the XL scale, the byte-level H-Nets start behind the tokenized Transformer. After how many training
+    bytes does each one cross over, and what happens to the gap after that?
+  answerable: true
+  author: Aloo
+  must_include:
+  - 'crossovers: space 200B, 1-stage 100B, 2-stage 30B bytes'
+  - the advantage widens afterwards
+  gold_answer_aloo: H-Net (space) crosses after 200B bytes, H-Net (1-stage) after 100B bytes, and H-Net (2-stage)
+    after 30B bytes. They start worse, then scale better. SpaceByte++ is strong but stays slightly worse than the
+    BPE Transformer. After the crossover, H-Net’s lead widens because the chunking keeps being refined as training
+    continues.
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized Transformer after just
+      200B bytes, 100B bytes, and 30B bytes respectively.
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: Beyond these points, H-Net’s performance advantage widens progressively, demonstrating that the benefits
+      of learnable dynamic chunking get strengthened with additional training data, as the model continuously refines
+      its chunking strategy.
+  scored: true
+- id: H6
+  question: On the downstream benchmarks, which H-Net variant is ahead, by how much does it beat the Transformer
+    at Large and at XL, and how do the other byte models compare?
+  answerable: true
+  author: Aloo
+  must_include:
+  - H-Net (2-stage) leads
+  - +2.2% at Large, +2.6% at XL over the Transformer
+  gold_answer_aloo: 'H-Net (2-stage) is highest on most tasks: 2.2% over the Transformer at Large and 2.6% at XL.
+    The Large 2-stage model matches the average downstream score of the XL BPE Transformer. SpaceByte++, H-Net (space),
+    and H-Net (1-stage) are similar to the BPE Transformer at Large and slightly better at XL. The paper notes that
+    the close scores may include some noise in the evaluations.'
+  gold_passages:
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: H-Net (2-stage) consistently achieves the highest performance across most tasks, outperforming 2.2%
+      and 2.6% over the Transformer baseline at Large and XL scales respectively.
+  - paper_id: 2507.07955v2
+    page_number: 12
+    excerpt: SpaceByte++, H-Net (space), and H-Net (1-stage) all have similar performance to the BPE Transformer
+      at Large scale, and slightly outperform it at the XL scale, consistent with their close training curves (and
+      possibly reflecting some noise in the evaluations).
+  scored: false
+- id: U1
+  question: How much electricity, or how much CO2, did training the big Transformer on WMT 2014 English-to-German
+    take?
+  answerable: false
+  scored: true
+  author: assistant (claude.ai review session, 2026-11-13); accepted by Aloo
+  why_unanswerable: The paper gives hardware (8 P100 GPUs), training time (3.5 days) and FLOP estimates, but never
+    energy or emissions.
+  trap: Tempts a conversion from GPU-days or FLOPs into an energy figure the paper never states.
+  gold_answer: The papers do not say. Correct behaviour is an explicit refusal, with no number or claim given.
+- id: U2
+  question: What BLEU score did the Transformer reach on WMT 2014 English-to-Chinese translation?
+  answerable: false
+  scored: true
+  author: assistant (claude.ai review session, 2026-11-13); accepted by Aloo
+  why_unanswerable: Translation results are reported only for English-German and English-French; "Chinese" never
+    appears in the paper.
+  trap: Tempts reusing the 28.4 (EN-DE) or 41.8 (EN-FR) BLEU numbers.
+  gold_answer: The papers do not say. Correct behaviour is an explicit refusal, with no number or claim given.
+- id: U3
+  question: What BLEU score does Moshi report on the WMT 2014 English-to-German benchmark?
+  answerable: false
+  scored: true
+  author: assistant (claude.ai review session, 2026-11-13); accepted by Aloo
+  why_unanswerable: BLEU and WMT never appear in the Moshi paper; they belong to the Transformer paper.
+  trap: 'Cross-paper trap: a naive retriever returns the Transformer''s 28.4 BLEU passage.'
+  gold_answer: The papers do not say. Correct behaviour is an explicit refusal, with no number or claim given.
+- id: U4
+  question: How well does Moshi handle spoken conversations in Japanese, for example its word error rate or a quality
+    score?
+  answerable: false
+  scored: true
+  author: assistant (claude.ai review session, 2026-11-13); accepted by Aloo
+  why_unanswerable: Moshi is evaluated in English only; "Japanese" never appears. The only multilingual mention
+    is the 230 ms turn-gap average from a 10-language study of human conversation.
+  trap: 'Near-miss trap: tempts citing the "10 languages" sentence as if Moshi supported them.'
+  gold_answer: The papers do not say. Correct behaviour is an explicit refusal, with no number or claim given.
+- id: U5
+  question: What end-to-end response latency, in milliseconds, does H-Net achieve when used for real-time dialogue?
+  answerable: false
+  scored: true
+  author: assistant (claude.ai review session, 2026-11-13); accepted by Aloo
+  why_unanswerable: The H-Net paper reports no latency figures and does not study dialogue or speech; "latency"
+    never appears.
+  trap: 'Cross-paper trap: tempts Moshi''s 160 ms theoretical latency.'
+  gold_answer: The papers do not say. Correct behaviour is an explicit refusal, with no number or claim given.

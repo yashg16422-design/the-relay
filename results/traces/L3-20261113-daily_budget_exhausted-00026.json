@@ -1,0 +1,66 @@
+{
+  "answer": "Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 9 minutes.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"methods: SpaceByte++, H-Net (space), H-Net (1-stage), and H-Net (2-stage). The same trends hold as at the Large scale. Our SpaceByte++ baseline is strong, but slightly worse than the BPE Transformer baseline. On the other hand, all byte-level H-Net methods start off worse than the token-level Transformer, but scale better after enough data. H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized Transformer after just 200B bytes, 100B bytes, and 30B bytes respectively. Beyond these points, H-Net’s performance advantage widens progressively, demonstrating that the benefits of learnable dynamic chunking get strengthened with additional training data, as the model continuously refines its chunking strategy. Downstream Evaluations. Table 2 presents zero-shot accuracy across diverse downstream benchmarks (Paperno et al. 2016; Zellers et al. 2019; Bisk et al. 2020; Clark,\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 12, §3.1 Language Modeling]\n\n\"-Net (space), validating our improved signal propagation techniques (Section 2.3). • H-Net (space) is a very strong model reaching the performance of the BPE Transformer, validating the effect of data-dependent chunking strategies together with a well-designed hierarchical architecture. • H-Net (1-stage) is stronger than H-Net (space), validating that our dynamic chunking mechanism successfully learns how to segment data in a context-dependent way that improves over strong heuristics. • H-Net (2-stage) is significantly better than H-Net (1-stage), validating that iterated dynamic chunking can potentially learn a nested hierarchy of useful features, and leverage compute and parameters even more effectively. XL Scale. At the XL scale, we zoom in more closely and compare only the strongest set of methods: SpaceByte++, H-Net (space), H-Net (1-stage), and H-Net (2-stage). The same trends\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 12, §3.1 Language Modeling]",
+  "arrival": "2026-11-12T19:23:30.450Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:23:45.261Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpd",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 531.801,
+    "lite_wait_s": 143.001,
+    "reason": "limit",
+    "slack_s": 14.81
+  },
+  "level": "extractive",
+  "question": "At what training-data sizes did H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized Transformer in the XL comparison?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-daily_budget_exhausted-00026",
+  "retrieved_chunk_ids": [
+    "9c6bbf025fbc1469",
+    "447cab223e56997f",
+    "306bd8dedc31e6ce"
+  ],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.3363732509315014,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 8.707498665899038,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.390498459339142,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

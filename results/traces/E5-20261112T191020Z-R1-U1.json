@@ -1,0 +1,103 @@
+{
+  "answer": "The model service failed while I was preparing your answer, so I am not sending an unchecked one. Please ask again.",
+  "arrival": "2026-11-12T19:11:35.163Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:13:35.163Z",
+  "decide": {
+    "gate": "strict",
+    "min_bm25": 0.0,
+    "mode": "precheck_abstain",
+    "outcome": "error",
+    "paper_source": "understand_step",
+    "papers": [
+      "1706.03762v7"
+    ],
+    "precheck": "pass",
+    "top_bm25": 18.98
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": null,
+  "level": "full",
+  "question": "How much electricity, or how much CO2, did training the big Transformer on WMT 2014 English-to-German take?",
+  "question_id": "U1",
+  "raw_answer": null,
+  "request_id": "E5-20261112T191020Z-R1-U1",
+  "retrieved_chunk_ids": [
+    "f8c3504b4b3841e7",
+    "dcdd8c649c57f4c6",
+    "7bf35641eaf8fbb1"
+  ],
+  "scenario": "E5-quality-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 297.071416862309,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "parse_state": "json",
+      "raw_text": "```json\n{\n  \"query\": \"energy consumption CO2 emissions training Transformer WMT 2014 English-to-German\",\n  \"papers\": [\n    \"transformer\"\n  ]\n}\n```",
+      "reasoning_tokens": null,
+      "start_ms": 0.10212510824203491,
+      "status": "ok",
+      "tokens_in": 137,
+      "tokens_out": 49,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 299.0601249039173,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 297.14454198256135,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 299.0987501107156,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "decide_precheck",
+      "parse_state": "yes",
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 299.09779177978635,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 299.303709063679,
+      "finish_reason": null,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft_attempt_1",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 299.1554168984294,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 25 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"methods: SpaceByte++, H-Net (space), H-Net (1-stage), and H-Net (2-stage). The same trends hold as at the Large scale. Our SpaceByte++ baseline is strong, but slightly worse than the BPE Transformer baseline. On the other hand, all byte-level H-Net methods start off worse than the token-level Transformer, but scale better after enough data. H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized Transformer after just 200B bytes, 100B bytes, and 30B bytes respectively. Beyond these points, H-Net’s performance advantage widens progressively, demonstrating that the benefits of learnable dynamic chunking get strengthened with additional training data, as the model continuously refines its chunking strategy. Downstream Evaluations. Table 2 presents zero-shot accuracy across diverse downstream benchmarks (Paperno et al. 2016; Zellers et al. 2019; Bisk et al. 2020; Clark,\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 12, §3.1 Language Modeling]\n\n\"ns. Recursive H-Nets represent a new class of foundation model architectures that not only overcome tokenization, but discover and operate over abstractions learned from raw data, leading to higher-quality models with less pre-processing. Iterating the 1-stage H-Net to 2 hierarchical stages further improves its capabilities and strongly outperforms all baselines, with steeper training curves and better scaling with data. A byte-level 2-stage H-Net overtakes the perplexity of a strong tokenized Transformer after just 30B training bytes, with the gap widening throughout training, and matches the downstream evaluations of the tokenized Transformer of twice its size. Finally, H-Nets realize the benefits of overcoming tokenization: • Robustness. Without special data mixes, the pretrained H-Net is dramatically more robust to textual perturbations than the token-based Transformer, as evaluated\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 4]",
+  "arrival": "2026-11-12T19:20:41.387Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:20:55.196Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 24.812,
+    "lite_wait_s": 18.062,
+    "reason": "limit",
+    "slack_s": 13.808
+  },
+  "level": "extractive",
+  "question": "At the XL scale, the byte-level H-Nets start behind the tokenized Transformer. After how many training bytes does each one cross over, and what happens to the gap after that?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-sustained_overload-00062",
+  "retrieved_chunk_ids": [
+    "9c6bbf025fbc1469",
+    "d07963f13e50a407",
+    "c90496c04428def0"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.902365755289793,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 8.030990604311228,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.9421155340969563,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 20 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"use Q = 8 quantizers, each with a codebook size of NA = 2048. At 12.5Hz, this represents a bitrate of 1.1kbps. While the latent dimension is 512, we project embeddings to 256 dimensions before applying the RVQ, and project back to 512 before the decoder. Consistently with previous work, we use quantizer dropout (Zeghidour et al., 2022) to provide the codec with bitrate scalability. We moreover follow the obser- vation of Kumar et al. (2023) that not applying quantization with a certain probability during training improves audio quality. More precisely, we only apply quantization 50% of the time, on a per-sequence basis, during training. Unlike Kumar et al. (2023), this means passing unquantized embeddings to the decoder, rather than passing embeddings quantized with all quantizers. Table 3 shows that this significantly improves objective quality metrics, while human evaluations are not\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 11]\n\n\"3.4.2 Audio modeling 3.4.2 Audio modeling The audio codec Mimi described in Section 3.3 outputs Q sub-sequences, with 12.5 steps per second of audio. We denote those sequences by At,q ∈{1, . . . , NA} for 1 ≤t ≤T with T = 12.5 · duration, and 1 ≤q ≤Q with Q = 8. We insert the audio sub-sequences into the multi-sequence V modeled by the RQ-Transformer. Remember that the first codebook At,1 corresponds to the semantic information, as detailed in Section 3.3.2, while the other codebooks correspond to acoustic features. Acoustic delay. We first experimented with simply setting V = A in the modeling. However we find that introducing a slight delay between the semantic and acoustic tokens led to more stable generations. Copet et al. (2023) show that this leads to reduced dependencies between the sub-sequences for a given time step, conditioned on the past, thus allowing to use a weaker model\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 14, §3.4.2 Audio modeling]",
+  "arrival": "2026-11-12T18:54:32.590Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T18:54:39.249Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 5001,
+    "full_wait_s": 19.953,
+    "lite_wait_s": 13.204,
+    "slack_s": 6.658
+  },
+  "level": "extractive",
+  "question": "How many Mimi RVQ quantizers and codebook entries per quantizer correspond to the reported 1.1 kbps bitrate at 12.5 Hz?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-burst_cache_on-00029",
+  "retrieved_chunk_ids": [
+    "d2c4e656db5a45b8",
+    "1dde8d9636feb963",
+    "d2e79100f126b14b"
+  ],
+  "scenario": "burst_cache_on",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.3609581403434277,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.831124097108841,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.3965411819517612,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

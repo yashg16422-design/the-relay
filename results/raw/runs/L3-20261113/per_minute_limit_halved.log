@@ -1,0 +1,1 @@
+per_minute_limit_halved: 62 requests, statuses={'ok': 43, 'timeout': 1, 'rate_limited': 18}, gave_up=1; results=results/raw/runs/L3-20261113/per_minute_limit_halved.csv, traces=results/traces

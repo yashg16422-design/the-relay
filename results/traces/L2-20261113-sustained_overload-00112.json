@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 41 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"2.2.1 Chunking Layer 2.2.1 Chunking Layer The chunking layer (Chunk in equation (2)) contains a routing module and downsampler, as illustrated in Figure 1- ( bottom-right ). Routing Module. In natural data, meaningful boundaries tend to emerge at points of contextual or semantic shift. From this observation, we add an inductive bias by measuring the similarity between adjacent representations: when context changes, consecutive vectors should exhibit lower similarity. The routing module implements this intuition through cosine similarity between adjacent encoder outputs. Given encoder outputs ˆ𝑋, it calculates boundary probabilities 𝑝𝑡and boundary indicators 𝑏𝑡as follows: 𝑞𝑡= 𝑊𝑞ˆ𝑥𝑡, 𝑘𝑡= 𝑊𝑘ˆ𝑥𝑡, 𝑝𝑡= 1 2 \u0012 1 − 𝑞⊤ 𝑡𝑘𝑡−1 ∥𝑞𝑡∥∥𝑘𝑡−1∥ \u0013 ∈[0, 1], 𝑏𝑡= 1{𝑝𝑡≥0.5}, (4) where 𝑝1 = 1.0 by definition, ensuring the sequence begins with a boundary. This formulation scales cosine similarity into a boundary\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 6, §2.2.1 Chunking Layer]\n\n\"1 −'!\"$ 1 −'!\"$ (d) Upsampler (b) Downsampler (a) Routing Module /0 - /0\" 0\"#$ *̅ . +\" Dynamic Chunking n _ e ℳ Figure 1: (left) Architectural overview of H-Net with a two-stage hierarchical design (𝑆= 2). (right) Dynamic Chunking (DC). ( bottom-right ) Key components of a chunking layer: (a) a routing module for dynamically drawing chunk boundaries, and (b) a downsampler that selectively retains vectors based on boundary indicators, reducing sequence length while preserving semantically significant positions. ( top-right ) Key components of a dechunking layer: (c) a smoothing module for converting discrete chunks into interpolated representations, and (d) an upsampler that restores compressed vectors to their original resolution based on boundary indicators. Linear in equation (3) and STE in equation (9) are omitted in the illustration for brevity. language model: with a single stage\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 3, §1 −'!\"$]",
+  "arrival": "2026-11-12T19:16:40.920Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:16:47.877Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 3634,
+    "full_wait_s": 40.568,
+    "lite_wait_s": 33.818,
+    "reason": "limit",
+    "slack_s": 6.955
+  },
+  "level": "extractive",
+  "question": "How does H-Net’s routing module turn adjacent-vector similarity into a compressed sequence?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-sustained_overload-00112",
+  "retrieved_chunk_ids": [
+    "c9034be23de061a1",
+    "03fadd79e501ecb2",
+    "4eca1e440cbe6544"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.762788932770491,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9.949580766260624,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 5.866205785423517,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

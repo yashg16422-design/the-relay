@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 24 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"hen compute- and data- matched, an H-Net with one stage of hierarchy operating at the byte level outperforms a strong Transformer language model operating over BPE tokens. Iterating the hierarchy to multiple stages further increases its performance by modeling multiple levels of abstraction, demonstrating significantly better scaling with data and matching the token-based Transformer of twice its size. H-Nets pretrained on English show significantly increased character-level robustness, and qualitatively learn meaningful data-dependent chunking strategies without any heuristics or explicit supervision. Finally, the H-Net’s improvement over tokenized pipelines is further increased in languages and modalities with weaker tokenization heuristics, such as Chinese and code, or DNA sequences (nearly 4× improvement in data efficiency over baselines), showing the potential of true end-to-end\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 1, §Abstract]\n\n\"-Net (space), validating our improved signal propagation techniques (Section 2.3). • H-Net (space) is a very strong model reaching the performance of the BPE Transformer, validating the effect of data-dependent chunking strategies together with a well-designed hierarchical architecture. • H-Net (1-stage) is stronger than H-Net (space), validating that our dynamic chunking mechanism successfully learns how to segment data in a context-dependent way that improves over strong heuristics. • H-Net (2-stage) is significantly better than H-Net (1-stage), validating that iterated dynamic chunking can potentially learn a nested hierarchy of useful features, and leverage compute and parameters even more effectively. XL Scale. At the XL scale, we zoom in more closely and compare only the strongest set of methods: SpaceByte++, H-Net (space), H-Net (1-stage), and H-Net (2-stage). The same trends\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 12, §3.1 Language Modeling]",
+  "arrival": "2026-11-12T19:37:15.315Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:37:23.765Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 2408,
+    "full_wait_s": 23.557,
+    "lite_wait_s": 16.807,
+    "reason": "limit",
+    "slack_s": 8.448
+  },
+  "level": "extractive",
+  "question": "With compute and data matched, how does a one-stage byte-level H-Net compare with a BPE Transformer, and what changes when you add more stages?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "P1-20261113-overload_patience_8s-00065",
+  "retrieved_chunk_ids": [
+    "925f92c624010805",
+    "447cab223e56997f",
+    "373665760883bf29"
+  ],
+  "scenario": "overload_patience_8s",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.51063085347414,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 11.941839940845966,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.568380769342184,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

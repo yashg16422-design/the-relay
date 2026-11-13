@@ -1,0 +1,66 @@
+{
+  "answer": "The model service is at its rate limit, so I could not finish a checked answer for you in time. Nothing was guessed. Please ask again in about a minute.",
+  "arrival": "2026-11-12T19:04:17.300Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:04:23.015Z",
+  "decide": {
+    "gate": "strict",
+    "mode": "precheck_abstain",
+    "outcome": "rate_limited"
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "lite",
+    "committed_tokens": 2267,
+    "full_wait_s": 7.36,
+    "lite_wait_s": 0.611,
+    "promised_tokens": 1367,
+    "slack_s": 5.713
+  },
+  "level": "lite",
+  "question": "What architecture did the authors propose, and which common operations does it dispense with?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-sustained_overload-00180",
+  "retrieved_chunk_ids": [],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 615.1081412099302,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 615.3693911619484,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "understand_attempt_1",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 615.2260159142315,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

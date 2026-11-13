@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 28 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"2 Hierarchical architectures with static chunking strategies, where chunk boundaries are content-agnostic (usually 2. Hierarchical architectures with static chunking strategies, where chunk boundaries are content-agnostic (usually some variant of fixed-width pooling).\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 31, §2 Hierarchical architectures with static chunking strategies, where chunk boundaries are content-agnostic (usually]\n\n\"Front matter Table 6: Related architectures. Comparison of related architectures, particularly those focused on byte-level modeling. H-Net is the first architecture that enables dynamic, multi-stage hierarchies. Extended discussion is provided in Appendix A. Class Autoregressive Chunking Mechanism Multi-stage Example Architectures Hierarchy Isotropic ✗ — — ByT5 ✓ — — MambaByte Hierarchical (static) ✗ 𝑘-width pooling ✓ Funnel-Transformer Canine Charformer ✓ 𝑘-width pooling ✓ Hourglass Transformer SaShiMi MegaByte Block Transformer MBLM AU-Net 3 Hierarchical (external) ✗ delimiters ✗ eByte WSF ✓ delimiters ✗ DPT (Whitespaces) SpaceByte AU-Net 2 entropy ✗ DPT (Entropy) BLT Hierarchical (dynamic) ✓ soft matching ✗ MANTa soft gating ✗ MrT5 stochastic reparameterization ✗ DPT (Gumbel) Hierarchical (dynamic) ✓ dynamic chunking ✓ H-Net 21\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 21]",
+  "arrival": "2026-11-12T19:17:36.479Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:17:43.138Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 2408,
+    "full_wait_s": 28.136,
+    "lite_wait_s": 21.387,
+    "reason": "limit",
+    "slack_s": 6.657
+  },
+  "level": "extractive",
+  "question": "What does the H-Net pooling ablation suggest about fixed-width chunking?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-burst-00029",
+  "retrieved_chunk_ids": [
+    "4a0ee6e9c9026dd9",
+    "9ed2ad42658f0bec",
+    "49ca30009569fb04"
+  ],
+  "scenario": "burst",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.738333936780691,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 7.516501005738974,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.8162916898727417,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

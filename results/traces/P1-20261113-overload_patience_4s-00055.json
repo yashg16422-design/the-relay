@@ -1,0 +1,37 @@
+{
+  "answer": "",
+  "arrival": "2026-11-12T19:36:41.309Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:36:44.983Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": true,
+  "ladder": null,
+  "level": "wait",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "P1-20261113-overload_patience_4s-00055",
+  "retrieved_chunk_ids": [],
+  "scenario": "overload_patience_4s",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3676.0913375765085,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "load_runner",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "timeout",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

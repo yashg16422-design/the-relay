@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 15 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"a cascaded pipeline and models both the user’s and the system’s speech into a single token stream, which is challenging in presence of significant overlap. The only previous full-duplex dialogue system is dGSLM (Nguyen et al., 2023), which models user and system speech as separate audio token streams and pro- poses a Siamese architecture to process both streams jointly. While dGSLM is full-duplex, it remains a proof-of-concept: it does not run in an online fashion, it does not benefit from the knowledge of a text language model, and it does not model acoustic information as it only models semantic tokens. Moshi addresses these limitations altogether: by modeling two streams of semantic and acoustic tokens hierarchically, Moshi is full duplex and can exploit all the information from the user (linguistic and non-linguistic) while producing speech in real time. Thanks to text pretraining\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6]\n\n\"Front matter USER: Hello, I wanted to talk to you about The Three Musketeers. MOSHI: Of course, happy to help! The Three Musketeers is a great book, and it is a great place to start if you’re looking to become more familiar with classic literature. USER: Wow, this is fantastic. Can you tell me more about the story? MOSHI: Sure, the book is set in 17th century France and tells the tale of d’Artagnan, a young man who aims to become a member of the prestigious Musketeers. USER: So what is the story about? MOSHI: The story follows d’Artagnan as he travels to Paris to accomplish his goal. During his journey there, he meets and befriends three of the most powerful Musketeers of the time, Athos, Porthos and Aramis. USER: Wow, it sounds exciting. What else does the story focus on? MOSHI: The book also explores the political and social issues of the time, including the abuses of power and the\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 63]",
+  "arrival": "2026-11-12T19:17:02.192Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:17:05.285Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 14.758,
+    "lite_wait_s": 1.26,
+    "reason": "limit",
+    "slack_s": 3.091
+  },
+  "level": "extractive",
+  "question": "dGSLM was already full-duplex. Which three limits does the paper still charge it with, and what does Moshi do differently?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-per_minute_limit_halved-00040",
+  "retrieved_chunk_ids": [
+    "94e9779702c36b47",
+    "a19a4f259c93ac2a",
+    "528b467194ab31d6"
+  ],
+  "scenario": "per_minute_limit_halved",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.370765294879675,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 10.85301535204053,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.438890144228935,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

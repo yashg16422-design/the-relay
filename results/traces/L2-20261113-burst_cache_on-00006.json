@@ -1,0 +1,39 @@
+{
+  "answer": "Front matter\nin Figure 1-(Left). [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 5]",
+  "arrival": "2026-11-12T19:10:21.436Z",
+  "cache_hit": true,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:10:33.400Z",
+  "decide": {
+    "gate": "strict",
+    "min_bm25": 0.0,
+    "mode": "precheck_abstain",
+    "outcome": "answered",
+    "paper_source": "none",
+    "papers": [],
+    "precheck": "pass",
+    "top_bm25": 6.576
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "full",
+    "committed_tokens": 3634,
+    "full_wait_s": 7.01,
+    "promised_tokens": 2267,
+    "slack_s": 11.962
+  },
+  "level": "full",
+  "question": "What architecture did the authors propose, and which common operations does it dispense with?",
+  "question_id": null,
+  "raw_answer": "Front matter\nin Figure 1-(Left). [[cite:963dc2311051d27f]]",
+  "request_id": "L2-20261113-burst_cache_on-00006",
+  "retrieved_chunk_ids": [
+    "963dc2311051d27f",
+    "4c82e690b46f42f9",
+    "6d1f80893844d956"
+  ],
+  "scenario": "burst_cache_on",
+  "spans": []
+}

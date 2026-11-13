@@ -1,0 +1,66 @@
+{
+  "answer": "Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 7 minutes.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ation (9) are omitted in the illustration for brevity. language model: with a single stage of dynamic chunking, a byte-level H-Net matches the perplexity and downstream performance of a strong BPE-tokenized Transformer at sizes exceeding 1B parameters. Empirically, the dynamic chunking module naturally compresses data to a similar resolution as BPE tokenizers (4.5-5 bytes/chunk) and qualitatively learns meaningful boundaries, all without any external supervision or heuristics. 3\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 3, §1 −'!\"$]\n\n\"methods: SpaceByte++, H-Net (space), H-Net (1-stage), and H-Net (2-stage). The same trends hold as at the Large scale. Our SpaceByte++ baseline is strong, but slightly worse than the BPE Transformer baseline. On the other hand, all byte-level H-Net methods start off worse than the token-level Transformer, but scale better after enough data. H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized Transformer after just 200B bytes, 100B bytes, and 30B bytes respectively. Beyond these points, H-Net’s performance advantage widens progressively, demonstrating that the benefits of learnable dynamic chunking get strengthened with additional training data, as the model continuously refines its chunking strategy. Downstream Evaluations. Table 2 presents zero-shot accuracy across diverse downstream benchmarks (Paperno et al. 2016; Zellers et al. 2019; Bisk et al. 2020; Clark,\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 12, §3.1 Language Modeling]",
+  "arrival": "2026-11-12T19:18:43.782Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:18:48.267Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpd",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 429.152,
+    "lite_wait_s": 40.353,
+    "reason": "limit",
+    "slack_s": 4.484
+  },
+  "level": "extractive",
+  "question": "A single stage of dynamic chunking is trained on raw bytes. Above what size does it match a strong BPE Transformer, and about how many bytes land in one learned chunk?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-daily_budget_exhausted-00012",
+  "retrieved_chunk_ids": [
+    "2f990d962e0400af",
+    "9c6bbf025fbc1469",
+    "8c71f7afe72af746"
+  ],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.7884986959397793,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 13.122998643666506,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.850123845040798,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

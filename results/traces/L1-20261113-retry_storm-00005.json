@@ -1,0 +1,37 @@
+{
+  "answer": "",
+  "arrival": "2026-11-12T18:54:34.500Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T18:54:36.556Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": true,
+  "ladder": null,
+  "level": "wait",
+  "question": "What architecture did the authors propose, and which common operations does it dispense with?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-retry_storm-00005",
+  "retrieved_chunk_ids": [],
+  "scenario": "retry_storm",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2059.246579185128,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "load_runner",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "timeout",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

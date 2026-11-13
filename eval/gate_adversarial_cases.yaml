@@ -1,0 +1,113 @@
+# Adversarial cases for the sentence gate (handover P0.1, diagnosis D8).
+# Every cited chunk is a real R1 chunk in library/chunks/R1.jsonl, so each
+# case can be checked against the extracted paper text.
+# WRITTEN BY THE ASSISTANT (Claude Code), 2026-11-12. The same author wrote the
+# strict gate, so the false-accept rate measured here is not an unbiased
+# estimate of real behaviour. Cases expected to slip through were included on
+# purpose. Cases us01-us05, ng09, ng10 and sw05 were written by the CTO
+# reviewer subagent and added after its review.
+# expect: reject = an attack the gate should stop; accept = a faithful claim.
+# allowed: paper ids the question is about (empty = scope unknown).
+papers: {T: 1706.03762v7, M: 2410.00037v1, H: 2507.07955v2}
+chunks:
+  HW: a74289279fd72be7    # Transformer p.7, 5.2 Hardware and Schedule
+  ABS: ecf34729c3ec1951   # Transformer p.1, Abstract
+  OPT: 827cd455aff6d15c   # Transformer p.7, 5.3 Optimizer
+  DROP: f9b33ff6d4e8382e  # Transformer p.8, Residual Dropout / Label Smoothing
+  BG: 7d21916634eee362    # Transformer p.2, Background
+  MLAT: 8dc73886cdd181d5  # Moshi p.1, Abstract (latency)
+  MHEL: 9dbc4fd644b48039  # Moshi p.3, contributions (Helium, Mimi)
+  MIM1: f449e374300a8557  # Moshi p.15, Inner Monologue
+  MIM2: aa317c1ce478f51e  # Moshi p.15, Inner Monologue (continued)
+  HDATA: 291ceedd632e4b45 # H-Net p.11, data budget
+  HNET: ab898751a220edeb  # H-Net p.11, model variants
+  TATT: e8118712b3430e7a  # Transformer p.4, scaled dot-product attention
+  MENC: 701c14a5afcfe820  # Moshi p.10, Mimi encoder
+  MTTS: 141df68db1ca529e  # Moshi p.31, TTS and ASR results
+cases:
+  # --- wrong paper: the claim is true of the cited paper, but the question is about another
+  - {id: wp01, category: wrong_paper, allowed: [M], expect: reject, answer: "Training used one machine with 8 NVIDIA P100 GPUs. [[HW]]"}
+  - {id: wp02, category: wrong_paper, allowed: [M], expect: reject, answer: "The base models were trained for a total of 100,000 steps or 12 hours. [[HW]]"}
+  - {id: wp03, category: wrong_paper, allowed: [H], expect: reject, answer: "Training used the Adam optimizer with warmup_steps = 4000. [[OPT]]"}
+  - {id: wp04, category: wrong_paper, allowed: [H], expect: reject, answer: "The model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task. [[ABS]]"}
+  - {id: wp05, category: wrong_paper, allowed: [T], expect: reject, answer: "The model has a theoretical latency of 160ms. [[MLAT]]"}
+  - {id: wp06, category: wrong_paper, allowed: [T], expect: reject, answer: "The text LLM has 7B parameters and was pretrained on 2.1T tokens. [[MHEL]]"}
+  - {id: wp07, category: wrong_paper, allowed: [M], expect: reject, answer: "All models were trained on the 100B token subset sampled from the FineWeb-Edu dataset. [[HDATA]]"}
+  - {id: wp08, category: wrong_paper, allowed: [M], expect: reject, answer: "The Transformer uses 1792 tokens from the GPT2 tokenizer. [[HDATA]]"}
+  - {id: wp09, category: wrong_paper, allowed: [T], expect: reject, answer: "Performance is measured using bits-per-byte. [[HNET]]"}
+  - {id: wp10, category: wrong_paper, allowed: [H], expect: reject, answer: "The model applies dropout to the output of each sub-layer. [[DROP]]"}
+  # --- negation: the passage says X, the claim says not-X
+  - {id: ng01, category: negation, allowed: [T], expect: reject, answer: "The models were not trained on 8 NVIDIA P100 GPUs. [[HW]]"}
+  - {id: ng02, category: negation, allowed: [T], expect: reject, answer: "The base models were never trained for 100,000 steps. [[HW]]"}
+  - {id: ng03, category: negation, allowed: [T], expect: reject, answer: "The Transformer does not achieve 28.4 BLEU on the WMT 2014 English-to-German translation task. [[ABS]]"}
+  - {id: ng04, category: negation, allowed: [M], expect: reject, answer: "Moshi does not have a theoretical latency of 160ms. [[MLAT]]"}
+  - {id: ng05, category: negation, allowed: [T], expect: reject, answer: "The authors did not use the Adam optimizer. [[OPT]]"}
+  - {id: ng06, category: negation, allowed: [T], expect: reject, answer: "The Transformer does not rely on self-attention to compute representations. [[BG]]"}
+  - {id: ng07, category: negation, allowed: [M], expect: reject, answer: "Moshi does not model the textual representation of its own speech. [[MIM1]]"}
+  - {id: ng08, category: negation, allowed: [T], expect: reject, answer: "Label smoothing does not improve accuracy. [[DROP]]"}
+  # --- wrong number: the number is not in the cited passage
+  - {id: wn01, category: wrong_number, allowed: [T], expect: reject, answer: "The base models were trained for 200,000 steps. [[HW]]"}
+  - {id: wn02, category: wrong_number, allowed: [T], expect: reject, answer: "Training used 16 NVIDIA P100 GPUs. [[HW]]"}
+  - {id: wn03, category: wrong_number, allowed: [M], expect: reject, answer: "Moshi has a theoretical latency of 190ms. [[MLAT]]"}
+  - {id: wn04, category: wrong_number, allowed: [M], expect: reject, answer: "Helium is a 9B-parameter text LLM. [[MHEL]]"}
+  - {id: wn05, category: wrong_number, allowed: [T], expect: reject, answer: "The model achieves 29.4 BLEU on the English-to-German translation task. [[ABS]]"}
+  - {id: wn06, category: wrong_number, allowed: [H], expect: reject, answer: "All tokenizer-free models process 4096 utf-8 encoded bytes per sequence. [[HDATA]]"}
+  - {id: wn07, category: wrong_number, allowed: [T], expect: reject, answer: "The schedule used warmup_steps = 8000. [[OPT]]"}
+  - {id: wn08, category: wrong_number, allowed: [M], expect: reject, answer: "Helium was pretrained on 3.1T tokens of public English data. [[MHEL]]"}
+  # --- number in another context: the number is in the passage but belongs to a different fact
+  - {id: nc01, category: number_other_context, allowed: [T], expect: reject, answer: "The big models were trained for 100,000 steps. [[HW]]"}
+  - {id: nc02, category: number_other_context, allowed: [T], expect: reject, answer: "Each training step for the big models took about 0.4 seconds. [[HW]]"}
+  - {id: nc03, category: number_other_context, allowed: [T], expect: reject, answer: "The base models were trained for 3.5 days. [[HW]]"}
+  - {id: nc04, category: number_other_context, allowed: [T], expect: reject, answer: "The model achieves 41.8 BLEU on the WMT 2014 English-to-German translation task. [[ABS]]"}
+  - {id: nc05, category: number_other_context, allowed: [T], expect: reject, answer: "The encoder and decoder stacks each contain 2 layers. [[ABS]]"}
+  - {id: nc06, category: number_other_context, allowed: [M], expect: reject, answer: "Moshi has a latency of 160ms in practice. [[MLAT]]"}
+  - {id: nc07, category: number_other_context, allowed: [H], expect: reject, answer: "The Transformer baseline processes 8192 tokens from the GPT2 tokenizer. [[HDATA]]"}
+  - {id: nc08, category: number_other_context, allowed: [T], expect: reject, answer: "The learning rate was 0.98. [[OPT]]"}
+  - {id: nc09, category: number_other_context, allowed: [T], expect: reject, answer: "The base model uses a dropout rate of 33. [[DROP]]"}
+  - {id: nc10, category: number_other_context, allowed: [H], expect: reject, answer: "The XL scale is matched to a Transformer with 760M parameters. [[HNET]]"}
+  # --- swapped entity or relation: every word is in the passage, the statement is false
+  - {id: sw01, category: swapped_relation, allowed: [T], expect: reject, answer: "The Transformer is based solely on convolutions, dispensing with attention mechanisms entirely. [[ABS]]"}
+  - {id: sw02, category: swapped_relation, allowed: [M], expect: reject, answer: "Mimi is a text LLM that the authors pretrain on public English data. [[MHEL]]"}
+  - {id: sw03, category: swapped_relation, allowed: [M], expect: reject, answer: "Helium is a neural audio codec that converts audio into discrete tokens. [[MHEL]]"}
+  - {id: sw04, category: swapped_relation, allowed: [H], expect: reject, answer: "H-Net (pool) is expected to be stronger than all of the data-dependent chunking strategies. [[HNET]]"}
+  # --- unit swap: right number, wrong unit (added after the CTO review of 2026-11-12, which wrote these)
+  - {id: us01, category: unit_swap, allowed: [M], expect: reject, answer: "Helium is a 7M-parameter text LLM. [[MHEL]]"}
+  - {id: us02, category: unit_swap, allowed: [M], expect: reject, answer: "Moshi has a theoretical latency of 160 seconds. [[MLAT]]"}
+  - {id: us03, category: unit_swap, allowed: [M], expect: reject, answer: "Helium was pretrained on 2.1B tokens of public English data. [[MHEL]]"}
+  - {id: us04, category: unit_swap, allowed: [T], expect: reject, answer: "The base models were trained for 100,000 hours. [[HW]]"}
+  - {id: us05, category: unit_swap, allowed: [T], expect: reject, answer: "The base models were trained for a total of 12 steps. [[HW]]"}
+  - {id: ng09, category: negation, allowed: [T], expect: reject, answer: "The Transformer fails to achieve 28.4 BLEU on the WMT 2014 English-to-German translation task. [[ABS]]"}
+  - {id: ng10, category: negation, allowed: [T], expect: reject, answer: "The Transformer avoids self-attention entirely. [[BG]]"}
+  - {id: sw05, category: swapped_relation, allowed: [T], expect: reject, answer: "Label smoothing improves perplexity but hurts accuracy. [[DROP]]"}
+  # --- structural attacks the original gate already handled
+  - {id: st01, category: structural, allowed: [T], expect: reject, answer: "Training used 8 NVIDIA P100 GPUs. [[HW]] This makes it the fastest model ever built."}
+  - {id: st02, category: structural, allowed: [T], expect: reject, answer: "Training used 8 NVIDIA P100 GPUs. [[cite:aaaaaaaaaaaaaaaa]]"}
+  - {id: st03, category: structural, allowed: [T], expect: reject, answer: "Training used 8 NVIDIA V100 GPUs. [[HW]]"}
+  # --- faithful claims: these must pass, or the gate is refusing good answers
+  - {id: ok01, category: faithful, allowed: [T], expect: accept, answer: "The models were trained on one machine with 8 NVIDIA P100 GPUs. [[HW]]"}
+  - {id: ok02, category: faithful, allowed: [T], expect: accept, answer: "The base models were trained for 100,000 steps or 12 hours. [[HW]]"}
+  - {id: ok03, category: faithful, allowed: [T], expect: accept, answer: "The big models were trained for 300,000 steps, which took 3.5 days. [[HW]]"}
+  - {id: ok04, category: faithful, allowed: [T], expect: accept, answer: "The Transformer achieves 28.4 BLEU on the WMT 2014 English-to-German translation task. [[ABS]]"}
+  - {id: ok05, category: faithful, allowed: [M], expect: accept, answer: "Moshi has a theoretical latency of 160ms, and 200ms in practice. [[MLAT]]"}
+  - {id: ok06, category: faithful, allowed: [M], expect: accept, answer: "Helium is a 7B-parameter text LLM pretrained on 2.1T tokens of public English data. [[MHEL]]"}
+  - {id: ok07, category: faithful, allowed: [H], expect: accept, answer: "All tokenizer-free models process 8192 utf-8 encoded bytes per sequence. [[HDATA]]"}
+  - {id: ok08, category: faithful, allowed: [T], expect: accept, answer: "The Transformer does not use recurrence or convolutions. [[ABS]]"}
+  - {id: ok09, category: faithful, allowed: [T], expect: accept, answer: "The authors used the Adam optimizer with warmup_steps = 4000. [[OPT]]"}
+  - {id: ok10, category: faithful, allowed: [M], expect: accept, answer: "Moshi does not use the textual representation corresponding to the stream of the user. [[MIM2]]"}
+  - {id: ok11, category: faithful, allowed: [T], expect: accept, answer: "The base models were trained for 100000 steps. [[HW]]"}
+  - {id: ok12, category: faithful, allowed: [T, M], expect: accept, answer: "The Transformer was trained on 8 NVIDIA P100 GPUs. [[HW]] Moshi has a theoretical latency of 160ms. [[MLAT]]"}
+  - {id: ok13, category: faithful, allowed: [], expect: accept, answer: "Helium is a 7B-parameter text LLM. [[MHEL]]"}
+  - {id: ok14, category: faithful, allowed: [H], expect: accept, answer: "H-Net (2-stage) is iterated to two nested stages. [[HNET]]"}
+  - {id: ok15, category: faithful, allowed: [T], expect: accept, answer: "Label smoothing hurts perplexity but improves accuracy and BLEU score. [[DROP]]"}
+  # --- short paraphrases (the CTO review found the first two were wrongly rejected)
+  - {id: ok16, category: faithful, allowed: [T], expect: accept, answer: "The big models needed 3.5 days. [[HW]]"}
+  - {id: ok17, category: faithful, allowed: [T], expect: accept, answer: "It took 3.5 days. [[HW]]"}
+  - {id: ok18, category: faithful, allowed: [M], expect: accept, answer: "The theoretical latency is 160 milliseconds. [[MLAT]]"}
+  - {id: ok19, category: faithful, allowed: [M], expect: accept, answer: "Helium has 7 billion parameters. [[MHEL]]"}
+  - {id: ok20, category: faithful, allowed: [T], expect: accept, answer: "Training ran on 8 GPUs. [[HW]]"}
+  # --- real drafts from the Qwen quality run of 2026-11-12 19:10 UTC that the strict gate wrongly rejected
+  - {id: ok21, category: faithful, allowed: [T], expect: accept, answer: "Scaled dot-product attention is preferred in practice because it is much faster and more space-efficient than additive attention, as it can be implemented using highly optimized matrix multiplication code. [[TATT]]"}
+  - {id: ok22, category: faithful, allowed: [M], expect: accept, question: "How does Mimi reach 1.1 kbps at 12.5 Hz?", answer: "Mimi reaches 12.5 Hz by projecting a 24kHz waveform to a latent representation of 12.5 frames per second. [[MENC]]"}
+  - {id: ok23, category: faithful, allowed: [M], expect: accept, answer: "Moshi requires only 2 seconds of lookahead. [[MTTS]] The provided passages do not state the specific word error rate for the streaming ASR system."}
+  - {id: st04, category: structural, allowed: [M], expect: reject, answer: "Moshi requires only 2 seconds of lookahead. [[MTTS]] The passages do not state it, but the word error rate is 3.1%."}
+  - {id: sw06, category: swapped_relation, allowed: [M], expect: reject, answer: "Mimi is a text LLM pretrained on public English data. [[MHEL]]"}

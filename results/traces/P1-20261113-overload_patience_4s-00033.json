@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 26 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ation (9) are omitted in the illustration for brevity. language model: with a single stage of dynamic chunking, a byte-level H-Net matches the perplexity and downstream performance of a strong BPE-tokenized Transformer at sizes exceeding 1B parameters. Empirically, the dynamic chunking module naturally compresses data to a similar resolution as BPE tokenizers (4.5-5 bytes/chunk) and qualitatively learns meaningful boundaries, all without any external supervision or heuristics. 3\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 3, §1 −'!\"$]\n\n\"4 Hierarchical architectures with dynamic chunking strategies, where chunk boundaries are content-dependent and 4. Hierarchical architectures with dynamic chunking strategies, where chunk boundaries are content-dependent and learned end-to-end. A.1.1 Isotropic Architectures The most direct approach to modeling language with tokenizers is to simply model raw byte sequences with a standard sequence model architecture. Since this naive approach suffers from computational challenges on long sequences, Mam- baByte (Wang et al. 2024) proposed using a state space model for its linear-time efficiency. We similarly use Mamba(-2) (Dao and Gu 2024) layers in the outer stages of an H-Net. Notably, through extensive ablations we show that Mamba is not just more efficient but also better at modeling high-resolution data such as text characters and DNA base pairs. A.1.2 Static Chunking To reduce\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 31, §4 Hierarchical architectures with dynamic chunking strategies, where chunk boundaries are content-dependent and]",
+  "arrival": "2026-11-12T19:35:31.901Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:35:39.078Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 25.732,
+    "lite_wait_s": 18.982,
+    "reason": "limit",
+    "slack_s": 7.175
+  },
+  "level": "extractive",
+  "question": "Approximately how many bytes per chunk did the paper report for learned dynamic chunking?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "P1-20261113-overload_patience_4s-00033",
+  "retrieved_chunk_ids": [
+    "2f990d962e0400af",
+    "7885618aef1cad6f",
+    "1e2c13d247e08965"
+  ],
+  "scenario": "overload_patience_4s",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.967249929904938,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 7.68333300948143,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 5.010500084608793,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

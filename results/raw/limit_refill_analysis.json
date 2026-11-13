@@ -1,0 +1,105 @@
+{
+  "source": "budget_ledger.csv",
+  "real_rows_with_rate_limit_headers": 332,
+  "method": "seconds per unit = reset_s / (limit - remaining), per saved response",
+  "limits_seen": {
+    "tokens": [
+      8000
+    ],
+    "requests": [
+      1000
+    ]
+  },
+  "tokens": {
+    "n": 332,
+    "limit": 8000,
+    "limit_window": "minute",
+    "seconds_per_unit_median": 0.0075,
+    "seconds_per_unit_if_continuous_refill": 0.0075,
+    "refill_per_second_median": 133.333,
+    "abs_error_ms_median": 0.5,
+    "abs_error_ms_p95_nearest_rank": 3495.5,
+    "abs_error_ms_max": 6672.0
+  },
+  "requests": {
+    "n": 332,
+    "limit": 1000,
+    "limit_window": "day",
+    "seconds_per_unit_median": 86.4,
+    "seconds_per_unit_if_continuous_refill": 86.4,
+    "refill_per_second_median": 0.012,
+    "abs_error_ms_median": 0.0,
+    "abs_error_ms_p95_nearest_rank": 1.0,
+    "abs_error_ms_max": 1.0
+  },
+  "rate_limited_responses": [
+    {
+      "ledger_line": 143,
+      "timestamp": "2026-11-11T05:27:33.873Z",
+      "model": "openai/gpt-oss-120b",
+      "retry_after_s": 3.0,
+      "tokens_remaining": 603,
+      "implied_request_tokens": 1003
+    },
+    {
+      "ledger_line": 245,
+      "timestamp": "2026-11-11T07:30:08.317Z",
+      "model": "qwen/qwen3.8-27b",
+      "retry_after_s": 12.0,
+      "tokens_remaining": 1184,
+      "implied_request_tokens": 2784
+    },
+    {
+      "ledger_line": 334,
+      "timestamp": "2026-11-11T08:27:56.796Z",
+      "model": "openai/gpt-oss-120b",
+      "retry_after_s": 11.0,
+      "tokens_remaining": 2323,
+      "implied_request_tokens": 3790
+    },
+    {
+      "ledger_line": 361,
+      "timestamp": "2026-11-11T08:47:21.011Z",
+      "model": "qwen/qwen3.8-27b",
+      "retry_after_s": 4.0,
+      "tokens_remaining": 4161,
+      "implied_request_tokens": 4694
+    },
+    {
+      "ledger_line": 364,
+      "timestamp": "2026-11-11T08:48:38.170Z",
+      "model": "qwen/qwen3.8-27b",
+      "retry_after_s": 1.0,
+      "tokens_remaining": 4433,
+      "implied_request_tokens": 4566
+    },
+    {
+      "ledger_line": 397,
+      "timestamp": "2026-11-11T09:29:23.442Z",
+      "model": "qwen/qwen3.8-27b",
+      "retry_after_s": 15.0,
+      "tokens_remaining": 2197,
+      "implied_request_tokens": 4197
+    },
+    {
+      "ledger_line": 401,
+      "timestamp": "2026-11-11T09:30:51.855Z",
+      "model": "qwen/qwen3.8-27b",
+      "retry_after_s": 16.0,
+      "tokens_remaining": 2129,
+      "implied_request_tokens": 4262
+    }
+  ],
+  "retry_after_s": {
+    "n": 7,
+    "min": 1.0,
+    "max": 16.0,
+    "all_hit_limit": "tokens per minute (requests remaining was 985 or more on every one)"
+  },
+  "not_in_headers": [
+    "requests per minute (no header reports it)",
+    "tokens per day (no header reports it)",
+    "requests in flight at once",
+    "the 429 response body (it was not saved before 2026-11-12)"
+  ]
+}

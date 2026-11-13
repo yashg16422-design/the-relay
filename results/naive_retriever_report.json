@@ -1,0 +1,364 @@
+{
+  "examples": [
+    {
+      "mechanism": "1. Cross-paper term collision",
+      "question": "How many GPUs was Moshi trained on?",
+      "why": "The Moshi paper never states a GPU count; 'trained' and 'GPUs' match the Transformer paper's hardware section instead.",
+      "fix": "paper_scope",
+      "by_setting": {
+        "R1": {
+          "naive_top": {
+            "paper_id": "1706.03762v7",
+            "page": 7,
+            "kind": "text",
+            "chunk_id": "a74289279fd72be7",
+            "bm25": 13.89,
+            "text": "5.2 Hardware and Schedule 5.2 Hardware and Schedule We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took abou"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 20,
+            "kind": "text",
+            "chunk_id": "086965018fe9e62d",
+            "bm25": 8.13,
+            "text": "4.4 Training stages and hyper-parameters 4.4 Training stages and hyper-parameters Helium pre-training. An overview of the training stages and hyper parameters is pro- vided in Table 1. For every training phase, we use Ad"
+          }
+        },
+        "R2": {
+          "naive_top": {
+            "paper_id": "1706.03762v7",
+            "page": 7,
+            "kind": "text",
+            "chunk_id": "e3de59017a181e20",
+            "bm25": 14.31,
+            "text": "5.2 Hardware and Schedule 5.2 Hardware and Schedule We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took abou"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 20,
+            "kind": "text",
+            "chunk_id": "b7202dc4a079371f",
+            "bm25": 8.6,
+            "text": "4.4 Training stages and hyper-parameters 4.4 Training stages and hyper-parameters Helium pre-training. An overview of the training stages and hyper parameters is pro- vided in Table 1. For every training phase, we use Ad"
+          }
+        },
+        "R3": {
+          "naive_top": {
+            "paper_id": "1706.03762v7",
+            "page": 7,
+            "kind": "text",
+            "chunk_id": "b2cc73ef93a93e2b",
+            "bm25": 14.59,
+            "text": "5.2 Hardware and Schedule 5.2 Hardware and Schedule We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took abou"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 20,
+            "kind": "text",
+            "chunk_id": "4f8b7feaa27f4348",
+            "bm25": 8.79,
+            "text": "4.4 Training stages and hyper-parameters 4.4 Training stages and hyper-parameters Helium pre-training. An overview of the training stages and hyper parameters is pro- vided in Table 1. For every training phase, we use Ad"
+          }
+        }
+      }
+    },
+    {
+      "mechanism": "2. Appendix chat transcripts hijack question words",
+      "question": "What does the Moshi paper say about SoundStream?",
+      "why": "Moshi's appendix prints sample dialogues where every other line starts 'MOSHI:' and which are full of 'what', 'say' and 'about'.",
+      "fix": "content_query",
+      "by_setting": {
+        "R1": {
+          "naive_top": {
+            "paper_id": "2410.00037v1",
+            "page": 63,
+            "kind": "text",
+            "chunk_id": "a19a4f259c93ac2a",
+            "bm25": 16.71,
+            "text": "Front matter USER: Hello, I wanted to talk to you about The Three Musketeers. MOSHI: Of course, happy to help! The Three Musketeers is a great book, and it is a great place to start if you’re looking to become more famil"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 9,
+            "kind": "text",
+            "chunk_id": "8b2f9a5caab0220e",
+            "bm25": 5.28,
+            "text": "3.3.1 Architecture 3.3.1 Architecture Our baseline architecture takes inspiration from SoundStream (Zeghidour et al., 2022) and Encodec (D´efossez et al., 2023) and consists of a SeaNet (Tagliasacchi et al., 2020) autoen"
+          }
+        },
+        "R2": {
+          "naive_top": {
+            "paper_id": "2410.00037v1",
+            "page": 63,
+            "kind": "text",
+            "chunk_id": "0b38df5820e596f1",
+            "bm25": 15.14,
+            "text": "Front matter USER: Hello, I wanted to talk to you about The Three Musketeers. MOSHI: Of course, happy to help! The Three Musketeers is a great book, and it is a great place to start if you’re looking to become more famil"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 9,
+            "kind": "text",
+            "chunk_id": "8eb69e86640e5554",
+            "bm25": 5.91,
+            "text": "3.3.1 Architecture 3.3.1 Architecture Our baseline architecture takes inspiration from SoundStream (Zeghidour et al., 2022) and Encodec (D´efossez et al., 2023) and consists of a SeaNet (Tagliasacchi et al., 2020) autoen"
+          }
+        },
+        "R3": {
+          "naive_top": {
+            "paper_id": "2410.00037v1",
+            "page": 63,
+            "kind": "text",
+            "chunk_id": "719c2a57ba9af3c4",
+            "bm25": 13.81,
+            "text": "Front matter USER: Hello, I wanted to talk to you about The Three Musketeers. MOSHI: Of course, happy to help! The Three Musketeers is a great book, and it is a great place to start if you’re looking to become more famil"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 9,
+            "kind": "text",
+            "chunk_id": "7fd8f66715122f2e",
+            "bm25": 6.04,
+            "text": "3.3.1 Architecture 3.3.1 Architecture Our baseline architecture takes inspiration from SoundStream (Zeghidour et al., 2022) and Encodec (D´efossez et al., 2023) and consists of a SeaNet (Tagliasacchi et al., 2020) autoen"
+          }
+        }
+      }
+    },
+    {
+      "mechanism": "3. Tables and figures shredded by PDF extraction",
+      "question": "What is the frame rate of Mimi?",
+      "why": "A table row label was extracted as its own tiny passage with the value column lost, so it matches the words and carries no answer.",
+      "fix": "drop_debris",
+      "by_setting": {
+        "R1": {
+          "naive_top": {
+            "paper_id": "2410.00037v1",
+            "page": 23,
+            "kind": "text",
+            "chunk_id": "7fe842a23668daa5",
+            "bm25": 16.68,
+            "text": "Front matter Table 4: Audio quality evaluation. Objective and subjective (MUSHRA) evaluation of audio quality for baseline neural audio codecs—RVQGAN (Kumar et al., 2024), Seman- tiCodec (Liu et al., 2024), and SpeechTok"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 23,
+            "kind": "text",
+            "chunk_id": "7fe842a23668daa5",
+            "bm25": 11.4,
+            "text": "Front matter Table 4: Audio quality evaluation. Objective and subjective (MUSHRA) evaluation of audio quality for baseline neural audio codecs—RVQGAN (Kumar et al., 2024), Seman- tiCodec (Liu et al., 2024), and SpeechTok"
+          }
+        },
+        "R2": {
+          "naive_top": {
+            "paper_id": "2410.00037v1",
+            "page": 23,
+            "kind": "text",
+            "chunk_id": "15feff31a534c351",
+            "bm25": 15.71,
+            "text": "Front matter Table 4: Audio quality evaluation. Objective and subjective (MUSHRA) evaluation of audio quality for baseline neural audio codecs—RVQGAN (Kumar et al., 2024), Seman- tiCodec (Liu et al., 2024), and SpeechTok"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 23,
+            "kind": "text",
+            "chunk_id": "15feff31a534c351",
+            "bm25": 11.11,
+            "text": "Front matter Table 4: Audio quality evaluation. Objective and subjective (MUSHRA) evaluation of audio quality for baseline neural audio codecs—RVQGAN (Kumar et al., 2024), Seman- tiCodec (Liu et al., 2024), and SpeechTok"
+          }
+        },
+        "R3": {
+          "naive_top": {
+            "paper_id": "2410.00037v1",
+            "page": 8,
+            "kind": "text",
+            "chunk_id": "10fe0f1a90659e6d",
+            "bm25": 13.34,
+            "text": "2048 Frame rate 2048 Frame rate -"
+          },
+          "fixed_top": {
+            "paper_id": "2410.00037v1",
+            "page": 23,
+            "kind": "text",
+            "chunk_id": "a92aacd2f69d97a9",
+            "bm25": 10.99,
+            "text": "Front matter Table 4: Audio quality evaluation. Objective and subjective (MUSHRA) evaluation of audio quality for baseline neural audio codecs—RVQGAN (Kumar et al., 2024), Seman- tiCodec (Liu et al., 2024), and SpeechTok"
+          }
+        }
+      }
+    },
+    {
+      "mechanism": "3b. Same mechanism, figure axis labels",
+      "question": "What bits-per-byte does H-Net (2-stage) XL reach?",
+      "why": "The top passage is the tick labels of a plot.",
+      "fix": "drop_debris",
+      "by_setting": {
+        "R1": {
+          "naive_top": {
+            "paper_id": "2507.07955v2",
+            "page": 13,
+            "kind": "text",
+            "chunk_id": "9dbaf0a8081d920f",
+            "bm25": 17.24,
+            "text": "1.05 Validation Bits-per-byte 1.05 Validation Bits-per-byte #FLOPs matched to GPT-3 Large (760M) 50B 100B 150B 200B 250B 300B 350B Total Training Bytes 0.75 0.80 0.85 0.90 0.95 200B 100B 30B H-Net (2-stage) overtakes (BP"
+          },
+          "fixed_top": {
+            "paper_id": "2507.07955v2",
+            "page": 13,
+            "kind": "text",
+            "chunk_id": "9dbaf0a8081d920f",
+            "bm25": 18.25,
+            "text": "1.05 Validation Bits-per-byte 1.05 Validation Bits-per-byte #FLOPs matched to GPT-3 Large (760M) 50B 100B 150B 200B 250B 300B 350B Total Training Bytes 0.75 0.80 0.85 0.90 0.95 200B 100B 30B H-Net (2-stage) overtakes (BP"
+          }
+        },
+        "R2": {
+          "naive_top": {
+            "paper_id": "2507.07955v2",
+            "page": 13,
+            "kind": "text",
+            "chunk_id": "fedfe84c23404c4b",
+            "bm25": 16.33,
+            "text": "1.05 Validation Bits-per-byte 1.05 Validation Bits-per-byte #FLOPs matched to GPT-3 Large (760M) 50B 100B 150B 200B 250B 300B 350B Total Training Bytes 0.75 0.80 0.85 0.90 0.95 200B 100B 30B H-Net (2-stage) overtakes (BP"
+          },
+          "fixed_top": {
+            "paper_id": "2507.07955v2",
+            "page": 13,
+            "kind": "text",
+            "chunk_id": "fedfe84c23404c4b",
+            "bm25": 17.6,
+            "text": "1.05 Validation Bits-per-byte 1.05 Validation Bits-per-byte #FLOPs matched to GPT-3 Large (760M) 50B 100B 150B 200B 250B 300B 350B Total Training Bytes 0.75 0.80 0.85 0.90 0.95 200B 100B 30B H-Net (2-stage) overtakes (BP"
+          }
+        },
+        "R3": {
+          "naive_top": {
+            "paper_id": "2507.07955v2",
+            "page": 13,
+            "kind": "text",
+            "chunk_id": "50fe52a8aa401c7c",
+            "bm25": 15.81,
+            "text": "1.05 Validation Bits-per-byte 1.05 Validation Bits-per-byte #FLOPs matched to GPT-3 Large (760M) 50B 100B 150B 200B 250B 300B 350B Total Training Bytes 0.75 0.80 0.85 0.90 0.95 200B 100B 30B H-Net (2-stage) overtakes (BP"
+          },
+          "fixed_top": {
+            "paper_id": "2507.07955v2",
+            "page": 13,
+            "kind": "text",
+            "chunk_id": "50fe52a8aa401c7c",
+            "bm25": 17.19,
+            "text": "1.05 Validation Bits-per-byte 1.05 Validation Bits-per-byte #FLOPs matched to GPT-3 Large (760M) 50B 100B 150B 200B 250B 300B 350B Total Training Bytes 0.75 0.80 0.85 0.90 0.95 200B 100B 30B H-Net (2-stage) overtakes (BP"
+          }
+        }
+      }
+    }
+  ],
+  "recall": [
+    {
+      "variant": "naive BM25",
+      "R1": {
+        "questions_with_all_gold": 19,
+        "n": 28,
+        "pct": 67.9
+      },
+      "R2": {
+        "questions_with_all_gold": 17,
+        "n": 28,
+        "pct": 60.7
+      },
+      "R3": {
+        "questions_with_all_gold": 25,
+        "n": 28,
+        "pct": 89.3
+      }
+    },
+    {
+      "variant": "+ paper scope",
+      "R1": {
+        "questions_with_all_gold": 21,
+        "n": 28,
+        "pct": 75.0
+      },
+      "R2": {
+        "questions_with_all_gold": 18,
+        "n": 28,
+        "pct": 64.3
+      },
+      "R3": {
+        "questions_with_all_gold": 25,
+        "n": 28,
+        "pct": 89.3
+      }
+    },
+    {
+      "variant": "+ content-word query",
+      "R1": {
+        "questions_with_all_gold": 21,
+        "n": 28,
+        "pct": 75.0
+      },
+      "R2": {
+        "questions_with_all_gold": 19,
+        "n": 28,
+        "pct": 67.9
+      },
+      "R3": {
+        "questions_with_all_gold": 26,
+        "n": 28,
+        "pct": 92.9
+      }
+    },
+    {
+      "variant": "  ...and drop damaged tables",
+      "R1": {
+        "questions_with_all_gold": 21,
+        "n": 28,
+        "pct": 75.0
+      },
+      "R2": {
+        "questions_with_all_gold": 19,
+        "n": 28,
+        "pct": 67.9
+      },
+      "R3": {
+        "questions_with_all_gold": 26,
+        "n": 28,
+        "pct": 92.9
+      }
+    },
+    {
+      "variant": "  ...and drop debris passages",
+      "R1": {
+        "questions_with_all_gold": 19,
+        "n": 28,
+        "pct": 67.9
+      },
+      "R2": {
+        "questions_with_all_gold": 19,
+        "n": 28,
+        "pct": 67.9
+      },
+      "R3": {
+        "questions_with_all_gold": 25,
+        "n": 28,
+        "pct": 89.3
+      }
+    }
+  ],
+  "corpus": {
+    "R1": {
+      "chunks": 789,
+      "debris_passages": 234,
+      "table_chunks": 35,
+      "tables_with_detached_decimals": 25
+    },
+    "R2": {
+      "chunks": 626,
+      "debris_passages": 227,
+      "table_chunks": 35,
+      "tables_with_detached_decimals": 25
+    },
+    "R3": {
+      "chunks": 539,
+      "debris_passages": 228,
+      "table_chunks": 35,
+      "tables_with_detached_decimals": 25
+    }
+  }
+}

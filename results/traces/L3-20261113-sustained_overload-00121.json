@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 12 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ate differences on Web Questions and Llama Questions can be explained by training on audio data and thus reducing the amount of parameters dedicated to textual knowledge, the very large difference on Trivia QA incites us to inspect more thoroughly patterns of errors. We find in particular that multiple-sentence questions (e.g. “The Terror of the Monster was an early title for a best- selling novel which inspired one of the highest-grossing movies of the mid-70’s. Under what name did it eventually terrify the reading and film going public?”) or ones with specific syntactic structure (e.g. “On the human body, a keloid is a type of what?”) are particu- larly challenging for Moshi, due to it being finetuned on oral-style conversations that do not display such patterns. We thus hypothesize that covering more syntactic scenarios during finetuning could reduce this gap.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 30]\n\n\"t audio. Table 13 reports these regurgitation results. Results & Impact of fine-tuning. We observe that the pre-trained model trained on the raw dataset often generates frequent sequences from the training set. The sampling temperature has an important effect on the regurgitation rate: the values typically employed for generation (0.6–1.0) are more prone to regurgitation. Out of 1000 generations, the model fine-tuned for conversation does not generate the most frequent training sequence. As a disclaimer, we point out that fine-tuning could potentially be over-ridden and therefore may not be sufficient per se to avoid regurgitation. Similar to what happens with textual models (Carlini et al., 2022), regurgitation is sig- nificantly impacted by the number of times that the model uses a given sequence for training. Therefore, we evaluate the impact of deduplicating the training dataset by\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 37]",
+  "arrival": "2026-11-12T19:24:10.980Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:24:18.243Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 12.159,
+    "lite_wait_s": 5.409,
+    "reason": "limit",
+    "slack_s": 7.262
+  },
+  "level": "extractive",
+  "question": "What dollar amount did the Transformer authors pay for the training run?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-sustained_overload-00121",
+  "retrieved_chunk_ids": [
+    "e2bcf07a198c85bf",
+    "39a64dad0951210d",
+    "41fced27cd1e9df3"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.0936642326414585,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 7.660747971385717,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.151706118136644,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

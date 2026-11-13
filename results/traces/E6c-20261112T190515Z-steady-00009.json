@@ -1,0 +1,65 @@
+{
+  "answer": "The model service failed while I was preparing your answer, so I am not sending an unchecked one. Please ask again.",
+  "arrival": "2026-11-12T19:11:45.881Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:11:56.953Z",
+  "decide": {
+    "gate": "strict",
+    "mode": "precheck_abstain",
+    "outcome": "error"
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": null,
+    "chosen": "full",
+    "committed_tokens": 0,
+    "full_wait_s": 0.0,
+    "promised_tokens": 2267,
+    "slack_s": 11.067
+  },
+  "level": "full",
+  "question": "At Large and XL scales, how did SpaceByte++ and H-Net variants compare with the BPE Transformer on average downstream performance?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "E6c-20261112T190515Z-steady-00009",
+  "retrieved_chunk_ids": [],
+  "scenario": "steady",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 7.882753852754831,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9.074545465409756,
+      "finish_reason": null,
+      "kind": "work",
+      "model": "openai/gpt-oss-120b",
+      "name": "understand_attempt_1",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 8.371295407414436,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

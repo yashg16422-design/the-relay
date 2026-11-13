@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 37 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"2.2.2 Dechunking 2.2.2 Dechunking The dechunking layer (Dechunk in equation (3)) consists of a smoothing module and upsampler, as illustrated in Figure 1- ( top-right ). Smoothing Module. The critical challenge in training a dynamic chunking module lies in the discrete nature of chunk boundaries, which impedes gradient flow during backpropagation. We introduce the smoothing module as a technique to address this problem. As illustrated in Figure 1-(c), this component transforms discrete chunking operations into 6\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 6, §2.2.2 Dechunking]\n\n\"m which interfaces between the main network and the encoder/decoder networks, learning how to segment data while using standard differentiable optimization. DC is composed of two complementary new techniques: (i) a routing module which predicts boundaries between adjacent elements through a similarity score (ii) and a smoothing module which interpolates representations using the router’s outputs, attenuating the effect of uncertain boundaries and significantly improving learnability. By combining these with a new auxiliary loss function that targets desired downsampling ratios, and modern techniques for gradient-based learning of discrete choices (Fedus, Zoph, and Shazeer 2022; Bengio, Léonard, and Courville 2013), DC lets an H-Net learn how to compress data in a fully end-to-end fashion. Signal Propagation. We introduce several architectural and training techniques to improve stability\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 2]",
+  "arrival": "2026-11-12T19:10:25.447Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:10:30.300Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 4534,
+    "full_wait_s": 36.873,
+    "lite_wait_s": 30.124,
+    "reason": "limit",
+    "slack_s": 4.852
+  },
+  "level": "extractive",
+  "question": "Dynamic chunking has to pick boundaries and still train with ordinary gradients. What do the routing module and the smoothing module each do, and what is the auxiliary loss for?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-burst-00018",
+  "retrieved_chunk_ids": [
+    "a70741935f0c7653",
+    "4eca1e440cbe6544",
+    "66faaf90e25c5783"
+  ],
+  "scenario": "burst",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.128167077898979,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.316792521625757,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.172708511352539,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 33 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ntences (rather than being subtly incoherent), result- ing in higher scores. For all these metrics, we score sequences with a negative-log likelihood normalized by sequence length. Since our model produces several tokens per timestep, we sum all tokens of a timestep with the weights used during training, i.e. 100 for the semantic tokens and 1 for the acoustic ones. We do not include text tokens from Inner Monologue in these scores, as these metrics are designed to compare untranscribed audio sequences and should be computed on audio tokens only. Similarly, when evaluating a multi-stream model after instruction tuning, we only score the tokens corresponding to the user stream as it does not include text tokens. Finally, we also report text understanding evaluation (without audio tokens) on MMLU (Hendrycks et al., 2020) for Spirit-LM and Moshi, as a way to measure how much audio training\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 27, §49.7 Moshi after multi-stream instruct, synthetic voice]\n\n\"3.4.4 Inner Monologue 3.4.4 Inner Monologue While operating purely in the audio domain already yields convincing results (see Table 7), we observe that having Moshi also model the textual representation of its own speech is providing a scaffolding that increases the linguistic quality of its generation. Formally, we define a text stream W ∈{1, . . . , NW }T derived from the sequence of text tokens obtained by applying the SentencePiece tokenizer (Kudo and Richardson, 2018) to the transcription of the audio corresponding to Moshi with Whisper (Radford et al., 2023), as described after. We insert W as the first sub-sequence in V , such that it acts as a prefix to the generation of semantic tokens. This can be seen as an extension of the hierarchical semantic- to-acoustic generation introduced by Borsos et al. (2022). Note that we do not use the textual representation corresponding to the\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 15, §3.4.4 Inner Monologue]",
+  "arrival": "2026-11-12T19:06:52.423Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:07:03.355Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 2267,
+    "full_wait_s": 32.795,
+    "lite_wait_s": 26.047,
+    "slack_s": 10.931
+  },
+  "level": "extractive",
+  "question": "How does Inner Monologue use text during generation, and what effect do the authors report?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-sustained_overload-00226",
+  "retrieved_chunk_ids": [
+    "97dacc450ff4ba0c",
+    "f449e374300a8557",
+    "7163fd5d5f0b8484"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.7567845322191715,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 7.936700247228146,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.822950344532728,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-12T19:01:25.743Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:01:28.620Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": null,
+  "level": "extractive",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-sustained_overload-00131",
+  "retrieved_chunk_ids": [
+    "97935aab6761a492",
+    "0cbfae0d4019333a",
+    "c5cafd620215036b"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.4618335776031017,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 6.0964166186749935,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.514708485454321,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

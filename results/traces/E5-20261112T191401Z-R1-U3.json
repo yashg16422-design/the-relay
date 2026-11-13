@@ -1,0 +1,103 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-12T19:15:30.485Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:17:30.485Z",
+  "decide": {
+    "gate": "strict",
+    "min_bm25": 0.0,
+    "mode": "precheck_abstain",
+    "outcome": "drafter_abstained",
+    "paper_source": "question_keywords+understand_step",
+    "papers": [
+      "2410.00037v1"
+    ],
+    "precheck": "pass",
+    "top_bm25": 13.461
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": null,
+  "level": "full",
+  "question": "What BLEU score does Moshi report on the WMT 2014 English-to-German benchmark?",
+  "question_id": "U3",
+  "raw_answer": "NOT_IN_PAPERS",
+  "request_id": "E5-20261112T191401Z-R1-U3",
+  "retrieved_chunk_ids": [
+    "01b9f901dcb929be",
+    "836f6b0adf0d2a19",
+    "43498b6900f42b4b"
+  ],
+  "scenario": "E5-quality-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1381.9429581053555,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "parse_state": "json",
+      "raw_text": "```json\n{\"query\":\"Moshi BLEU score WMT 2014 English-to-German benchmark\",\"papers\":[\"moshi\"]}\n```",
+      "reasoning_tokens": null,
+      "start_ms": 0.3580409102141857,
+      "status": "ok",
+      "tokens_in": 131,
+      "tokens_out": 32,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1386.65979122743,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 1382.0662503130734,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1386.7201250977814,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "decide_precheck",
+      "parse_state": "yes",
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 1386.7185832932591,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1624.5816661976278,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "parse_state": null,
+      "raw_text": "NOT_IN_PAPERS",
+      "reasoning_tokens": null,
+      "start_ms": 1386.8012502789497,
+      "status": "ok",
+      "tokens_in": 742,
+      "tokens_out": 6,
+      "ttft_ms": 227.67320880666375
+    }
+  ]
+}

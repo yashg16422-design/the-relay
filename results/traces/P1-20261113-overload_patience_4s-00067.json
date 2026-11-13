@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 8 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"wo sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack. Similar to the encoder, we employ residual connections around each of the sub-layers, followed by layer normalization. We also modify the self-attention sub-layer in the decoder stack to prevent positions from attending to subsequent positions. This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position i can depend only on the known outputs at positions less than i.\" [Attention Is All You Need, arXiv:1706.03762v7, PDF p. 3, §3.1 Encoder and Decoder Stacks]\n\n\"3.2.3 Applications of Attention in our Model 3.2.3 Applications of Attention in our Model The Transformer uses multi-head attention in three different ways: • In \"encoder-decoder attention\" layers, the queries come from the previous decoder layer, and the memory keys and values come from the output of the encoder. This allows every position in the decoder to attend over all positions in the input sequence. This mimics the typical encoder-decoder attention mechanisms in sequence-to-sequence models such as [38, 2, 9]. • The encoder contains self-attention layers. In a self-attention layer all of the keys, values and queries come from the same place, in this case, the output of the previous layer in the encoder. Each position in the encoder can attend to all positions in the previous layer of the encoder. • Similarly, self-attention layers in the decoder allow each position in the decoder\" [Attention Is All You Need, arXiv:1706.03762v7, PDF p. 5, §3.2.3 Applications of Attention in our Model]",
+  "arrival": "2026-11-12T19:37:19.475Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:37:22.656Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 7.56,
+    "lite_wait_s": 0.81,
+    "reason": "limit",
+    "slack_s": 3.18
+  },
+  "level": "extractive",
+  "question": "How does the Transformer decoder prevent a position from using future output positions?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "P1-20261113-overload_patience_4s-00067",
+  "retrieved_chunk_ids": [
+    "fde064ddef2ed795",
+    "0e39cfe2541cd93f",
+    "4020c8d8c71aeec3"
+  ],
+  "scenario": "overload_patience_4s",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.669708363711834,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 12.155583128333092,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 5.728292278945446,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

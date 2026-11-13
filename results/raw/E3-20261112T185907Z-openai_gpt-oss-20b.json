@@ -1,0 +1,38 @@
+{
+  "experiment": "E3-20261112T185907Z",
+  "model": "openai/gpt-oss-20b",
+  "records": [
+    {
+      "label": "large_0",
+      "sent_s": 0.0,
+      "options": {
+        "max_completion_tokens": 16
+      },
+      "status": 200,
+      "text": "",
+      "finish_reason": "length",
+      "tokens_in": 2929,
+      "tokens_out": 16,
+      "reasoning_tokens": 14,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "963",
+        "x-ratelimit-remaining-tokens": "5055",
+        "x-ratelimit-reset-requests": "53m16.799s",
+        "x-ratelimit-reset-tokens": "22.087s"
+      },
+      "ms": 646.3
+    },
+    {
+      "label": "large_1",
+      "sent_s": 0.646,
+      "options": {
+        "max_completion_tokens": 16
+      },
+      "status": "transport",
+      "body": "Call estimate exceeds the approved budget for openai/gpt-oss-20b",
+      "ms": 0.2
+    }
+  ]
+}

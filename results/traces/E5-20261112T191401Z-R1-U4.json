@@ -1,0 +1,103 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-12T19:15:37.366Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:17:37.366Z",
+  "decide": {
+    "gate": "strict",
+    "min_bm25": 0.0,
+    "mode": "precheck_abstain",
+    "outcome": "drafter_abstained",
+    "paper_source": "question_keywords+understand_step",
+    "papers": [
+      "2410.00037v1"
+    ],
+    "precheck": "pass",
+    "top_bm25": 12.887
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": null,
+  "level": "full",
+  "question": "How well does Moshi handle spoken conversations in Japanese, for example its word error rate or a quality score?",
+  "question_id": "U4",
+  "raw_answer": "NOT_IN_PAPERS",
+  "request_id": "E5-20261112T191401Z-R1-U4",
+  "retrieved_chunk_ids": [
+    "858b07af389b9fec",
+    "d46789c8be295244",
+    "611b700507277f28"
+  ],
+  "scenario": "E5-quality-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1028.9020827040076,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "parse_state": "json",
+      "raw_text": "{\n\"query\": \"Moshi Japanese spoken conversation word error rate quality score\",\n\"papers\": [\n\"moshi\"\n]\n}",
+      "reasoning_tokens": null,
+      "start_ms": 0.18974998965859413,
+      "status": "ok",
+      "tokens_in": 130,
+      "tokens_out": 32,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1033.6606656201184,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 1028.993624728173,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1036.2760405987501,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "decide_precheck",
+      "parse_state": "yes",
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 1036.2728326581419,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 1353.3096248283982,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "parse_state": null,
+      "raw_text": "NOT_IN_PAPERS",
+      "reasoning_tokens": null,
+      "start_ms": 1036.6294579580426,
+      "status": "ok",
+      "tokens_in": 1490,
+      "tokens_out": 6,
+      "ttft_ms": 294.83004193753004
+    }
+  ]
+}

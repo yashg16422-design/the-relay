@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 33 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"on is ignored by the model. This goes from paralinguistic information, such as emotion and accent, to non-speech audio, such as surrounding acoustic events. Finally, these models remain fun- damentally turn-based, assuming that dialogue is a sequence of well-defined single-speaker segments. While this paradigm is suited to text dialogue, it falls short in modeling aspects of spoken conversations such as interruptions, overlapping speech— which amounts for 10 to 20% of spoken time (C¸etin and Shriberg, 2006) —and backchanneling (i.e. non-interrupting interjections such as “OK” or “I see”). In this work we introduce Moshi, a speech-text foundation model and real-time spoken dialogue system that aims at solving the aforementioned limitations: latency, textual infor- mation bottleneck and turn-based modeling. Moshi augments a text LLM backbone with a smaller audio language model (Borsos et\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 2, §1 Introduction]\n\n\"nge of model sizes and compute horizons (Kaplan et al. 2020; Hoffmann et al. 2022). We did not pursue this formal approach in this paper due to resource constraints. Instead, we used a simpler heuristic for the scaling behavior of our models, at least with respect to data. We note that • essentially all modern models live in the “overtrained\" regime (with respect to the formal scaling laws) due to inference considerations at deployment (Touvron, Martin, et al. 2023); and • these overtrained models often use modern schedulers that have extended periods of constant learning rates (Hu et al. 2024; DeepSeek-AI 2024). Thus, we decided to use the models’ losses during the constant phase as a proxy for how quickly they improve with data. We believe this still provides useful insight into scaling behaviors, and a more dedicated analysis of formal scaling laws remains an important topic for\" [Dynamic Chunking for End-to-End Hierarchical Sequence Modeling, arXiv:2507.07955v2, PDF p. 23]",
+  "arrival": "2026-11-12T19:14:54.329Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:15:01.488Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 2267,
+    "full_wait_s": 32.596,
+    "lite_wait_s": 25.847,
+    "reason": "limit",
+    "slack_s": 7.158
+  },
+  "level": "extractive",
+  "question": "Which spoken-conversation behaviors do the authors say turn-based models miss?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-sustained_overload-00081",
+  "retrieved_chunk_ids": [
+    "8ec62039552cbec3",
+    "2184ad62f64685b8",
+    "7f61adf92a833df5"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 2.4455259554088116,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.0047761760652065,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 2.4781092070043087,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+retry_disciplined: 105 requests, statuses={'ok': 29, 'rate_limited': 76}, gave_up=0; results=results/raw/runs/L2-20261113/retry_disciplined.csv, traces=results/traces

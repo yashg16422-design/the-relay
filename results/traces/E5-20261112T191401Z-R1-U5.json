@@ -1,0 +1,103 @@
+{
+  "answer": "I couldn't find support for this question in the passages I retrieved, so I can't answer it without guessing.",
+  "arrival": "2026-11-12T19:15:50.273Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:17:50.273Z",
+  "decide": {
+    "gate": "strict",
+    "min_bm25": 0.0,
+    "mode": "precheck_abstain",
+    "outcome": "drafter_abstained",
+    "paper_source": "question_keywords+understand_step",
+    "papers": [
+      "2507.07955v2"
+    ],
+    "precheck": "pass",
+    "top_bm25": 6.484
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": null,
+  "level": "full",
+  "question": "What end-to-end response latency, in milliseconds, does H-Net achieve when used for real-time dialogue?",
+  "question_id": "U5",
+  "raw_answer": "NOT_IN_PAPERS",
+  "request_id": "E5-20261112T191401Z-R1-U5",
+  "retrieved_chunk_ids": [
+    "f1934f3d195864f7",
+    "e51eeacc0d3f0322",
+    "8e118510d61e0358"
+  ],
+  "scenario": "E5-quality-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 344.3069588392973,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand",
+      "parse_state": "json",
+      "raw_text": "{\n  \"query\": \"H-Net end-to-end response latency milliseconds real-time dialogue\",\n  \"papers\": [\n    \"hnet\"\n  ]\n}",
+      "reasoning_tokens": null,
+      "start_ms": 0.5507497116923332,
+      "status": "ok",
+      "tokens_in": 130,
+      "tokens_out": 38,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 350.39316676557064,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 344.57724960520864,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 350.50966683775187,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "decide_precheck",
+      "parse_state": "yes",
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 350.50749965012074,
+      "status": "ok",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 573.6329997889698,
+      "finish_reason": "stop",
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "draft",
+      "parse_state": null,
+      "raw_text": "NOT_IN_PAPERS",
+      "reasoning_tokens": null,
+      "start_ms": 350.6701667793095,
+      "status": "ok",
+      "tokens_in": 806,
+      "tokens_out": 6,
+      "ttft_ms": 219.58095906302333
+    }
+  ]
+}

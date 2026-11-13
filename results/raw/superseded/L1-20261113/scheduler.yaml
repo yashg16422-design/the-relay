@@ -1,0 +1,14 @@
+# Values are UNVERIFIED policy defaults until calibrated with E1-E4 and S1-S3.
+queue_capacity: 200 # UNVERIFIED; validate against arrival and wait-time measurements
+unverified_concurrency_ceiling: 10 # UNVERIFIED; calibrate with E4 and stand-in runs
+patient_wait_s: 5 # UNVERIFIED; measure against observed user patience
+# Ladder inputs. Measured 2026-11-13 on the calibrated stand-in at R1 with limits off:
+# 70 full and 70 lite requests over the 35 legacy questions, 35 passage-only requests.
+# Refit from real runs once they exist.
+degradation:
+  full_latency_s: 3.65 # p95 total time of a full request (n=70)
+  lite_latency_s: 2.94 # p95 total time without the repair pass (n=70)
+  extractive_latency_s: 0.05 # passage-only p95 was 3.2 ms (n=35); rounded up
+tokens_per_level:
+  full: 2267 # p95 tokens of a full request (median 1273, mean 1335)
+  lite: 1367 # p95 tokens without the repair pass (median 1232)

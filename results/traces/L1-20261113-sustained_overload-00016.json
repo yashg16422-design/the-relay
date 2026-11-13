@@ -1,0 +1,37 @@
+{
+  "answer": "",
+  "arrival": "2026-11-12T18:54:52.561Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T18:54:56.112Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": true,
+  "ladder": null,
+  "level": "wait",
+  "question": "Why do the Transformer authors say scaled dot-product attention is faster and more space-efficient than additive attention in practice?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-sustained_overload-00016",
+  "retrieved_chunk_ids": [],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3553.405584767461,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "load_runner",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "timeout",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

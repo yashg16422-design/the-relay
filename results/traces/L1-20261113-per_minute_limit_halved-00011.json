@@ -1,0 +1,37 @@
+{
+  "answer": "",
+  "arrival": "2026-11-12T18:55:16.217Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T18:55:19.988Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": true,
+  "ladder": null,
+  "level": "wait",
+  "question": "What limitation of dGSLM does Moshi address, and what design choice does it use to address it?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-per_minute_limit_halved-00011",
+  "retrieved_chunk_ids": [],
+  "scenario": "per_minute_limit_halved",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3772.918096277863,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "load_runner",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "timeout",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

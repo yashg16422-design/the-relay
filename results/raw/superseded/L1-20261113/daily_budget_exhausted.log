@@ -1,0 +1,1 @@
+daily_budget_exhausted: 35 requests, statuses={'ok': 9, 'rate_limited': 25, 'timeout': 1}, gave_up=1; results=results/raw/runs/L1-20261113/daily_budget_exhausted.csv, traces=results/traces

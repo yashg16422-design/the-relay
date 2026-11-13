@@ -1,0 +1,768 @@
+{
+  "cases_file": "eval/gate_adversarial_cases.yaml",
+  "case_author": "assistant (Claude Code); same author as the strict gate",
+  "summary": {
+    "legacy": {
+      "attacks": 53,
+      "false_accepts": 36,
+      "false_accept_pct": 67.9,
+      "faithful": 23,
+      "false_rejects": 8,
+      "false_reject_pct": 34.8,
+      "false_accepts_by_category": {
+        "negation": {
+          "accepted": 8,
+          "n": 10
+        },
+        "number_other_context": {
+          "accepted": 9,
+          "n": 10
+        },
+        "structural": {
+          "accepted": 0,
+          "n": 4
+        },
+        "swapped_relation": {
+          "accepted": 6,
+          "n": 6
+        },
+        "unit_swap": {
+          "accepted": 4,
+          "n": 5
+        },
+        "wrong_number": {
+          "accepted": 1,
+          "n": 8
+        },
+        "wrong_paper": {
+          "accepted": 8,
+          "n": 10
+        }
+      }
+    },
+    "strict": {
+      "attacks": 53,
+      "false_accepts": 16,
+      "false_accept_pct": 30.2,
+      "faithful": 23,
+      "false_rejects": 0,
+      "false_reject_pct": 0.0,
+      "false_accepts_by_category": {
+        "negation": {
+          "accepted": 3,
+          "n": 10
+        },
+        "number_other_context": {
+          "accepted": 7,
+          "n": 10
+        },
+        "structural": {
+          "accepted": 0,
+          "n": 4
+        },
+        "swapped_relation": {
+          "accepted": 6,
+          "n": 6
+        },
+        "unit_swap": {
+          "accepted": 0,
+          "n": 5
+        },
+        "wrong_number": {
+          "accepted": 0,
+          "n": 8
+        },
+        "wrong_paper": {
+          "accepted": 0,
+          "n": 10
+        }
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "wp01",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation a74289279fd72be7 is from a paper the question is not about"
+    },
+    {
+      "id": "wp02",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation a74289279fd72be7 is from a paper the question is not about"
+    },
+    {
+      "id": "wp03",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation 827cd455aff6d15c is from a paper the question is not about"
+    },
+    {
+      "id": "wp04",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "citation ecf34729c3ec1951 is from a paper the question is not about"
+    },
+    {
+      "id": "wp05",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "citation 8dc73886cdd181d5 is from a paper the question is not about"
+    },
+    {
+      "id": "wp06",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation 9dbc4fd644b48039 is from a paper the question is not about"
+    },
+    {
+      "id": "wp07",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation 291ceedd632e4b45 is from a paper the question is not about"
+    },
+    {
+      "id": "wp08",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation 291ceedd632e4b45 is from a paper the question is not about"
+    },
+    {
+      "id": "wp09",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation ab898751a220edeb is from a paper the question is not about"
+    },
+    {
+      "id": "wp10",
+      "category": "wrong_paper",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "citation f9b33ff6d4e8382e is from a paper the question is not about"
+    },
+    {
+      "id": "ng01",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "ng02",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "ng03",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "ng04",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "ng05",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "ng06",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ng07",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ng08",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "wn01",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn02",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn03",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn04",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn05",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn06",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn07",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "wn08",
+      "category": "wrong_number",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number in the sentence is absent from its cited passage"
+    },
+    {
+      "id": "nc01",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "nc02",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "nc03",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "nc04",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "nc05",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number appears in its cited passage but not near the claim's subject"
+    },
+    {
+      "id": "nc06",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "nc07",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "nc08",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "nc09",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "nc10",
+      "category": "number_other_context",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "sw01",
+      "category": "swapped_relation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "sw02",
+      "category": "swapped_relation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "sw03",
+      "category": "swapped_relation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "sw04",
+      "category": "swapped_relation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "us01",
+      "category": "unit_swap",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "us02",
+      "category": "unit_swap",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "us03",
+      "category": "unit_swap",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "us04",
+      "category": "unit_swap",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "us05",
+      "category": "unit_swap",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "reject",
+      "strict_reason": "a number's unit differs from the unit in its cited passage"
+    },
+    {
+      "id": "ng09",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a negated claim is not matched by a negation in its cited passage"
+    },
+    {
+      "id": "ng10",
+      "category": "negation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "sw05",
+      "category": "swapped_relation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "st01",
+      "category": "structural",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a sentence has no citation marker",
+      "strict": "reject",
+      "strict_reason": "a sentence has no citation marker"
+    },
+    {
+      "id": "st02",
+      "category": "structural",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "citation aaaaaaaaaaaaaaaa was not in retrieved passages",
+      "strict": "reject",
+      "strict_reason": "citation aaaaaaaaaaaaaaaa was not in retrieved passages"
+    },
+    {
+      "id": "st03",
+      "category": "structural",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "reject",
+      "strict_reason": "a quoted phrase or named term is absent from its cited passage"
+    },
+    {
+      "id": "ok01",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok02",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok03",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok04",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok05",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok06",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok07",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok08",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok09",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok10",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok11",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok12",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok13",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok14",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok15",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok16",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok17",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok18",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok19",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a number in the sentence is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok20",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok21",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a quoted phrase or named term is absent from its cited passage",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok22",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "ok23",
+      "category": "faithful",
+      "expect": "accept",
+      "legacy": "reject",
+      "legacy_reason": "a sentence has no citation marker",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    },
+    {
+      "id": "st04",
+      "category": "structural",
+      "expect": "reject",
+      "legacy": "reject",
+      "legacy_reason": "a sentence has no citation marker",
+      "strict": "reject",
+      "strict_reason": "a sentence has no citation marker"
+    },
+    {
+      "id": "sw06",
+      "category": "swapped_relation",
+      "expect": "reject",
+      "legacy": "accept",
+      "legacy_reason": "all sentence citations passed",
+      "strict": "accept",
+      "strict_reason": "all sentence citations passed"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "answer": "Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 16 minutes.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"Front matter Figure 1: Overview of Moshi. Moshi is a speech-text foundation model which enables real-time spoken dialogue. The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using Inner Monologue (Section 3.4). been proposed by Wang et al. (2024), with an ASR system running in parallel to a text generator that feeds into a streaming TTS. While this allows modeling more complex sce- narios than previous approaches, it still relies on a cascaded pipeline and models both the user’s and the system’s speech into a single token\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6]",
+  "arrival": "2026-11-12T18:55:51.440Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T18:55:58.700Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpd",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 935.839,
+    "lite_wait_s": 555.647,
+    "slack_s": 7.259
+  },
+  "level": "extractive",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L1-20261113-daily_budget_exhausted-00013",
+  "retrieved_chunk_ids": [
+    "97935aab6761a492",
+    "0cbfae0d4019333a",
+    "c5cafd620215036b"
+  ],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.6058700643479824,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 6.9305370561778545,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.6537032574415207,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

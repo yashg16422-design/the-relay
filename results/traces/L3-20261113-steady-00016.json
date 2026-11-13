@@ -1,0 +1,37 @@
+{
+  "answer": "",
+  "arrival": "2026-11-12T19:19:54.958Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:19:58.509Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": true,
+  "ladder": null,
+  "level": "wait",
+  "question": "How do Helium, Mimi, and Moshi's token streams work together to support full-duplex dialogue?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-steady-00016",
+  "retrieved_chunk_ids": [],
+  "scenario": "steady",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3553.1812999397516,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "load_runner",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "timeout",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

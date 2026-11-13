@@ -1,0 +1,66 @@
+{
+  "answer": "Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 7 minutes.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"3.2.1 Scaled Dot-Product Attention 3.2.1 Scaled Dot-Product Attention We call our particular attention \"Scaled Dot-Product Attention\" (Figure 2). The input consists of queries and keys of dimension dk, and values of dimension dv. We compute the dot products of the query with all keys, divide each by √dk, and apply a softmax function to obtain the weights on the values. In practice, we compute the attention function on a set of queries simultaneously, packed together into a matrix Q. The keys and values are also packed together into matrices K and V . We compute the matrix of outputs as: Attention(Q, K, V ) = softmax(QKT √dk )V (1) The two most commonly used attention functions are additive attention [2], and dot-product (multi- plicative) attention. Dot-product attention is identical to our algorithm, except for the scaling factor of 1 √dk . Additive attention computes the compatibility\" [Attention Is All You Need, arXiv:1706.03762v7, PDF p. 4, §3.2.1 Scaled Dot-Product Attention]\n\n\"hm, except for the scaling factor of 1 √dk . Additive attention computes the compatibility function using a feed-forward network with a single hidden layer. While the two are similar in theoretical complexity, dot-product attention is much faster and more space-efficient in practice, since it can be implemented using highly optimized matrix multiplication code. While for small values of dk the two mechanisms perform similarly, additive attention outperforms dot product attention without scaling for larger values of dk [3]. We suspect that for large values of dk, the dot products grow large in magnitude, pushing the softmax function into regions where it has extremely small gradients 4. To counteract this effect, we scale the dot products by 1 √dk .\" [Attention Is All You Need, arXiv:1706.03762v7, PDF p. 4, §3.2.1 Scaled Dot-Product Attention]",
+  "arrival": "2026-11-12T19:21:54.594Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:22:03.025Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpd",
+    "chosen": "extractive",
+    "committed_tokens": 0,
+    "full_wait_s": 437.313,
+    "lite_wait_s": 48.514,
+    "reason": "limit",
+    "slack_s": 8.425
+  },
+  "level": "extractive",
+  "question": "Why do the Transformer authors say scaled dot-product attention is faster and more space-efficient than additive attention in practice?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-daily_budget_exhausted-00019",
+  "retrieved_chunk_ids": [
+    "77a0c9b803b98870",
+    "e8118712b3430e7a",
+    "de41c3f5e3a0aa99"
+  ],
+  "scenario": "daily_budget_exhausted",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 11.72513235360384,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 26.215340476483107,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 12.489215470850468,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "answer": "The model service failed while I was preparing your answer, so I am not sending an unchecked one. Please ask again.",
+  "arrival": "2026-11-12T19:11:36.529Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:13:36.529Z",
+  "decide": {
+    "gate": "strict",
+    "mode": "precheck_abstain",
+    "outcome": "error"
+  },
+  "fallback_delivered": false,
+  "gave_up": false,
+  "ladder": null,
+  "level": "full",
+  "question": "What BLEU score did the Transformer reach on WMT 2014 English-to-Chinese translation?",
+  "question_id": "U2",
+  "raw_answer": null,
+  "request_id": "E5-20261112T191020Z-R1-U2",
+  "retrieved_chunk_ids": [],
+  "scenario": "E5-quality-R1-qwen_qwen3_8_27b",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 0.4616249352693558,
+      "finish_reason": null,
+      "kind": "work",
+      "model": "qwen/qwen3.8-27b",
+      "name": "understand_attempt_1",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.1370827667415142,
+      "status": "error",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

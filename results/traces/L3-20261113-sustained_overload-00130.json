@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 16 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"5.2 Hardware and Schedule 5.2 Hardware and Schedule We trained our models on one machine with 8 NVIDIA P100 GPUs. For our base models using the hyperparameters described throughout the paper, each training step took about 0.4 seconds. We trained the base models for a total of 100,000 steps or 12 hours. For our big models,(described on the bottom line of table 3), step time was 1.0 seconds. The big models were trained for 300,000 steps (3.5 days).\" [Attention Is All You Need, arXiv:1706.03762v7, PDF p. 7, §5.2 Hardware and Schedule]\n\n\"ate differences on Web Questions and Llama Questions can be explained by training on audio data and thus reducing the amount of parameters dedicated to textual knowledge, the very large difference on Trivia QA incites us to inspect more thoroughly patterns of errors. We find in particular that multiple-sentence questions (e.g. “The Terror of the Monster was an early title for a best- selling novel which inspired one of the highest-grossing movies of the mid-70’s. Under what name did it eventually terrify the reading and film going public?”) or ones with specific syntactic structure (e.g. “On the human body, a keloid is a type of what?”) are particu- larly challenging for Moshi, due to it being finetuned on oral-style conversations that do not display such patterns. We thus hypothesize that covering more syntactic scenarios during finetuning could reduce this gap.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 30]",
+  "arrival": "2026-11-12T19:24:29.200Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:24:34.045Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1335,
+    "full_wait_s": 16.041,
+    "lite_wait_s": 9.291,
+    "reason": "limit",
+    "slack_s": 4.843
+  },
+  "level": "extractive",
+  "question": "What hardware and training duration did the paper report for the base Transformer?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-sustained_overload-00130",
+  "retrieved_chunk_ids": [
+    "a74289279fd72be7",
+    "e2bcf07a198c85bf",
+    "b1e5e8f67c5caaff"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 4.30208258330822,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9.431082755327225,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 4.371874500066042,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

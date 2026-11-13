@@ -1,0 +1,69 @@
+{
+  "experiment": "E3-20261112T190331Z",
+  "model": "openai/gpt-oss-20b",
+  "records": [
+    {
+      "label": "large_0",
+      "sent_s": 0.0,
+      "options": {
+        "max_completion_tokens": 16
+      },
+      "status": 200,
+      "text": "",
+      "finish_reason": "length",
+      "tokens_in": 2929,
+      "tokens_out": 16,
+      "reasoning_tokens": 14,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "932",
+        "x-ratelimit-remaining-tokens": "5055",
+        "x-ratelimit-reset-requests": "1h37m55.2s",
+        "x-ratelimit-reset-tokens": "22.087s"
+      },
+      "ms": 740.5
+    },
+    {
+      "label": "large_1",
+      "sent_s": 0.74,
+      "options": {
+        "max_completion_tokens": 16
+      },
+      "status": 200,
+      "text": "",
+      "finish_reason": "length",
+      "tokens_in": 2929,
+      "tokens_out": 16,
+      "reasoning_tokens": 14,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "931",
+        "x-ratelimit-remaining-tokens": "2184",
+        "x-ratelimit-reset-requests": "1h39m21.6s",
+        "x-ratelimit-reset-tokens": "43.62s"
+      },
+      "ms": 675.1
+    },
+    {
+      "label": "large_2",
+      "sent_s": 1.416,
+      "options": {
+        "max_completion_tokens": 16
+      },
+      "status": 429,
+      "body": "{\"error\":{\"message\":\"Rate limit reached for model `openai/gpt-oss-20b` in organization `org_REDACTED` service tier `on_demand` on tokens per minute (TPM): Limit 8000, Used 5724, Requested 2945. Please try again in 5.0175s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing\",\"type\":\"tokens\",\"code\":\"rate_limit_exceeded\"}}\n",
+      "headers": {
+        "retry-after": "6",
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "931",
+        "x-ratelimit-remaining-tokens": "2276",
+        "x-ratelimit-reset-requests": "1h39m21.6s",
+        "x-ratelimit-reset-tokens": "42.93s"
+      },
+      "ms": 122.4
+    }
+  ]
+}

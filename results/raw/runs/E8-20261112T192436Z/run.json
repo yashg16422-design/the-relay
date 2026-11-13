@@ -1,0 +1,63 @@
+{
+  "experiment": "E8-load-R1-openai_gpt_oss_120b-20261112T192436Z",
+  "model": "openai/gpt-oss-120b",
+  "setting": "R1",
+  "pipeline_config": {
+    "understand_max_completion_tokens": 200,
+    "judge_max_completion_tokens": 512,
+    "draft_max_completion_tokens": 700,
+    "repair_max_completion_tokens": 700,
+    "max_repairs": 1,
+    "decide_mode": "precheck_abstain",
+    "precheck_min_bm25": 0.0,
+    "gate_strict": true,
+    "scope_to_named_papers": true,
+    "judge_retry_options": {
+      "response_format": {
+        "type": "json_object"
+      }
+    },
+    "options_by_step": {
+      "understand": {
+        "temperature": 0
+      },
+      "judge": {
+        "temperature": 0
+      },
+      "draft": {
+        "temperature": 0
+      },
+      "repair": {
+        "temperature": 0
+      }
+    },
+    "content_word_query": true,
+    "options_by_model": {
+      "openai/gpt-oss-120b": {
+        "reasoning_effort": "low"
+      },
+      "openai/gpt-oss-20b": {
+        "reasoning_effort": "low"
+      }
+    }
+  },
+  "questions_file": "eval/questions.yaml",
+  "n": 8,
+  "args": {
+    "command": "load",
+    "id": "E8",
+    "model": "openai/gpt-oss-120b",
+    "setting": "R1",
+    "questions": "eval/questions.yaml",
+    "ids": null,
+    "shape": "burst",
+    "n": 8,
+    "rate_per_min": 1.5,
+    "patience_median_ms": 8000,
+    "deadline_seconds": 120,
+    "seed": 20261113,
+    "scored_only": false,
+    "rerank": false,
+    "dry_run": false
+  }
+}

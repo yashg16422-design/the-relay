@@ -1,0 +1,37 @@
+{
+  "answer": "",
+  "arrival": "2026-11-12T19:13:20.154Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:13:26.957Z",
+  "decide": null,
+  "fallback_delivered": false,
+  "gave_up": true,
+  "ladder": null,
+  "level": "wait",
+  "question": "At what training-data sizes did H-Net (space), H-Net (1-stage), and H-Net (2-stage) cross over the tokenized Transformer in the XL comparison?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-sustained_overload-00057",
+  "retrieved_chunk_ids": [],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 6805.38860661909,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "load_runner",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "timeout",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 14 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"3.1 Overview 3.1 Overview Moshi is a multi-stream speech-to-speech Transformer model, which allows for full-duplex spoken dialogue with a user thanks to an innovative architecture summarized in Figure 1. 6\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6, §3.1 Overview]\n\n\"anner, we propose Mimi (Section 3.3), a neural audio codec combining semantic and acoustic information into a single tokenizer by using residual vector quantization and knowledge distillation. To jointly model the audio streams from Moshi and the user, as well as Moshi’s text tokens, we rely on a Depth Transformer compatible with streaming inference (Sections 3.4.1, 3.4.2). In this section, we further detail each of these components. We then describe the training datasets and the different training phases we used to train Moshi in Section 4. Finally, in Section 5, we report thorough evaluation results on Moshi’s abilities, both linguistic and acoustic, as well as ablation experiments on its main components, while Section 6 provides analyses on the safety of our system.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 7]",
+  "arrival": "2026-11-12T19:19:19.076Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:19:26.687Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 14.191,
+    "lite_wait_s": 7.441,
+    "reason": "limit",
+    "slack_s": 7.61
+  },
+  "level": "extractive",
+  "question": "Moshi is a full-duplex, multi-stream speech-to-speech Transformer. What are its three main components?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-sustained_overload-00044",
+  "retrieved_chunk_ids": [
+    "5878f9d89acdc1ca",
+    "c5cafd620215036b",
+    "06d4ee40b7b65ddf"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.866962157189846,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 9.168962016701698,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.9411699399352074,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

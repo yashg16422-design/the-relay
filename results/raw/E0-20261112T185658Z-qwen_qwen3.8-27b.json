@@ -1,0 +1,121 @@
+{
+  "experiment": "E0-20261112T185658Z",
+  "model": "qwen/qwen3.8-27b",
+  "records": [
+    {
+      "label": "temperature0",
+      "sent_s": 0.0,
+      "options": {
+        "max_completion_tokens": 64,
+        "temperature": 0
+      },
+      "status": 200,
+      "text": "ok",
+      "finish_reason": "stop",
+      "tokens_in": 19,
+      "tokens_out": 2,
+      "reasoning_tokens": null,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "7917",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "622ms"
+      },
+      "ms": 452.6
+    },
+    {
+      "label": "reasoning_effort_low",
+      "sent_s": 0.453,
+      "options": {
+        "max_completion_tokens": 64,
+        "reasoning_effort": "low"
+      },
+      "status": 200,
+      "text": "ok",
+      "finish_reason": "stop",
+      "tokens_in": 47,
+      "tokens_out": 22,
+      "reasoning_tokens": 18,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "7889",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "832ms"
+      },
+      "ms": 1710.3
+    },
+    {
+      "label": "json_mode_judge",
+      "sent_s": 2.163,
+      "options": {
+        "max_completion_tokens": 512,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "status": 200,
+      "text": "{\"answerable\": false, \"reason\": \"The evidence discusses the training of the model from 'Attention Is All You Need' (Transformer), not 'Moshi'.\"}",
+      "finish_reason": "stop",
+      "tokens_in": 135,
+      "tokens_out": 37,
+      "reasoning_tokens": null,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "7697",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "2.272s"
+      },
+      "ms": 238.4
+    },
+    {
+      "label": "abstain_sentinel",
+      "sent_s": 2.401,
+      "options": {
+        "max_completion_tokens": 700
+      },
+      "status": 200,
+      "text": "The provided evidence does not contain information regarding the number of GPUs used to train Moshi.\n\nNOT_IN_PAPERS",
+      "finish_reason": "stop",
+      "tokens_in": 177,
+      "tokens_out": 25,
+      "reasoning_tokens": null,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "996",
+        "x-ratelimit-remaining-tokens": "7513",
+        "x-ratelimit-reset-requests": "5m45.6s",
+        "x-ratelimit-reset-tokens": "12.12s"
+      },
+      "ms": 238.5
+    },
+    {
+      "label": "forced_truncation",
+      "sent_s": 2.64,
+      "options": {
+        "max_completion_tokens": 8
+      },
+      "status": 200,
+      "text": "Attention acts as a cognitive filter, selectively",
+      "finish_reason": "length",
+      "tokens_in": 18,
+      "tokens_out": 8,
+      "reasoning_tokens": null,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "995",
+        "x-ratelimit-remaining-tokens": "7660",
+        "x-ratelimit-reset-requests": "7m12s",
+        "x-ratelimit-reset-tokens": "3.84s"
+      },
+      "ms": 268.9
+    }
+  ]
+}

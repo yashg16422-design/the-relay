@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 15 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"3.4 Generative audio modeling 3.4 Generative audio modeling We now describe how we extend the base Helium model to support the modeling of the audio tokens provided by the Mimi codec. With our goal of achieving realistic spoken dialogue interactions, we further show how to model not just a single stream of audio, but two at the same time, one representing the user, and one the system. Finally, we detail a novel feature, the Inner Monologue, which consists in a joint modeling of the textual and audio modalities on the system side, to improve the quality of interactions.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 12, §3.4 Generative audio modeling]",
+  "arrival": "2026-11-12T19:37:14.599Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:37:23.184Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 15.243,
+    "lite_wait_s": 8.493,
+    "reason": "limit",
+    "slack_s": 8.584
+  },
+  "level": "extractive",
+  "question": "Which languages does Moshi officially support, and how many are supported?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "P1-20261113-overload_patience_8s-00063",
+  "retrieved_chunk_ids": [
+    "41c6ef0f0645ef67",
+    "eaf205457a8a0eac",
+    "088a8f2fe12d22ec"
+  ],
+  "scenario": "overload_patience_8s",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 5.046642385423183,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 8.083684369921684,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 5.112434271723032,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

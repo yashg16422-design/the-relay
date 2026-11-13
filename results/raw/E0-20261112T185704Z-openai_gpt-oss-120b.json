@@ -1,0 +1,121 @@
+{
+  "experiment": "E0-20261112T185704Z",
+  "model": "openai/gpt-oss-120b",
+  "records": [
+    {
+      "label": "temperature0",
+      "sent_s": 0.0,
+      "options": {
+        "max_completion_tokens": 64,
+        "temperature": 0
+      },
+      "status": 200,
+      "text": "ok",
+      "finish_reason": "stop",
+      "tokens_in": 78,
+      "tokens_out": 36,
+      "reasoning_tokens": 26,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "7858",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "1.065s"
+      },
+      "ms": 816.2
+    },
+    {
+      "label": "reasoning_effort_low",
+      "sent_s": 0.816,
+      "options": {
+        "max_completion_tokens": 64,
+        "reasoning_effort": "low"
+      },
+      "status": 200,
+      "text": "ok",
+      "finish_reason": "stop",
+      "tokens_in": 78,
+      "tokens_out": 16,
+      "reasoning_tokens": 6,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "7836",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "1.23s"
+      },
+      "ms": 481.1
+    },
+    {
+      "label": "json_mode_judge",
+      "sent_s": 1.297,
+      "options": {
+        "max_completion_tokens": 512,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "status": 200,
+      "text": "{\"answerable\":false,\"reason\":\"The evidence mentions training on 8 GPUs for a model in the 'Attention Is All You Need' paper, but does not specify the number of GPUs used for training Moshi, so the question cannot be answered from the provided information.\"}",
+      "finish_reason": "stop",
+      "tokens_in": 212,
+      "tokens_out": 184,
+      "reasoning_tokens": 115,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "7277",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "5.422s"
+      },
+      "ms": 668.1
+    },
+    {
+      "label": "abstain_sentinel",
+      "sent_s": 1.966,
+      "options": {
+        "max_completion_tokens": 700
+      },
+      "status": 200,
+      "text": "NOT_IN_PAPERS",
+      "finish_reason": "stop",
+      "tokens_in": 225,
+      "tokens_out": 85,
+      "reasoning_tokens": 71,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "996",
+        "x-ratelimit-remaining-tokens": "6958",
+        "x-ratelimit-reset-requests": "5m45.6s",
+        "x-ratelimit-reset-tokens": "7.815s"
+      },
+      "ms": 606.9
+    },
+    {
+      "label": "forced_truncation",
+      "sent_s": 2.572,
+      "options": {
+        "max_completion_tokens": 8
+      },
+      "status": 200,
+      "text": "",
+      "finish_reason": "length",
+      "tokens_in": 77,
+      "tokens_out": 8,
+      "reasoning_tokens": 6,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "995",
+        "x-ratelimit-remaining-tokens": "7325",
+        "x-ratelimit-reset-requests": "7m12s",
+        "x-ratelimit-reset-tokens": "5.062s"
+      },
+      "ms": 447.7
+    }
+  ]
+}

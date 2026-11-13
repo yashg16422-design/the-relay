@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 11 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"ate differences on Web Questions and Llama Questions can be explained by training on audio data and thus reducing the amount of parameters dedicated to textual knowledge, the very large difference on Trivia QA incites us to inspect more thoroughly patterns of errors. We find in particular that multiple-sentence questions (e.g. “The Terror of the Monster was an early title for a best- selling novel which inspired one of the highest-grossing movies of the mid-70’s. Under what name did it eventually terrify the reading and film going public?”) or ones with specific syntactic structure (e.g. “On the human body, a keloid is a type of what?”) are particu- larly challenging for Moshi, due to it being finetuned on oral-style conversations that do not display such patterns. We thus hypothesize that covering more syntactic scenarios during finetuning could reduce this gap.\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 30]\n\n\"I’m sorry, I did not catch that. USER: I’d like to learn about Maroon. MOSHI: Oh, Marron. Okay, well, let’s see. Maroon is a color that is a dark red or a brownish red. It is named after the French word for chestnut. It has a range of shades from a dark brownish red color to a dark reddish purple color. It’s also considered to be the complementary color to teal. USER: What’s the opposite of Maroom? MOSHI: The opposite of Maroon, I’m sorry, that’s not a word. I think you mean complementary color. USER: Yeah, that’s MOSHI: Okay, USER: it. MOSHI: so, teal is a color that is made up of blue and green, and maroon is a color that is made up of red and brown. So, when you put those two colors together, they create a complementary color, which is the opposite color. USER: Yeah. I think I’m gonna look more up on Maroom. MOSHI: Oh, okay. Yeah, USER: I’ve got some questions. MOSHI: yeah. 64\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 64]",
+  "arrival": "2026-11-12T19:17:31.466Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:17:35.032Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1204,
+    "full_wait_s": 11.469,
+    "lite_wait_s": 4.72,
+    "reason": "limit",
+    "slack_s": 3.564
+  },
+  "level": "extractive",
+  "question": "What theoretical latency did Moshi report, and what natural-conversation average did it compare against?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-burst_cache_on-00014",
+  "retrieved_chunk_ids": [
+    "e2bcf07a198c85bf",
+    "97935aab6761a492",
+    "41fced27cd1e9df3"
+  ],
+  "scenario": "burst_cache_on",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.46858287230134,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 8.909707888960838,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.539124969393015,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

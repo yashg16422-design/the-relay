@@ -1,0 +1,121 @@
+{
+  "experiment": "E0-20261112T185702Z",
+  "model": "openai/gpt-oss-20b",
+  "records": [
+    {
+      "label": "temperature0",
+      "sent_s": 0.0,
+      "options": {
+        "max_completion_tokens": 64,
+        "temperature": 0
+      },
+      "status": 200,
+      "text": "ok",
+      "finish_reason": "stop",
+      "tokens_in": 78,
+      "tokens_out": 32,
+      "reasoning_tokens": 22,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "999",
+        "x-ratelimit-remaining-tokens": "7858",
+        "x-ratelimit-reset-requests": "1m26.4s",
+        "x-ratelimit-reset-tokens": "1.065s"
+      },
+      "ms": 584.1
+    },
+    {
+      "label": "reasoning_effort_low",
+      "sent_s": 0.584,
+      "options": {
+        "max_completion_tokens": 64,
+        "reasoning_effort": "low"
+      },
+      "status": 200,
+      "text": "ok",
+      "finish_reason": "stop",
+      "tokens_in": 78,
+      "tokens_out": 18,
+      "reasoning_tokens": 8,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "998",
+        "x-ratelimit-remaining-tokens": "7811",
+        "x-ratelimit-reset-requests": "2m52.8s",
+        "x-ratelimit-reset-tokens": "1.417s"
+      },
+      "ms": 462.5
+    },
+    {
+      "label": "json_mode_judge",
+      "sent_s": 1.047,
+      "options": {
+        "max_completion_tokens": 512,
+        "response_format": {
+          "type": "json_object"
+        }
+      },
+      "status": 200,
+      "text": "{\"answerable\":false,\"reason\":\"The evidence discusses training on 8 NVIDIA P100 GPUs for a different model and does not mention Moshi.\"}",
+      "finish_reason": "stop",
+      "tokens_in": 212,
+      "tokens_out": 163,
+      "reasoning_tokens": 123,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "997",
+        "x-ratelimit-remaining-tokens": "7246",
+        "x-ratelimit-reset-requests": "4m19.2s",
+        "x-ratelimit-reset-tokens": "5.655s"
+      },
+      "ms": 618.9
+    },
+    {
+      "label": "abstain_sentinel",
+      "sent_s": 1.666,
+      "options": {
+        "max_completion_tokens": 700
+      },
+      "status": 200,
+      "text": "Moshi was trained on 8 GPUs. [[cite:a74289279fd72be7]]",
+      "finish_reason": "stop",
+      "tokens_in": 225,
+      "tokens_out": 125,
+      "reasoning_tokens": 96,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "996",
+        "x-ratelimit-remaining-tokens": "7367",
+        "x-ratelimit-reset-requests": "5m45.6s",
+        "x-ratelimit-reset-tokens": "4.747s"
+      },
+      "ms": 412.9
+    },
+    {
+      "label": "forced_truncation",
+      "sent_s": 2.078,
+      "options": {
+        "max_completion_tokens": 8
+      },
+      "status": 200,
+      "text": "",
+      "finish_reason": "length",
+      "tokens_in": 77,
+      "tokens_out": 8,
+      "reasoning_tokens": 6,
+      "headers": {
+        "x-ratelimit-limit-requests": "1000",
+        "x-ratelimit-limit-tokens": "8000",
+        "x-ratelimit-remaining-requests": "995",
+        "x-ratelimit-remaining-tokens": "7240",
+        "x-ratelimit-reset-requests": "7m12s",
+        "x-ratelimit-reset-tokens": "5.7s"
+      },
+      "ms": 256.7
+    }
+  ]
+}

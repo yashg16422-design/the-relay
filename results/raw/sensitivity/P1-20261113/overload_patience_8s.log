@@ -1,0 +1,1 @@
+overload_patience_8s: 105 requests, statuses={'ok': 35, 'rate_limited': 65, 'timeout': 5}, gave_up=5; results=results/raw/sensitivity/P1-20261113/overload_patience_8s.csv, traces=results/traces

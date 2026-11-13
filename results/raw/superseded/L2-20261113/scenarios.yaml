@@ -1,0 +1,93 @@
+# Load shapes for the calibrated stand-in (decision record 0009, proposed).
+# The file used for runs up to 2026-11-11 is scenarios.legacy-2026-11-11.yaml.
+#
+# Sizing. On the calibrated stand-in at R1 a full answer uses 1,335 tokens on
+# average (n=70, measured 2026-11-13), so 8,000 tokens per minute sustain about
+# 6.0 answers per minute. Rates below are fractions of that. Requests per minute
+# (30) never binds: each answer makes 2 to 3 model calls.
+#
+# ASSUMPTION, not a measurement: how long people wait. Each request draws its own
+# patience from a lognormal with median 8 s, capped at 20 s, and that draw is
+# also its deadline. Nobody measured real users here.
+seed: 20261113
+retrieval_setting: R1
+results_path: results/raw/runs/unset.csv # each run passes its own --results file
+trace_dir: results/traces
+question_files:
+  - eval/questions.yaml # 35 legacy questions
+  - eval/questions_aloo.yaml # Aloo's own questions, when the file exists
+
+x-common: &common
+  patience_ms: 8000 # fallback only; patience_median_ms governs
+  deadline_ms: 8000 # fallback only
+  patience_median_ms: 8000
+  patience_sigma: 0.5
+  patience_cap_ms: 20000
+  zipf_exponent: 1.1
+  urgent_fraction: 0.2
+  cache: false
+
+scenarios:
+  steady: # 60% of capacity for 15 minutes
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 3.6
+    duration_seconds: 900
+    max_requests: 200
+
+  burst: # 30 requests inside 10 seconds, then the queue drains
+    <<: *common
+    arrival_mode: burst
+    max_requests: 30
+    burst_spread_ms: 333
+
+  burst_cache_on: # the same burst with the answer cache switched on
+    <<: *common
+    arrival_mode: burst
+    max_requests: 30
+    burst_spread_ms: 333
+    cache: true
+
+  sustained_overload: # 3x capacity for 15 minutes
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 900
+    max_requests: 600
+
+  per_minute_limit_halved: # 80% of capacity; at 4 minutes the per-minute limits halve
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 4.8
+    duration_seconds: 720
+    max_requests: 200
+    limit_changes:
+      - at_seconds: 240
+        limits: {tokens_per_minute: 4000, requests_per_minute: 15}
+
+  daily_budget_exhausted: # steady load; the daily token bucket is left with about 3 minutes of work
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 3.6
+    duration_seconds: 480
+    max_requests: 200
+    limit_changes:
+      - at_seconds: 0
+        limits: {remaining_tokens_day: 14400} # 3 min x 3.6 answers/min x 1,335 tokens
+
+  retry_disciplined: # overload, always the full pipeline, the project's retry policy
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 360
+    max_requests: 300
+    ladder: false
+
+  retry_storm: # the same arrivals; retries at once, ignores retry-after, no retry budget, no local admission
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 360
+    max_requests: 300
+    ladder: false
+    retry_mode: naive

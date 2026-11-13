@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 14 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"we first transcribe the generated audio with HuBERT-Large (Hsu et al., 2021) finetuned on LibriSpeech 960h,15 and only consider sequences between 4 and 10s, which allows comparing to baselines such as Vall-E (Wang et al., 2023). We emphasize that no LibriSpeech data is seen during the training of our ASR and TTS systems. Results. Our streaming TTS model obtains 4.7% of WER on LibriSpeech test-clean, which outperforms Vall-E’s 5.9% WER but is worse than NaturalSpeech 3 (Ju et al., 2024) with 1.81%. Yet, Moshi only requires 2 seconds of lookahead when Vall-E and NaturalSpeech\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 31, §5.7 Streaming ASR and TTS]\n\n\"5.7 Streaming ASR and TTS 5.7 Streaming ASR and TTS Metrics. Section 3.4.4 and Appendix C describe how Inner Monologue can provide a streaming TTS or streaming ASR system by simply changing the delay it uses between text and audio tokens. In particular, we train a streaming TTS model by delaying audio tokens by 2 seconds, giving some lookahead to the text tokens, and teacher forcing text tokens at inference. Similarly, we train a streaming ASR model by delaying text tokens by 2 seconds, allowing the model to listen to audio content before generating text tokens. In that case, at inference we teacher force the audio tokens. We perform TTS with a temperature of 0.6 while we use greedy decoding for ASR, and evaluate on LibriSpeech (Panayotov et al., 2015) test-clean in Word Error Rate (WER). For TTS, we first transcribe the generated audio with HuBERT-Large (Hsu et al., 2021) finetuned on\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 31, §5.7 Streaming ASR and TTS]",
+  "arrival": "2026-11-12T19:21:16.018Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:21:20.128Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1335,
+    "full_wait_s": 14.265,
+    "lite_wait_s": 9.439,
+    "reason": "limit",
+    "slack_s": 4.107
+  },
+  "level": "extractive",
+  "question": "How did Moshi's streaming TTS WER compare with Vall-E and NaturalSpeech 3, and what lookahead did Moshi need?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L3-20261113-sustained_overload-00073",
+  "retrieved_chunk_ids": [
+    "141df68db1ca529e",
+    "b018814c525086ac",
+    "fe2c66c8e01640e6"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 8.585836738348007,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 11.415003798902035,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 8.861919865012169,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}

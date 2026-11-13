@@ -1,0 +1,66 @@
+{
+  "answer": "The assistant is at its per-minute model limit. A checked answer would need about 15 seconds of waiting, which is longer than this request allows, so I am not making you wait for it.\n\nThese are passages from the papers that best match your question. They are passages, not an answer.\n\n\"Front matter Figure 1: Overview of Moshi. Moshi is a speech-text foundation model which enables real-time spoken dialogue. The main components of Moshi’s architecture are: a bespoke text language model backbone (Helium, see Section 3.2); a neural audio codec with residual vector quantization and with semantic knowledge distilled from a self-supervised speech model (Mimi, Section 3.3); the streaming, hierarchical generation of semantic and acoustic tokens for both the user and Moshi, along with time-aligned text tokens for Moshi when using Inner Monologue (Section 3.4). been proposed by Wang et al. (2024), with an ASR system running in parallel to a text generator that feeds into a streaming TTS. While this allows modeling more complex sce- narios than previous approaches, it still relies on a cascaded pipeline and models both the user’s and the system’s speech into a single token\" [Moshi: a speech-text foundation model for real-time dialogue, arXiv:2410.00037v1, PDF p. 6]",
+  "arrival": "2026-11-12T19:15:12.226Z",
+  "cache_hit": false,
+  "coalesced": false,
+  "deadline": "2026-11-12T19:15:16.277Z",
+  "decide": null,
+  "fallback_delivered": true,
+  "gave_up": false,
+  "ladder": {
+    "blocked_by": "tpm",
+    "chosen": "extractive",
+    "committed_tokens": 1367,
+    "full_wait_s": 15.18,
+    "lite_wait_s": 8.431,
+    "reason": "limit",
+    "slack_s": 4.05
+  },
+  "level": "extractive",
+  "question": "What three main components make up Moshi's architecture?",
+  "question_id": null,
+  "raw_answer": null,
+  "request_id": "L2-20261113-sustained_overload-00085",
+  "retrieved_chunk_ids": [
+    "97935aab6761a492",
+    "0cbfae0d4019333a",
+    "c5cafd620215036b"
+  ],
+  "scenario": "sustained_overload",
+  "spans": [
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 3.8787322118878365,
+      "finish_reason": null,
+      "kind": "wait",
+      "model": null,
+      "name": "scheduler_wait",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 0.0,
+      "status": "queued",
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    },
+    {
+      "attempt": 1,
+      "cached_tokens": null,
+      "end_ms": 7.769565097987652,
+      "finish_reason": null,
+      "kind": "work",
+      "model": null,
+      "name": "retrieve_tool",
+      "parse_state": null,
+      "raw_text": null,
+      "reasoning_tokens": null,
+      "start_ms": 3.93185717985034,
+      "status": null,
+      "tokens_in": null,
+      "tokens_out": null,
+      "ttft_ms": null
+    }
+  ]
+}
