@@ -37,7 +37,7 @@ The legacy questions were proposed by the assistant, so these recall figures are
 Aloo's own questions showing a different ordering; re-rank time above about 300 ms per question.
 
 ## CTO review
-2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts, `docs/reflection_draft.md`.
+2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts. (`docs/reflection_draft.md` was removed by Aloo's instruction on 2026-11-13.)
 
 ## Aloo's call
 Accepted. Aloo, in the Claude Code session on 2026-11-13: "i accept 0006,8,11".

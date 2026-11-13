@@ -46,7 +46,7 @@ New runs append to `results/run_log.csv` and pass through unchanged. After accep
 - A reviewer-facing reason to keep the old names (for example, the old tables are kept in the write-up as context): keep the old names and add a suffix to the new runs instead.
 
 ## CTO review
-2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts, `docs/reflection_draft.md`. The reviewer also suggested the simpler option 3 (see Options).
+2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts. (`docs/reflection_draft.md` was removed by Aloo's instruction on 2026-11-13.) The reviewer also suggested the simpler option 3 (see Options).
 
 ## Aloo's call
 Accepted. Aloo, in the Claude Code session on 2026-11-13, answering "Do you accept record 0007 so I can replace results.csv with the view and commit?": "Yes, write and commit". `results/results.csv` was replaced by the view the same day (SHA-256 of the pre-rework file is in Evidence; the byte-for-byte copy is `results/raw/results_full_log_2026-11-12.csv`).

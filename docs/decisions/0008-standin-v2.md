@@ -27,7 +27,7 @@ About 120 more lines in `standin/server.py`. Draft and repair latency rest on 19
 A real burst that shows latency rising steeply with concurrency; a daily-limit 429 whose behaviour is not a refilling bucket; refitted draft latency (once 20 post-rework calls exist) more than 25% away from the current fit.
 
 ## CTO review
-2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts, `docs/reflection_draft.md`.
+2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts. (`docs/reflection_draft.md` was removed by Aloo's instruction on 2026-11-13.)
 
 ## Aloo's call
 Accepted. Aloo, in the Claude Code session on 2026-11-13: "i accept 0006,8,11".
