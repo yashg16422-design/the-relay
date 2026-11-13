@@ -1,6 +1,6 @@
 # 0006 — How "decide" is made, and what the sentence gate checks
 
-- Status: proposed            <!-- only Aloo changes this to accepted / rejected -->
+- Status: accepted            <!-- only Aloo changes this to accepted / rejected -->
 - Date: 2026-11-12
 - Phase / gate: D (rework before the paid quality runs)
 
@@ -82,3 +82,4 @@ The CTO reviewer disagrees in part: it prefers a minimal A (cap 512, unreadable 
 2026-11-12, on the first diff: `GO WITH CHANGES`. Blocking: (1) the bare word "Transformer" scoped Moshi and H-Net questions to the wrong paper; (2) the paid runners ignored the new config keys; (3) this record omitted A's retry cost, the caveats on the gate figures, and that the strict gate was live by default. All three are fixed above and in the code; the reviewer's eight extra attack cases are in the case file. Re-review: 2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts, `docs/reflection_draft.md`.
 
 ## Aloo's call
+Accepted. Aloo, in the Claude Code session on 2026-11-13: "i accept 0006,8,11".

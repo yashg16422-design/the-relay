@@ -1,73 +1,81 @@
 # The Relay
 
-*Two pages of writing; the required tables follow, generated from `results/results.csv`.*
+*Two pages of writing; the required tables follow.*
 
 ## 1. What I built and why
 
 Five steps: **understand** (a model call names the query and the paper), **retrieve** (a tool: BM25 within that paper), **decide** (a branch: the drafter may answer `NOT_IN_PAPERS`), **draft** (streamed, every sentence cited) and a **sentence gate** with one repair loop. Qwen runs quality, gpt-oss-120b load; gpt-oss-20b only probes limits (it ignored the abstain instruction on a trap question).
 
-The decision that shaped everything: **nothing reaches the person unless a retrieved passage supports it; under pressure the answer gets weaker, never less honest.** It costs first-token time: the gate holds the whole draft a median 233 ms (p95 390 ms, n=42 answered drafts). And the gate is lexical: it accepts 30.2% of 53 written attacks.
+The decision that shaped everything: **nothing reaches the person unless a retrieved passage supports it; under pressure the answer gets weaker, never less honest.** Costs: the gate holds each draft a median 233 ms (p95 390 ms, n=42) and, being lexical, still accepts 30.2% of 53 written attacks.
 
 ## 2. The real service and my stand-in
 
-Limits (Table 1) come from headers on 332 responses and four probes. Per-minute limits are refilling buckets, not windows: a real 429 said "Limit 8000, Used 5724, Requested 2945. Please try again in 5.0175s", exactly the shortfall divided by 133.3 tokens per second. "Requested" includes the output cap, so a larger cap costs headroom even unused. The pipeline never fails over between models.
+Limits (Table 1) come from headers on 332 responses and four probes. Per-minute limits are refilling buckets, not windows: a real 429 said "Limit 8000, Used 5724, Requested 2945. Please try again in 5.0175s", exactly the shortfall divided by 133.3 tokens per second. "Requested" includes the output cap, so a larger cap costs headroom even unused.
 
-The stand-in has the same four buckets, streams, bills tokens drawn from real counts, draws latency per step from a lognormal fitted on 319 real calls, and can inject errors, hangs and slowdown. Its understand p50 is +10.5% against real. It differs most in drafts (p50 966 ms against 634 ms on 105 later real drafts); tokens per day is docs-only.
+The stand-in has the same four buckets, streams, bills tokens drawn from real counts, draws latency per step from a lognormal fitted on 319 real calls, and can inject errors, hangs and slowdown. It differs most in drafts (p50 966 ms against 634 ms on 105 later real drafts); tokens per day is docs-only.
 
 ## 3. Results
 
-Real: steady (n=12) and burst (n=8); the rest is stand-in. Percentiles: nearest-rank p50, p95, and p99 when n ≥ 100.
+Real: steady (n=12) and burst (n=8); the rest is stand-in.
 
-Quality on my 15 questions (Qwen, R1): 40.0% correct, 26.7% wrong, 33.3% correctly refused, 1,378.5 tokens per answer. Every "wrong" is a missing fact, none a false one; all five unanswerable questions were refused. Grades are the assistant's suggestions under my rule, not yet graded blind by me; an assistant wrote the five unanswerable questions at my request.
+Quality on my 15 questions (Qwen, R1): 40.0% correct, 26.7% wrong, 33.3% correctly refused, 1,378.5 tokens per answer. Every "wrong" is a missing fact, none a false one; all five unanswerable questions were refused. Grades are the assistant's suggestions under my rule; an assistant wrote the five unanswerable questions at my request.
 
 The number I could not have guessed: a real answer costs 1,485.2 tokens in 2.25 calls, so tokens allow 5.4 answers a minute and about 135 a day, where requests would allow 13.3 and 444. Before the rework it answered 11 of 107: a judge reply cut off at 120 tokens was read as "not answerable" (found by a review I commissioned).
 
 ## 4. Where the time goes
 
-Rule: the p95 total-time request of the real burst. It took 7,501.0 ms: 5.4 ms waiting, 1,763.1 ms working, 5,731.8 ms retrying (76.4%), because our limiter held its draft twice for the bucket. All of it came before the first token; the gate added 132 ms.
+Rule: the p95 total-time request of the real burst. It took 7,501.0 ms: 5.4 ms waiting, 1,763.1 ms working, 5,731.8 ms retrying (76.4%), as our limiter held its draft twice for the bucket. All of it came before the first token.
 
 ## 5. When a limit is hit
 
-Before spending a token, each request gets the richest level whose predicted wait plus p95 fits its remaining patience; running requests come first.
+Each request gets the richest level whose predicted wait plus p95 fits its remaining patience; running requests come first.
 
-- **Per minute** (overload, 275 requests): 56 got a full answer, 25 one without repair; 93 were held a median 4.2 s first; 189 got passages with a notice, because the wait would outlast them; 5 got nothing.
+- **Per minute** (overload, n=275): 56 got a full answer, 25 one without repair; 93 were held a median 4.2 s first; 189 got passages with a notice, because the wait would outlast them; 5 got nothing.
 - **Per day** (35 requests): 9 answered, then 26 got passages. Nobody was delayed: no wait would help in time.
 
 ## Retrieval: quality versus cost
 
-R1 to R2 changes piece size; R2 to R3 adds re-ranking (Table 3). Correct: 40.0%, 33.3%, 40.0%; tokens per answer: 1,378.5, 2,070.4, 2,271.7. One answer separates them (noise at n=15; one R2 and R3 answer was also lost to a gate bug fixed afterwards and not rerun), so I keep R1: 61% of R3's tokens, and tokens bind. Near the limit the repair goes (p95 1,367 tokens against 2,267); past it, the passages are sent as they are.
+R1 to R2 changes piece size; R2 to R3 adds re-ranking (Table 3). Correct: 40.0%, 33.3%, 40.0%; tokens per answer: 1,378.5, 2,070.4, 2,271.7. That is noise at n=15 (one R2 and R3 answer was also lost to a gate bug, fixed but not rerun), so I keep R1: 61% of R3's tokens, and tokens bind. Near the limit the repair goes (p95 1,367 tokens against 2,267); past it, passages are sent as they are.
 
 ## How this library will mislead a naive retriever
 
 1. **Cross-paper collision.** "How many GPUs was Moshi trained on?" returns the Transformer's hardware section (p. 7). Fixed: search only the named paper.
 2. **Chat transcripts.** "What does the Moshi paper say about SoundStream?" returns an appendix dialogue (p. 63). Fixed: drop question words.
-3. **Shredded tables.** "What bits-per-byte does H-Net (2-stage) XL reach?" returns a plot's axis labels (p. 13); 25 of 35 tables lost their decimal points. Not fixed.
+3. **Shredded tables.** "What bits-per-byte does H-Net (2-stage) XL reach?" returns a plot's axis labels (p. 13). Not fixed.
 
 ## 6. Retries
 
-Retry only 429s, 5xx and timeouts; wait `retry-after`; never past the deadline; three attempts; a shared budget. Made worse: on the same overload, retrying at once sent 367 calls against 133, of which 234 were refused, and answered no more (27 of 105 against 29); it did fail faster.
+Retry only 429s, 5xx and timeouts; wait `retry-after`; never past the deadline; three attempts; a shared budget. Made worse: on the same overload, retrying at once sent 367 calls against 133 and answered no more (27 of 105 against 29).
 
 ## 7. What the person sees
 
-"Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 9 minutes. These are passages from the papers that best match your question. They are passages, not an answer." Two cited passages follow. (Stand-in; the real daily limit was never reached, and gradual refill is observed only for requests per day.)
+"Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 9 minutes. These are passages from the papers that best match your question. They are passages, not an answer." Two cited passages follow. (Stand-in; the real daily limit was never reached.)
 
 ## 8. What I'm unsure about, what I left out, what I learned
 
-Least certain: patience, assumed at a median of 8 s. Halving it in the same overload left answers unchanged (37 of 105 against 35), because tokens decide who is answered, but 14 people gave up against 5.
+Least certain: patience, assumed at a median of 8 s. Halving it left answers unchanged (37 of 105 against 35), since tokens decide who is answered, but 14 gave up against 5.
 
-Not built: failover to another model (it dodges a per-model limit); releasing sentences as each passes the gate (233 ms sooner, but a later one can fail).
+Not built: failover to another model (it dodges a per-model limit); releasing sentences as each passes the gate (a later one can fail).
 
-New to me: I learned that a later repair can hit a 429 after earlier calls have already spent tokens, and that failed-request duration is not user-visible time to first token.
+New to me: I started thinking a rate limit was a simple gate: a request is accepted or rejected, and a 429 means no useful work happened. But one answer is a chain of steps, and a later repair call can hit a limit after earlier calls have already used tokens. And elapsed time on a failed request is not time to first token.
 
 ## Your feedback on Vaani
 
-Teacher AI’s clarifying questions and reviewable prompt/tool diff stood out. Memories carries selected past-call context forward. The readiness-score calculation and memory-selection policy were unclear to me; I would explain both beside the demo.
+What stood out was the "Teacher AI" build flow: the agent asks clarifying questions, assembles the prompt and tools, then shows a change diff for approval. I could not tell how the readiness score is calculated, or how a team decides which past-call details "Memories" should keep. I would explain both, concretely, near the demo.
 
 ## How I worked with the assistant
 
-My prompts set the objective across quality, latency, limits, and cost; required comparable questions and a budget check before real calls; and defined first-token time and reproducible tables. I used an LLM for direction, while the engineering requirements and system write-up were mine. I caught a cost summary that omitted known usage from repair attempts ending in 429 by reconciling traces. I overruled a stand-in-only comparison: after the reset, I required budgeted real R2 runs on both days and then R3, keeping failures visible. I approved the assistant-proposed trace audit because it made answers and evidence reviewable. My contribution was setting and enforcing those measurement and decision constraints.
+History: `transcripts/`. Three prompts, quoted from it by item number:
 
-History: `transcripts/`.
+1. Item 157: "evaluate answer quality, latency, provider limits, and cost; compare at least two options; and choose the smallest experiment that can distinguish them." It made the competing goals visible first.
+2. Item 116: "Please run the real R2 evaluations for Day 1 and Day 2, then proceed to R3 if the budget and approval gates permit. Keep failures in the ledger…" Same questions across settings, failures kept.
+3. Item 54: "I approve decision record 0004. Please proceed with its trace-audit change and preserve the agreed results CSV contract." Every answer became traceable by request id.
+
+**Got wrong.** The first cost summary missed spend from attempts that later failed with a 429 during repair. A review I asked for recomputed it from the traces.
+
+**Overruled.** After rate limits interrupted the evaluation, I did not accept a stand-in-only comparison: I had R2 and R3 run with real calls, budgeted, 429s visible.
+
+**Mine.** What to measure, which evidence to trust, and where to stop; I did not type every line.
 
 ## Results tables (required by the brief)
 

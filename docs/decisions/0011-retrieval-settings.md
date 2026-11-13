@@ -1,6 +1,6 @@
 # 0011 — Retrieval settings for the paid comparison, and two query fixes
 
-- Status: proposed            <!-- only Aloo changes this to accepted / rejected -->
+- Status: accepted            <!-- only Aloo changes this to accepted / rejected -->
 - Date: 2026-11-13
 - Phase / gate: D
 
@@ -40,3 +40,4 @@ Aloo's own questions showing a different ordering; re-rank time above about 300 
 2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts, `docs/reflection_draft.md`.
 
 ## Aloo's call
+Accepted. Aloo, in the Claude Code session on 2026-11-13: "i accept 0006,8,11".
