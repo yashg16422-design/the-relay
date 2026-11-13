@@ -1,41 +1,39 @@
 # The Relay
 
-*Two pages of writing; the required tables follow.*
-
 ## 1. What I built and why
 
-Five steps: **understand** (a model call names the query and the paper), **retrieve** (a tool: BM25 within that paper), **decide** (a branch: the drafter may answer `NOT_IN_PAPERS`), **draft** (streamed, every sentence cited) and a **sentence gate** with one repair loop. Qwen runs quality, gpt-oss-120b load, gpt-oss-20b only limit probes.
+Five steps: **understand** (a model call names query and paper), **retrieve** (a tool: BM25 within that paper), **decide** (a branch: the drafter may answer `NOT_IN_PAPERS`), **draft** (streamed, every sentence cited) and a **sentence gate** with one repair loop. Quality runs took half of Qwen's daily tokens (101,689 of 200,000), so load runs use gpt-oss-120b, whose 12 real steady answers graded 10 correct.
 
 The decision that shaped everything: **nothing reaches the person unless a retrieved passage supports it; under pressure the answer gets weaker, never less honest.** Costs: the gate holds each draft a median 233 ms (p95 390 ms, n=42) and, being lexical, still accepts 30.2% of 53 written attacks.
 
 ## 2. The real service and my stand-in
 
-Limits (Table 1) come from headers on 332 responses and four probes. Per-minute limits are refilling buckets, not windows: a real 429 said "Limit 8000, Used 5724, Requested 2945. Please try again in 5.0175s", exactly the shortfall divided by 133.3 tokens per second. "Requested" includes the output cap, so a larger cap costs headroom even unused.
+Limits (Table 1) come from 332 response headers and four probes. Per-minute limits are refilling buckets, not windows: a real 429 said "Limit 8000, Used 5724, Requested 2945. Please try again in 5.0175s", exactly the shortfall divided by 133.3 tokens per second. "Requested" includes the output cap, so a larger cap costs headroom even unused.
 
-The stand-in has the same four buckets, streams, bills tokens drawn from real counts, draws latency per step from a lognormal fitted on 319 real calls, and can inject errors, hangs and slowdown. It differs most in drafts (p50 966 ms against 634 ms on 105 later real drafts).
+The stand-in has the same four buckets, streams, bills tokens drawn from real counts, draws latency per step from a lognormal fitted on 319 real calls, and can inject errors, hangs and slowdown. Its drafts are slowest against real (p50 966 ms against 634 ms, n=105).
 
 ## 3. Results
 
-Real: steady (n=12) and burst (n=8); the rest is stand-in.
+Real: steady (n=12) and burst (n=8); the rest is stand-in. The answer cache barely helped a burst (26.7% answered against 23.3%, 1 hit in 30): the limit turned most repeats away first.
 
-Quality on my 15 questions (Qwen, R1): 40.0% correct, 26.7% wrong, 33.3% correctly refused, 1,378.5 tokens per answer. Every "wrong" is a missing fact, none a false one; all five unanswerable questions were refused. I blind-graded the 15 R1 answers and matched the assistant's suggested grades on all 15; R2, R3 and the load rows carry its grades under my rule; an assistant wrote the five unanswerable questions at my request.
+Quality on my 15 questions (Qwen, R1): 40.0% correct, 26.7% wrong, 33.3% correctly refused, 1,378.5 tokens per answer. Every "wrong" is a missing fact, none a false one. I blind-graded the 15 R1 answers and matched the assistant's suggested grades on all 15; R2, R3 and the load rows carry its grades under my rule; an assistant wrote the five unanswerable questions at my request.
 
-The number I could not have guessed: a real answer costs 1,485.2 tokens in 2.25 calls, so tokens allow 5.4 answers a minute and about 135 a day, where requests would allow 13.3 and 444. Before the rework it answered 11 of 107: a judge reply cut off at 120 tokens was read as "not answerable" (found by a review I commissioned).
+The number I could not have guessed: a real answer costs 1,485.2 tokens in 2.25 calls, so tokens allow 5.4 answers a minute and about 135 a day, where requests would allow 13.3 and 444. Before the rework it answered 11 of 107: a truncated judge reply was read as "not answerable" (a review I commissioned found it).
 
 ## 4. Where the time goes
 
-Rule: the p95 total-time request of the real burst. It took 7,501.0 ms: 5.4 ms waiting, 1,763.1 ms working, 5,731.8 ms retrying (76.4%), as our limiter held its draft twice for the bucket. All of it came before the first token.
+Rule: the p95 total-time request of the real burst. It took 7,501.0 ms: 5.4 ms waiting, 1,763.1 ms working, 5,731.8 ms retrying (76.4%): our limiter held its draft for the bucket. All of it came before the first token.
 
 ## 5. When a limit is hit
 
-Each request gets the richest level whose predicted wait plus p95 fits its remaining patience; running requests come first.
+Each request gets the richest level whose predicted wait plus p95 fits its patience; running requests go first.
 
-- **Per minute** (overload, n=275): 56 got a full answer, 25 one without repair; 93 were held a median 4.2 s first; 189 got passages with a notice, because the wait would outlast them; 5 got nothing.
+- **Per minute** (overload, n=275): 56 got a full answer, 25 one without repair; 93 were held a median 4.2 s first; 189 got passages with a notice (the wait would outlast them); 5 got nothing.
 - **Per day** (35 requests): 9 answered, then 26 got passages. Nobody was delayed: no wait would help.
 
 ## Retrieval: quality versus cost
 
-R1 to R2 changes piece size; R2 to R3 adds re-ranking (Table 3). Correct: 40.0%, 33.3%, 40.0%; tokens per answer: 1,378.5, 2,070.4, 2,271.7. That is noise at n=15 (one R2 and R3 answer was also lost to a gate bug, fixed but not rerun), so I keep R1: 61% of R3's tokens, and tokens bind. Near the limit the repair goes (p95 1,367 tokens against 2,267); past it, passages are sent as they are.
+R1 to R2 changes piece size; R2 to R3 adds re-ranking (Table 3). Correct: 40.0%, 33.3%, 40.0%; tokens per answer: 1,378.5, 2,070.4, 2,271.7. That is noise at n=15 (a since-fixed gate bug also cost R2 and R3 one answer each), so I keep R1 at 61% of R3's tokens. Near the limit the repair goes (p95 1,367 tokens against 2,267); past it, passages are sent as-is.
 
 ## How this library will mislead a naive retriever
 
@@ -45,15 +43,15 @@ R1 to R2 changes piece size; R2 to R3 adds re-ranking (Table 3). Correct: 40.0%,
 
 ## 6. Retries
 
-Retry only 429s, 5xx and timeouts; wait `retry-after`; never past the deadline; three attempts; a shared budget. Made worse: on the same overload, retrying at once sent 367 calls against 133 and answered no more (27 of 105 against 29).
+Retry only 429s, 5xx and timeouts; wait `retry-after`; never past the deadline; three attempts; a shared budget. Made worse: on the same overload, retrying at once failed faster (total p95 2,490 ms against 7,145 ms) but sent 2.8 times the calls (367 against 133) for the same answers (27 of 105 against 29); wasted calls spend request budget.
 
 ## 7. What the person sees
 
-"Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 9 minutes. These are passages from the papers that best match your question. They are passages, not an answer." Two cited passages follow. (Stand-in; the real daily limit was never reached.)
+"Today's model budget for this assistant is used up, so I cannot write you a checked answer right now. The budget refills gradually rather than at midnight: the next full answer can be served in about 9 minutes." Two cited passages follow, labelled "passages, not an answer". (Stand-in; the real daily limit was never reached.)
 
 ## 8. What I'm unsure about, what I left out, what I learned
 
-Least certain: patience, assumed at a median of 8 s. Halving it left answers unchanged (37 of 105 against 35), since tokens decide who is answered, but 14 gave up against 5.
+Least certain: patience, assumed at a median of 8 s. Halving it left answers unchanged (37 of 105 against 35), but 14 gave up against 5.
 
 Not built: failover to another model (it dodges a per-model limit); releasing sentences as each passes the gate (a later one can fail).
 
