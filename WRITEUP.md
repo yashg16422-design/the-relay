@@ -4,7 +4,7 @@
 
 ## 1. What I built and why
 
-Five steps: **understand** (a model call names the query and the paper), **retrieve** (a tool: BM25 within that paper), **decide** (a branch: the drafter may answer `NOT_IN_PAPERS`), **draft** (streamed, every sentence cited) and a **sentence gate** with one repair loop. Qwen runs quality, gpt-oss-120b load; gpt-oss-20b only probes limits (it ignored the abstain instruction on a trap question).
+Five steps: **understand** (a model call names the query and the paper), **retrieve** (a tool: BM25 within that paper), **decide** (a branch: the drafter may answer `NOT_IN_PAPERS`), **draft** (streamed, every sentence cited) and a **sentence gate** with one repair loop. Qwen runs quality, gpt-oss-120b load, gpt-oss-20b only limit probes.
 
 The decision that shaped everything: **nothing reaches the person unless a retrieved passage supports it; under pressure the answer gets weaker, never less honest.** Costs: the gate holds each draft a median 233 ms (p95 390 ms, n=42) and, being lexical, still accepts 30.2% of 53 written attacks.
 
@@ -12,13 +12,13 @@ The decision that shaped everything: **nothing reaches the person unless a retri
 
 Limits (Table 1) come from headers on 332 responses and four probes. Per-minute limits are refilling buckets, not windows: a real 429 said "Limit 8000, Used 5724, Requested 2945. Please try again in 5.0175s", exactly the shortfall divided by 133.3 tokens per second. "Requested" includes the output cap, so a larger cap costs headroom even unused.
 
-The stand-in has the same four buckets, streams, bills tokens drawn from real counts, draws latency per step from a lognormal fitted on 319 real calls, and can inject errors, hangs and slowdown. It differs most in drafts (p50 966 ms against 634 ms on 105 later real drafts); tokens per day is docs-only.
+The stand-in has the same four buckets, streams, bills tokens drawn from real counts, draws latency per step from a lognormal fitted on 319 real calls, and can inject errors, hangs and slowdown. It differs most in drafts (p50 966 ms against 634 ms on 105 later real drafts).
 
 ## 3. Results
 
 Real: steady (n=12) and burst (n=8); the rest is stand-in.
 
-Quality on my 15 questions (Qwen, R1): 40.0% correct, 26.7% wrong, 33.3% correctly refused, 1,378.5 tokens per answer. Every "wrong" is a missing fact, none a false one; all five unanswerable questions were refused. Grades are the assistant's suggestions under my rule; an assistant wrote the five unanswerable questions at my request.
+Quality on my 15 questions (Qwen, R1): 40.0% correct, 26.7% wrong, 33.3% correctly refused, 1,378.5 tokens per answer. Every "wrong" is a missing fact, none a false one; all five unanswerable questions were refused. I blind-graded the 15 R1 answers and matched the assistant's suggested grades on all 15; R2, R3 and the load rows carry its grades under my rule; an assistant wrote the five unanswerable questions at my request.
 
 The number I could not have guessed: a real answer costs 1,485.2 tokens in 2.25 calls, so tokens allow 5.4 answers a minute and about 135 a day, where requests would allow 13.3 and 444. Before the rework it answered 11 of 107: a judge reply cut off at 120 tokens was read as "not answerable" (found by a review I commissioned).
 
@@ -31,7 +31,7 @@ Rule: the p95 total-time request of the real burst. It took 7,501.0 ms: 5.4 ms w
 Each request gets the richest level whose predicted wait plus p95 fits its remaining patience; running requests come first.
 
 - **Per minute** (overload, n=275): 56 got a full answer, 25 one without repair; 93 were held a median 4.2 s first; 189 got passages with a notice, because the wait would outlast them; 5 got nothing.
-- **Per day** (35 requests): 9 answered, then 26 got passages. Nobody was delayed: no wait would help in time.
+- **Per day** (35 requests): 9 answered, then 26 got passages. Nobody was delayed: no wait would help.
 
 ## Retrieval: quality versus cost
 
@@ -65,7 +65,7 @@ What stood out was the "Teacher AI" build flow: the agent asks clarifying questi
 
 ## How I worked with the assistant
 
-History: `transcripts/`. Three prompts, quoted from it by item number:
+History: `transcripts/`. Three prompts, by item number:
 
 1. Item 157: "evaluate answer quality, latency, provider limits, and cost; compare at least two options; and choose the smallest experiment that can distinguish them." It made the competing goals visible first.
 2. Item 116: "Please run the real R2 evaluations for Day 1 and Day 2, then proceed to R3 if the budget and approval gates permit. Keep failures in the ledger…" Same questions across settings, failures kept.

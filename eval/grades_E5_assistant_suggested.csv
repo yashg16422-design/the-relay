@@ -1,24 +1,24 @@
 request_id,grade,grader,note
-E5-20261112T191401Z-R1-T2,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: says memory constraints become critical but not that they limit batching across examples; nothing false
-E5-20261112T191401Z-R1-T5,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
-E5-20261112T191401Z-R1-T6,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: gives no number for h or d_k; nothing false
-E5-20261112T191401Z-R1-M2,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
-E5-20261112T191401Z-R1-M4,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
-E5-20261112T191401Z-R1-M5,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: missing 8 quantizers x 2048 and the 512 to 256 projection; nothing false
-E5-20261112T191401Z-R1-M6,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: TTS and lookahead right; says the passages do not give the ASR WER; nothing false
-E5-20261112T191401Z-R1-H3,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
-E5-20261112T191401Z-R1-H4,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
-E5-20261112T191401Z-R1-H5,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
-E5-20261112T191401Z-R1-U1,refused_correctly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","refused, no claim made"
-E5-20261112T191401Z-R1-U2,refused_correctly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","refused, no claim made"
-E5-20261112T191401Z-R1-U3,refused_correctly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","refused, no claim made"
-E5-20261112T191401Z-R1-U4,refused_correctly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","refused, no claim made"
-E5-20261112T191401Z-R1-U5,refused_correctly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","refused, no claim made"
+E5-20261112T191401Z-R1-T2,wrong,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",incomplete: says memory constraints become critical but not that they limit batching across examples; nothing false
+E5-20261112T191401Z-R1-T5,correct,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",
+E5-20261112T191401Z-R1-T6,wrong,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",incomplete: gives no number for h or d_k; nothing false
+E5-20261112T191401Z-R1-M2,correct,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",
+E5-20261112T191401Z-R1-M4,correct,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",
+E5-20261112T191401Z-R1-M5,wrong,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",incomplete: missing 8 quantizers x 2048 and the 512 to 256 projection; nothing false
+E5-20261112T191401Z-R1-M6,wrong,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",incomplete: TTS and lookahead right; says the passages do not give the ASR WER; nothing false
+E5-20261112T191401Z-R1-H3,correct,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",
+E5-20261112T191401Z-R1-H4,correct,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",
+E5-20261112T191401Z-R1-H5,correct,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)",
+E5-20261112T191401Z-R1-U1,refused_correctly,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)","refused, no claim made"
+E5-20261112T191401Z-R1-U2,refused_correctly,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)","refused, no claim made"
+E5-20261112T191401Z-R1-U3,refused_correctly,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)","refused, no claim made"
+E5-20261112T191401Z-R1-U4,refused_correctly,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)","refused, no claim made"
+E5-20261112T191401Z-R1-U5,refused_correctly,"assistant-suggested, confirmed by Aloo blind (15/15 agreement)","refused, no claim made"
 E5-20261112T191621Z-R2-T2,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: gives path length instead of memory limiting batching; nothing false
 E5-20261112T191621Z-R2-T5,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
 E5-20261112T191621Z-R2-T6,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: says the passages do not give h or d_k; nothing false
 E5-20261112T191621Z-R2-M2,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",borderline: 160 vs 230 ms right; does not say the audio model ingests and predicts discrete audio units
-E5-20261112T191621Z-R2-M4,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: omits the must-include 'in real time' (regraded after the CTO review, to match how M2 was graded)
+E5-20261112T191621Z-R2-M4,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","incomplete: omits the must-include 'in real time' (regraded after the CTO review, to match how M2 was graded)"
 E5-20261112T191621Z-R2-M5,refused_wrongly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",gate rejected an honest 'passages do not contain' sentence that repeated the question's 1.1 kbps; rule fixed afterwards
 E5-20261112T191621Z-R2-M6,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
 E5-20261112T191621Z-R2-H3,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
@@ -33,7 +33,7 @@ E5-20261112T192040Z-R2b-T2,wrong,"assistant-suggested (Claude Code, 2026-11-13);
 E5-20261112T192040Z-R2b-T5,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
 E5-20261112T192040Z-R2b-T6,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",h = 8 and d_k = 64 cited to the Table 3 page
 E5-20261112T192040Z-R2b-M2,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: 160 ms without the 230 ms comparison; discrete units attributed to the codec
-E5-20261112T192040Z-R2b-M4,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",incomplete: omits the must-include 'in real time' (regraded after the CTO review, to match how M2 was graded)
+E5-20261112T192040Z-R2b-M4,wrong,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo","incomplete: omits the must-include 'in real time' (regraded after the CTO review, to match how M2 was graded)"
 E5-20261112T192040Z-R2b-M5,refused_wrongly,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",same gate rejection as R2
 E5-20261112T192040Z-R2b-M6,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
 E5-20261112T192040Z-R2b-H3,correct,"assistant-suggested (Claude Code, 2026-11-13); not yet confirmed by Aloo",
