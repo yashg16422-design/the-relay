@@ -71,7 +71,7 @@ History: `transcripts/`. Three prompts, quoted from it by item number:
 2. Item 116: "Please run the real R2 evaluations for Day 1 and Day 2, then proceed to R3 if the budget and approval gates permit. Keep failures in the ledger…" Same questions across settings, failures kept.
 3. Item 54: "I approve decision record 0004. Please proceed with its trace-audit change and preserve the agreed results CSV contract." Every answer became traceable by request id.
 
-**Got wrong.** The first cost summary missed spend from attempts that later failed with a 429 during repair. A review I asked for recomputed it from the traces.
+**Got wrong.** The first cost summary missed spend from attempts that later failed with a 429 during repair. A review I requested recomputed it from traces.
 
 **Overruled.** After rate limits interrupted the evaluation, I did not accept a stand-in-only comparison: I had R2 and R3 run with real calls, budgeted, 429s visible.
 
