@@ -6,7 +6,7 @@ Transcript item numbers refer to `transcripts/relay_transcript.json` (Codex Desk
 
 ## 1. Things you should know before you write
 
-- **`docs/OVERRULES.md` is empty.** The old write-up claims an overrule. If you claim one, enter it there with its evidence.
+- **`docs/OVERRULES.md` was an empty table and was removed on 2026-11-13 at Aloo's instruction.** The overrule he claims is stated in the write-up itself.
 - **`docs/reflection_draft.md` (removed from the repo on 2026-11-13) was drafted by the assistant** (transcript item 162 delivers it as "sample wording"). It says its three prompts are "cleaned-up versions". The brief asks for the real history, so quote prompts exactly as they are in the transcript.
 - **Transcript items 159 and 163** are you asking the assistant to present reasoning as yours. A reviewer who reads the transcript will see that. Decide how you want to describe it.
 - **Missing histories.** The repo has `HANDOVER_CURSOR.md` and `CURSOR_COMPLETION_PROMPT.md`, so Cursor was used; its history is not in `transcripts/`. The claude.ai review session and this Claude Code session are not there yet either (handover task H6).
