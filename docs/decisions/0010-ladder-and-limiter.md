@@ -1,6 +1,6 @@
 # 0010 — Degradation ladder and a limiter that models refill
 
-- Status: proposed            <!-- only Aloo changes this to accepted / rejected -->
+- Status: accepted            <!-- only Aloo changes this to accepted / rejected -->
 - Date: 2026-11-13
 - Phase / gate: D
 
@@ -30,3 +30,4 @@ Rerun of the real burst still answering fewer than a bucket's worth (about 3 of 
 2026-11-13, final submission review of the whole tree: `GO WITH CHANGES`, projected 68/100 as it stood and about 82 with its fixes. Builder-side fixes it asked for are applied (two prose figures corrected, M4 regraded, disclaimer rule tightened, dead limiter branch removed). Still open and Aloo's: this record's acceptance, the personal sections, blind grading, missing transcripts, `docs/reflection_draft.md`.
 
 ## Aloo's call
+Accepted. Aloo, in the Claude Code session on 2026-11-13: "yeah those 2 records are acceptable too".
