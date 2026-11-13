@@ -6,7 +6,7 @@ import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Collection, Mapping, Sequence
 
 import numpy as np
 from rank_bm25 import BM25Okapi
@@ -19,6 +19,30 @@ def tokenize(text: str) -> list[str]:
     return [token.casefold() for token in TOKEN_PATTERN.findall(text)]
 
 
+# Words that make a sentence a question but say nothing about its subject.
+# Left in a BM25 query they match chatty passages (Moshi's appendix dialogues)
+# ahead of the method sections; see analysis/naive_retriever.py.
+QUESTION_WORDS = frozenset(
+    """what is are was were does do did the a an of in on to for how many much which who
+    say says about paper and it its with by at from that this""".split()
+)
+# A table whose decimal points were torn off by PDF extraction: "4.92" became
+# "492" with a stray "." on a nearby line. Its numbers are wrong as printed.
+_DETACHED_DECIMALS = re.compile(r"\n\.\n|\n\. \.|\. \.\n")
+
+
+def content_query(question: str) -> str:
+    """The question with its question words removed (the whole question if nothing is left)."""
+    kept = [token for token in tokenize(question) if token not in QUESTION_WORDS]
+    return " ".join(kept) or question
+
+
+def is_damaged_table(chunk: Mapping[str, Any]) -> bool:
+    return chunk.get("kind") == "table" and bool(
+        _DETACHED_DECIMALS.search(str(chunk.get("text", "")))
+    )
+
+
 @dataclass(frozen=True)
 class RetrievalHit:
     chunk: Mapping[str, Any]
@@ -26,6 +50,7 @@ class RetrievalHit:
     bm25_rank: int | None
     semantic_rank: int | None
     rerank_score: float | None = None
+    bm25_score: float | None = None
 
 
 @dataclass(frozen=True)
@@ -87,6 +112,7 @@ class PaperRetriever:
         *,
         top_k: int,
         chunk_dir: str | Path,
+        drop_damaged_tables: bool = False,
         **kwargs: Any,
     ) -> PaperRetriever:
         path = Path(chunk_dir) / f"{setting}.jsonl"
@@ -95,6 +121,8 @@ class PaperRetriever:
             for line in path.read_text(encoding="utf-8").splitlines()
             if line.strip()
         ]
+        if drop_damaged_tables:
+            chunks = [chunk for chunk in chunks if not is_damaged_table(chunk)]
         return cls(chunks, setting=setting, top_k=top_k, **kwargs)
 
     def get_chunk(self, chunk_id: str) -> Mapping[str, Any] | None:
@@ -107,21 +135,31 @@ class PaperRetriever:
         top_k: int | None = None,
         use_semantic: bool = False,
         rerank: bool = False,
+        paper_ids: Collection[str] | None = None,
     ) -> RetrievalResult:
+        """Search the index; ``paper_ids`` restricts results to those papers."""
         import time
+
+        eligible = [
+            index for index, chunk in enumerate(self.chunks)
+            if not paper_ids or chunk.get("paper_id") in paper_ids
+        ]
+        if not eligible:
+            return RetrievalResult(self.setting, query, (), 0.0, 0.0, 0.0)
 
         final_k = top_k or self.top_k
         if final_k < 1:
             raise ValueError("top_k must be positive")
-        candidate_k = min(len(self.chunks), max(final_k, self.candidate_depth))
+        candidate_k = min(len(eligible), max(final_k, self.candidate_depth))
         bm25_start = time.perf_counter()
         scores = self._bm25.get_scores(tokenize(query))
         bm25_order = sorted(
-            range(len(self.chunks)),
+            eligible,
             key=lambda index: (-float(scores[index]), str(self.chunks[index]["chunk_id"])),
         )[:candidate_k]
         bm25_ms = (time.perf_counter() - bm25_start) * 1000
         bm25_rank = {self.chunks[index]["chunk_id"]: rank for rank, index in enumerate(bm25_order, 1)}
+        bm25_scores = {self.chunks[index]["chunk_id"]: float(scores[index]) for index in bm25_order}
 
         semantic_ms = 0.0
         semantic_rank: dict[str, int] = {}
@@ -134,7 +172,7 @@ class PaperRetriever:
             )[0]
             similarities = embeddings @ query_embedding
             semantic_order = sorted(
-                range(len(self.chunks)),
+                eligible,
                 key=lambda index: (
                     -float(similarities[index]),
                     str(self.chunks[index]["chunk_id"]),
@@ -181,6 +219,7 @@ class PaperRetriever:
                 bm25_rank=bm25_rank.get(chunk_id),
                 semantic_rank=semantic_rank.get(chunk_id),
                 rerank_score=rerank_scores.get(chunk_id),
+                bm25_score=bm25_scores.get(chunk_id),
             )
             for chunk_id in fused_order[:final_k]
         )

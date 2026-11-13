@@ -6,7 +6,7 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -28,6 +28,11 @@ class Span(BaseModel):
     tokens_out: int | None = Field(default=None, ge=0)
     cached_tokens: int | None = Field(default=None, ge=0)
     reasoning_tokens: int | None = Field(default=None, ge=0)
+    # Added by decision record 0006. "length" means the reply hit its token cap.
+    finish_reason: str | None = None
+    # Decide step only: yes | no | uncertain | abstain, and the reply's first 500 characters.
+    parse_state: str | None = None
+    raw_text: str | None = Field(default=None, max_length=500)
 
     @model_validator(mode="after")
     def end_after_start(self) -> Span:
@@ -52,6 +57,15 @@ class RequestTrace(BaseModel):
     coalesced: bool
     spans: list[Span]
     gave_up: bool = False
+    # Added by decision record 0006: how "decide" was made for this request.
+    # Keys: mode, papers, paper_source, top_bm25, min_bm25, precheck, outcome.
+    decide: dict[str, Any] | None = None
+    # The last draft as the model wrote it (with [[cite:...]] markers), for offline gate replay.
+    raw_answer: str | None = None
+    # True when retrieved passages were sent in place of a model answer (limit reached).
+    fallback_delivered: bool = False
+    # What the ladder knew when it chose `level`: slack, predicted wait, blocking bucket.
+    ladder: dict[str, Any] | None = None
 
 
 def write_trace(trace: RequestTrace, directory: str | Path | None = None) -> Path:

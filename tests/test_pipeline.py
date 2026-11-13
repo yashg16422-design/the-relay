@@ -8,7 +8,7 @@ from datetime import datetime, timedelta, timezone
 
 from relay.llm_client import LLMRequestError, LLMResponse, StreamCapture, TokenUsage
 from relay.cache import AnswerCache
-from relay.pipeline import CitedAnswerPipeline, SAFE_REFUSAL
+from relay.pipeline import CitedAnswerPipeline, LIMIT_REPLIES, SAFE_REFUSAL
 from relay.retrieval import PaperRetriever
 from relay.retry import GlobalRetryBudget, RetryPolicy
 
@@ -469,5 +469,5 @@ def test_expired_request_returns_timeout_refusal() -> None:
     )
 
     assert result.status == "timeout"
-    assert result.answer == SAFE_REFUSAL
+    assert result.answer == LIMIT_REPLIES["timeout"]
     assert client.complete_calls == []

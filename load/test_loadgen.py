@@ -22,13 +22,13 @@ from relay.limiter import AdaptiveLimiter
 from relay.pipeline import CitedAnswerPipeline, PipelineResult
 from relay.retrieval import PaperRetriever
 from relay.scheduler import DequeueResult, EnqueueResult, RequestEnvelope
-from standin.server import create_app, load_config as load_standin_config
+from standin.server import LEGACY_CONFIG, create_app, load_config as load_standin_config
 
 
 PASSAGES = [
     {
         "chunk_id": "0123456789abcdef",
-        "paper_id": "1706.03762",
+        "paper_id": "1706.03762v7",
         "paper_title": "Attention Is All You Need",
         "page_number": 3,
         "section": "3 Model Architecture",
@@ -72,13 +72,13 @@ def test_load_settings_scenarios_are_readable_and_named():
     settings = load_settings()
 
     assert {"steady", "burst", "sustained_overload"}.issubset(settings.scenarios)
-    assert settings.seed == 20261109
+    assert settings.seed == 20261113
 
 
 def test_actual_pipeline_produces_contract_rows_and_persisted_trace(tmp_path):
     async def run():
         runtime_config = load_config()
-        standin_app = create_app(load_standin_config())
+        standin_app = create_app(load_standin_config(LEGACY_CONFIG))
         transport = httpx.ASGITransport(app=standin_app)
         client = LLMClient(
             runtime_config,
@@ -171,6 +171,7 @@ def test_timeouts_are_recorded_as_gave_up_and_timeout_rows(tmp_path):
         max_requests=1,
         patience_ms=20,
         deadline_ms=100,
+        ladder=False,  # this test is about patience running out while the pipeline works
     )
     summary = asyncio.run(
         run_scenario(
@@ -201,7 +202,7 @@ def test_timeouts_are_recorded_as_gave_up_and_timeout_rows(tmp_path):
 def test_loadgen_routes_tight_deadline_to_citation_checked_extractive_path(tmp_path):
     async def run():
         runtime_config = load_config()
-        standin_app = create_app(load_standin_config())
+        standin_app = create_app(load_standin_config(LEGACY_CONFIG))
         transport = httpx.ASGITransport(app=standin_app)
         client = LLMClient(
             runtime_config,
@@ -241,10 +242,14 @@ def test_loadgen_routes_tight_deadline_to_citation_checked_extractive_path(tmp_p
             await client.aclose()
 
     summary = asyncio.run(run())
-    assert summary.status_counts == {"ok": 1}
+    # A request that allows less time than a checked answer takes gets passages and a
+    # notice, never an unchecked sentence. It is a timeout, not a success, and not "gave up".
+    assert summary.status_counts == {"timeout": 1}
+
     trace = json.loads(next((tmp_path / "traces").glob("*.json")).read_text())
     assert trace["level"] == "extractive"
-    assert trace["spans"][-1]["name"] == "sentence_gate"
+    assert trace["fallback_delivered"] is True and trace["gave_up"] is False
+    assert "not sending an unchecked one" in trace["answer"]
 
 
 def test_already_expired_enqueue_is_persisted_once(tmp_path, monkeypatch):
@@ -407,3 +412,40 @@ def test_accepted_priority_shed_persists_the_displaced_request(tmp_path, monkeyp
         else:
             assert trace["answer"] == "answer"
             assert trace["retrieved_chunk_ids"] == []
+
+
+def test_ladder_counts_tokens_promised_to_requests_in_flight():
+    from load.loadgen import choose_level
+
+    class Limiter:
+        def __init__(self):
+            self.asked = []
+
+        async def predicted_wait(self, model, *, request_tokens):
+            self.asked.append(request_tokens)
+            # 8,000-token bucket refilling at 133.3 tokens per second
+            return max(0.0, (request_tokens - 8000) / 133.3), "tpm"
+
+    scenario = Scenario(arrival_mode="burst", max_requests=1, patience_ms=8000, deadline_ms=8000)
+
+    async def pick(committed, slack):
+        limiter = Limiter()
+        return await choose_level(scenario=scenario, limiter=limiter, model="m",
+                                  slack_s=slack, committed_tokens=committed)
+
+    level, notice, info = asyncio.run(pick(0, 8.0))
+    assert (level, notice) == ("full", None) and info["promised_tokens"] == 1335
+    # 7,000 tokens already promised: a full answer would wait about 9.5 s, lite about 2.8 s.
+    level, notice, info = asyncio.run(pick(7000, 8.0))
+    assert level == "lite" and info["full_wait_s"] > 8
+    # Nothing fits in 2 seconds except the passages, and the notice says why.
+    level, notice, info = asyncio.run(pick(7000, 2.0))
+    assert level == "extractive" and "per-minute" in notice
+    assert asyncio.run(pick(7000, 0.01))[0] == "drop"
+
+
+def test_daily_notice_gives_next_capacity_time_not_a_midnight_reset():
+    from load.loadgen import limit_notice_for
+
+    notice = limit_notice_for("tpd", 1440)
+    assert "24 minutes" in notice and "midnight" in notice and "used up" in notice

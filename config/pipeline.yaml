@@ -1,6 +1,33 @@
 # Output limits are provisional; validate with model selection and Phase 1 measurements.
-understand_max_completion_tokens: 100 # UNVERIFIED; small query rewrite budget
-judge_max_completion_tokens: 120 # UNVERIFIED; small answerability budget
-draft_max_completion_tokens: 400 # UNVERIFIED; tune against answer quality and latency
-repair_max_completion_tokens: 400 # UNVERIFIED; one bounded repair pass
+understand_max_completion_tokens: 200 # was 100; real replies hit it. Groq counts this cap against the per-minute bucket at admission, so it is kept small
+judge_max_completion_tokens: 512 # was 120; 71 of 96 wrong refusals were at that cap (used only when decide_mode is llm_judge)
+draft_max_completion_tokens: 700 # was 400; leaves room for reasoning plus the answer (real draft p95 306)
+repair_max_completion_tokens: 700 # was 400; real repair p95 397 of 400
 max_repairs: 1 # UNVERIFIED policy default; prevents answer-repair loops
+
+# --- Decide step (decision record 0006, status: proposed) -------------------
+# llm_judge        = one model call judges answerability (three-state parse, one retry).
+# precheck_abstain = no judge call; a zero-token retrieval check, then the drafter
+#                    either answers with citations or replies NOT_IN_PAPERS.
+decide_mode: precheck_abstain # builder's recommendation in record 0006 (proposed); llm_judge is one word away
+precheck_min_bm25: 0.0 # UNVERIFIED; 0 disables the check. Tune offline on Aloo's questions.
+gate_strict: true # false = the lexical gate used for every run up to 2026-11-11
+scope_to_named_papers: true # retrieve and cite only from the paper(s) the question names
+judge_retry_options: {response_format: {type: json_object}} # accepted by all three models in E0 (results/raw/E0-20261112T1856*.json)
+# temperature 0 was accepted by all three models in E0. reasoning_effort is NOT set:
+# in E0 it made Qwen reason (18 reasoning tokens, 1,710 ms) where it otherwise did not (0, 453 ms).
+options_by_step:
+  understand: {temperature: 0}
+  judge: {temperature: 0}
+  draft: {temperature: 0}
+  repair: {temperature: 0}
+
+# --- Retrieval query (decision record 0011, status: proposed) ---------------
+content_word_query: true # strip question words before BM25; measured in results/naive_retriever_report.json
+
+# Per-model options. In E0 reasoning_effort: low cut gpt-oss reasoning from 22-26 tokens to 6-8
+# on a one-word reply; in the real burst E8 (2026-11-12 19:03 UTC) four of seven gpt-oss-120b
+# understand calls spent their whole 300-token cap. Qwen is left alone (low made it reason more).
+options_by_model:
+  openai/gpt-oss-120b: {reasoning_effort: low}
+  openai/gpt-oss-20b: {reasoning_effort: low}

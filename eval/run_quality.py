@@ -24,6 +24,7 @@ from relay.llm_client import (
     last_known_daily_requests_remaining,
     last_known_daily_tokens_remaining,
 )
+from relay.decide import pipeline_kwargs_from_config
 from relay.pipeline import CitedAnswerPipeline
 from relay.retrieval import PaperRetriever
 
@@ -300,6 +301,7 @@ async def _run(args: argparse.Namespace) -> None:
             },
             approval=approval,
             max_repairs=max_repairs,
+            **pipeline_kwargs_from_config(pipeline_config),
             understand_max_tokens=output_limits["understand"],
             judge_max_tokens=output_limits["judge"],
             draft_max_tokens=output_limits["draft"],

@@ -1,68 +1,111 @@
-# These are local workload designs, not measured provider limits or performance.
-# The stand-in's numeric ceilings remain explicitly UNVERIFIED in standin/config.yaml.
-# The queue uses lower numeric priorities for more urgent synthetic requests.
-seed: 20261109 # Scenario RNG seed; chosen for reproducibility, not measured.
-retrieval_setting: R1 # Local baseline setting; change after retrieval comparison.
-results_path: results/results.csv # Append-only contract output.
-trace_dir: results/traces # One append-only JSON file per request_id.
-questions:
-  - How does the Transformer handle sequence processing?
-  - What does the Moshi paper describe about real-time dialogue?
-  - What problem does Dynamic Chunking study?
-  - Which passages explain the paper's main architecture?
+# Load shapes for the calibrated stand-in (decision record 0009, proposed).
+# The file used for runs up to 2026-11-11 is scenarios.legacy-2026-11-11.yaml.
+#
+# Sizing. On the calibrated stand-in at R1 a full answer uses 1,335 tokens on
+# average (n=70, measured 2026-11-13), so 8,000 tokens per minute sustain about
+# 6.0 answers per minute. Rates below are fractions of that. Requests per minute
+# (30) never binds: each answer makes 2 to 3 model calls.
+#
+# ASSUMPTION, not a measurement: how long people wait. Each request draws its own
+# patience from a lognormal with median 8 s, capped at 20 s, and that draw is
+# also its deadline. Nobody measured real users here.
+seed: 20261113
+retrieval_setting: R1
+results_path: results/raw/runs/unset.csv # each run passes its own --results file
+trace_dir: results/traces
+question_files:
+  - eval/questions.yaml # 35 legacy questions
+  - eval/questions_aloo.yaml # Aloo's own questions, when the file exists
+
+x-common: &common
+  patience_ms: 8000 # fallback only; patience_median_ms governs
+  deadline_ms: 8000 # fallback only
+  patience_median_ms: 8000
+  patience_sigma: 0.5
+  patience_cap_ms: 20000
+  zipf_exponent: 1.1
+  urgent_fraction: 0.2
+  cache: false
 
 scenarios:
-  steady:
+  steady: # 60% of capacity for 15 minutes
+    <<: *common
     arrival_mode: poisson
-    max_requests: 20 # UNVERIFIED workload size; local scenario choice.
-    rate_per_minute: 30 # UNVERIFIED offered rate; local scenario choice.
-    duration_seconds: 30 # UNVERIFIED duration; local scenario choice.
-    patience_ms: 5000 # UNVERIFIED local user patience assumption.
-    deadline_ms: 8000 # UNVERIFIED local request deadline assumption.
-    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
-    urgent_fraction: 0.2 # UNVERIFIED synthetic request-class mix for queue priority tests.
+    rate_per_minute: 3.6
+    duration_seconds: 900
+    max_requests: 200
 
-  burst:
+  burst: # 30 requests inside 10 seconds, then the queue drains
+    <<: *common
     arrival_mode: burst
-    max_requests: 40 # UNVERIFIED burst size; intended to exceed placeholder stand-in RPM.
-    burst_spread_ms: 0 # UNVERIFIED spread; zero offers all requests at once.
-    patience_ms: 5000 # UNVERIFIED local user patience assumption.
-    deadline_ms: 8000 # UNVERIFIED local request deadline assumption.
-    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
-    urgent_fraction: 0.2 # UNVERIFIED synthetic request-class mix for queue priority tests.
+    max_requests: 30
+    burst_spread_ms: 333
 
-  sustained_overload:
-    arrival_mode: poisson
-    max_requests: 80 # UNVERIFIED workload size; local scenario choice.
-    rate_per_minute: 480 # UNVERIFIED offered rate; local scenario choice.
-    duration_seconds: 10 # UNVERIFIED duration; local scenario choice.
-    patience_ms: 3000 # UNVERIFIED local user patience assumption.
-    deadline_ms: 5000 # UNVERIFIED local request deadline assumption.
-    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
-    urgent_fraction: 0.2 # UNVERIFIED synthetic request-class mix for queue priority tests.
+  burst_cache_on: # the same burst with the answer cache switched on
+    <<: *common
+    arrival_mode: burst
+    max_requests: 30
+    burst_spread_ms: 333
+    cache: true
 
-  per_minute_limit_halved:
+  sustained_overload: # 3x capacity for 15 minutes
+    <<: *common
     arrival_mode: poisson
-    max_requests: 30 # UNVERIFIED workload size; local scenario choice.
-    rate_per_minute: 180 # UNVERIFIED offered rate; local scenario choice.
-    duration_seconds: 10 # UNVERIFIED duration; local scenario choice.
-    patience_ms: 3000 # UNVERIFIED local user patience assumption.
-    deadline_ms: 5000 # UNVERIFIED local request deadline assumption.
-    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    rate_per_minute: 18
+    duration_seconds: 900
+    max_requests: 600
+
+  per_minute_limit_halved: # 80% of capacity; at 4 minutes the per-minute limits halve
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 4.8
+    duration_seconds: 720
+    max_requests: 200
     limit_changes:
-      - at_seconds: 3 # UNVERIFIED transition time; local scenario choice.
-        limits:
-          requests_per_minute: 30 # UNVERIFIED; halves stand-in's 60 RPM placeholder only.
+      - at_seconds: 240
+        limits: {tokens_per_minute: 4000, requests_per_minute: 15}
 
-  daily_budget_exhausted:
+  daily_budget_exhausted: # steady load; the daily token bucket is left with about 3 minutes of work
+    <<: *common
     arrival_mode: poisson
-    max_requests: 20 # UNVERIFIED workload size; local scenario choice.
-    rate_per_minute: 240 # UNVERIFIED offered rate; local scenario choice.
-    duration_seconds: 8 # UNVERIFIED duration; local scenario choice.
-    patience_ms: 3000 # UNVERIFIED local user patience assumption.
-    deadline_ms: 5000 # UNVERIFIED local request deadline assumption.
-    zipf_exponent: 1.1 # UNVERIFIED question popularity shape.
+    rate_per_minute: 3.6
+    duration_seconds: 480
+    max_requests: 200
     limit_changes:
-      - at_seconds: 2 # UNVERIFIED transition time; local scenario choice.
-        limits:
-          requests_per_day: 5 # UNVERIFIED local ceiling to force exhaustion; not a Groq limit.
+      - at_seconds: 0
+        limits: {remaining_tokens_day: 14400} # 3 min x 3.6 answers/min x 1,335 tokens
+
+  retry_disciplined: # overload, always the full pipeline, the project's retry policy
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 360
+    max_requests: 300
+    ladder: false
+
+  retry_storm: # the same arrivals; retries at once, ignores retry-after, no retry budget, no local admission
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 360
+    max_requests: 300
+    ladder: false
+    retry_mode: naive
+
+  # Sensitivity check for the least certain assumption (user patience): the same overload
+  # for 6 minutes with the patience median at 8 s and at 4 s. Not rows of Table 2.
+  overload_patience_8s:
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 360
+    max_requests: 300
+
+  overload_patience_4s:
+    <<: *common
+    arrival_mode: poisson
+    rate_per_minute: 18
+    duration_seconds: 360
+    max_requests: 300
+    patience_median_ms: 4000
+    patience_cap_ms: 10000

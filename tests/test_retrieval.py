@@ -128,3 +128,19 @@ def test_duplicate_or_incomplete_chunks_are_rejected() -> None:
         )
     with pytest.raises(ValueError, match="chunk_id"):
         PaperRetriever([{"chunk_id": "missing text"}], setting="R1", top_k=1)
+
+
+def test_content_query_drops_question_words_but_never_everything() -> None:
+    from relay.retrieval import content_query
+
+    assert content_query("What does the Moshi paper say about SoundStream?") == "moshi soundstream"
+    assert content_query("What is it?") == "What is it?"
+
+
+def test_damaged_table_is_detected_only_for_table_chunks() -> None:
+    from relay.retrieval import is_damaged_table
+
+    torn = "base | 6 512\n. .\n| 492 258 65"
+    assert is_damaged_table({"kind": "table", "text": torn}) is True
+    assert is_damaged_table({"kind": "text", "text": torn}) is False
+    assert is_damaged_table({"kind": "table", "text": "Model | BLEU\nbig | 28.4"}) is False

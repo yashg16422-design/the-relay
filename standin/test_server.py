@@ -6,11 +6,11 @@ import time
 
 import httpx
 
-from standin.server import create_app, load_config
+from standin.server import LEGACY_CONFIG, create_app, load_config
 
 
 def config(**overrides):
-    raw = load_config().model_dump()
+    raw = load_config(LEGACY_CONFIG).model_dump()
     for key, value in overrides.items():
         if key == "limits":
             raw["limits"].update(value)
@@ -229,3 +229,57 @@ def test_admin_endpoint_changes_limits_midrun():
     assert before.status_code == 200
     assert update.json()["limits"]["requests_per_minute"] == 1
     assert after.status_code == 429
+
+
+# ---- stand-in v2: token buckets and per-step profiles (decision record 0008) ----
+
+def bucket_config(**limits):
+    raw = config(limit_model="token_bucket")
+    raw["limits"] = {"requests_per_minute": None, "tokens_per_minute": None,
+                     "requests_per_day": None, "tokens_per_day": None, **limits}
+    return raw
+
+
+def test_token_bucket_refills_continuously_and_reports_reset_like_groq() -> None:
+    from standin.server import RuntimeState, StandinConfig
+
+    state = RuntimeState(StandinConfig.model_validate(bucket_config(tokens_per_minute=8000)))
+    limited, headers, _ = state._bucket_check(6000, now=100.0)
+    assert limited is False and headers["x-ratelimit-remaining-tokens"] == "2000"
+    assert headers["x-ratelimit-reset-tokens"] == "45.000s"  # 6000 used / 133.3 per s
+    limited, headers, retry_after = state._bucket_check(3000, now=100.0)
+    assert limited is True and retry_after == 8  # 1000 short / 133.3 per s = 7.5 s
+    assert headers["x-ratelimit-remaining-tokens"] == "2000"  # a refused request takes nothing
+    limited, _, _ = state._bucket_check(3000, now=108.0)
+    assert limited is False
+
+
+def test_daily_token_bucket_can_be_drained_by_admin_and_then_refuses() -> None:
+    async def run():
+        app = create_app(bucket_config(tokens_per_day=200000))
+        async with httpx.AsyncClient(
+            transport=httpx.ASGITransport(app=app), base_url="http://standin.test"
+        ) as client:
+            await client.post("/admin/limits", json={"remaining_tokens_day": 5})
+            return await client.post("/v1/chat/completions", json={
+                "model": "m", "messages": [{"role": "user", "content": "hello there, world"}]})
+
+    response = asyncio.run(run())
+    assert response.status_code == 429
+    assert int(response.headers["retry-after"]) >= 1
+    assert response.headers["x-ratelimit-remaining-tokens-day"] == "5"
+
+
+def test_step_profile_sets_latency_and_billed_tokens() -> None:
+    raw = bucket_config()
+    raw["steps"] = {"understand": {"latency_mu": 3.9, "latency_sigma": 0.0, "output_tokens": [80]}}
+    started = time.perf_counter()
+    response = asyncio.run(post(create_app(raw), {
+        "model": "m", "max_completion_tokens": 300,
+        "messages": [{"role": "system", "content": "Rewrite the user's question as one concise search query."},
+                     {"role": "user", "content": "What is Mimi?"}]}))
+    elapsed_ms = (time.perf_counter() - started) * 1000
+    usage = response.json()["usage"]
+    assert usage["completion_tokens"] == 80
+    assert usage["completion_tokens_details"]["reasoning_tokens"] > 0
+    assert elapsed_ms >= 45  # exp(3.9) is about 49 ms

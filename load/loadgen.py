@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import csv
+import math
 import random
 import re
 import time
@@ -23,6 +24,7 @@ from relay.cache import AnswerCache
 from relay.config import AppConfig, load_config as load_runtime_config
 from relay.limiter import AdaptiveLimiter
 from relay.llm_client import LLMClient
+from relay.decide import pipeline_kwargs_from_config
 from relay.pipeline import CitedAnswerPipeline, PipelineResult
 from relay.retrieval import PaperRetriever
 from relay.retry import GlobalRetryBudget, RetryPolicy
@@ -72,6 +74,28 @@ class Scenario(BaseModel):
     urgent_priority: int = 0
     normal_priority: int = 10
     limit_changes: list[LimitChange] = Field(default_factory=list)
+    cache: bool = True  # false = every request runs the pipeline (no answer cache)
+    # Per-request patience: lognormal with this median, capped. When set, each
+    # request's deadline IS its own patience draw and patience_ms/deadline_ms
+    # are only fallbacks.
+    patience_median_ms: float | None = Field(default=None, gt=0)
+    patience_sigma: float = Field(default=0.5, ge=0)
+    patience_cap_ms: float = Field(default=20000, gt=0)
+    # naive = retry at once, ignore retry-after, no shared retry budget (the retry-storm row).
+    retry_mode: Literal["policy", "naive"] = "policy"
+    ladder: bool = True  # false = always try the full pipeline (used by the retry comparison)
+
+    def patience_s(self, seed: int, index: int) -> float:
+        if self.patience_median_ms is None:
+            return self.patience_ms / 1000
+        rng = random.Random(f"patience-{seed}-{index}")
+        draw = rng.lognormvariate(math.log(self.patience_median_ms), self.patience_sigma)
+        return min(draw, self.patience_cap_ms) / 1000
+
+    def deadline_s(self, seed: int, index: int) -> float:
+        if self.patience_median_ms is None:
+            return self.deadline_ms / 1000
+        return self.patience_s(seed, index)
 
 
 class LoadSettings(BaseModel):
@@ -81,8 +105,23 @@ class LoadSettings(BaseModel):
     retrieval_setting: str = Field(min_length=1)
     results_path: Path
     trace_dir: Path
-    questions: list[str] = Field(min_length=1)
+    questions: list[str] = Field(default_factory=list)
+    # eval-style YAML files; every entry's "question" joins the pool.
+    question_files: list[Path] = Field(default_factory=list)
     scenarios: dict[str, Scenario]
+
+    def question_pool(self) -> list[str]:
+        pool = list(self.questions)
+        for path in self.question_files:
+            full = path if path.is_absolute() else PROJECT_ROOT / path
+            if not full.exists():
+                continue  # Aloo's file may not exist yet; the pool says how many it has
+            raw = yaml.safe_load(full.read_text(encoding="utf-8")) or {}
+            pool.extend(str(item["question"]).strip() for item in raw.get("questions", []))
+        pool = list(dict.fromkeys(question for question in pool if question))
+        if not pool:
+            raise ValueError("the question pool is empty")
+        return pool
 
 
 @dataclass(frozen=True)
@@ -107,6 +146,7 @@ def load_settings(path: str | Path = DEFAULT_SCENARIOS) -> LoadSettings:
     raw = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
     if not isinstance(raw, Mapping):
         raise ValueError("scenarios.yaml must contain a YAML mapping")
+    raw = {key: value for key, value in raw.items() if not str(key).startswith("x-")}
     return LoadSettings.model_validate(raw)
 
 
@@ -253,6 +293,81 @@ class AppendOnlyResults:
             stream.flush()
 
 
+def _human_wait(seconds: float) -> str:
+    if seconds < 90:
+        return f"{max(1, round(seconds))} seconds"
+    if seconds < 5400:
+        return f"{round(seconds / 60)} minutes"
+    return f"{seconds / 3600:.1f} hours"
+
+
+def limit_notice_for(bucket: str | None, wait_s: float) -> str:
+    """The first paragraph a waiting person reads when a limit, not the papers, blocks an answer."""
+    if bucket in ("tpd", "rpd"):
+        return (
+            "Today's model budget for this assistant is used up, so I cannot write you a "
+            "checked answer right now. The budget refills gradually rather than at midnight: "
+            f"the next full answer can be served in about {_human_wait(wait_s)}."
+        )
+    return (
+        "The assistant is at its per-minute model limit. A checked answer would need about "
+        f"{_human_wait(wait_s)} of waiting, which is longer than this request allows, "
+        "so I am not making you wait for it."
+    )
+
+
+async def choose_level(
+    *, scenario: "Scenario", limiter: Any, model: str, slack_s: float,
+    committed_tokens: int = 0,
+) -> tuple[str, str | None, dict[str, Any]]:
+    """The degradation ladder: the richest answer this request can still get in time.
+
+    full       = understand, retrieve, draft, gate, one repair
+    lite       = the same without the repair
+    extractive = no model call: the top passages verbatim, with a notice
+    drop       = nothing fits; the person is told at once instead of waiting
+    A level fits when (predicted wait for its tokens) + (its measured p95) is
+    within the request's remaining patience. `committed_tokens` is what requests
+    already in flight have been promised and not yet spent: they come first, so
+    a new arrival is not started on tokens that would strand them half-way.
+    """
+    config = _load_yaml_mapping(PROJECT_ROOT / "config" / "scheduler.yaml")
+    latency = config.get("degradation", {})
+    tokens = config.get("tokens_per_level", {})
+    info: dict[str, Any] = {"slack_s": round(slack_s, 3), "committed_tokens": committed_tokens}
+    if not scenario.ladder:
+        return "full", None, {**info, "ladder": "off"}
+    worst_wait, worst_bucket = 0.0, None
+    for level in ("full", "lite"):
+        wait, bucket = (0.0, None)
+        if limiter is not None:
+            wait, bucket = await limiter.predicted_wait(
+                model, request_tokens=int(tokens.get(level, 0)) + committed_tokens
+            )
+        info[f"{level}_wait_s"] = round(wait, 3)
+        if wait > worst_wait:
+            worst_wait, worst_bucket = wait, bucket
+        if wait + float(latency.get(f"{level}_latency_s", 0)) <= slack_s:
+            expected = config.get("tokens_expected", {})
+            return level, None, {**info, "chosen": level, "blocked_by": bucket,
+                                 "promised_tokens": int(expected.get(level, tokens.get(level, 0)))}
+    info["blocked_by"] = worst_bucket
+    if float(latency.get("extractive_latency_s", 0)) <= slack_s:
+        if worst_wait > 0:
+            notice = limit_notice_for(worst_bucket, worst_wait)
+        else:
+            # No limit is in the way; the request simply allows less time than a
+            # checked answer takes. It still gets passages, never an unchecked sentence.
+            notice = (
+                "A checked answer takes about "
+                f"{_human_wait(float(latency.get('lite_latency_s', 0)))}, which is longer than this "
+                "request allows, so I am not sending an unchecked one."
+            )
+        return "extractive", notice, {**info, "chosen": "extractive",
+                                      "reason": "limit" if worst_wait > 0 else "patience"}
+    return "drop", None, {**info, "chosen": "drop"}
+
+
 def _request_id(run_id: str, scenario: str, index: int) -> str:
     safe = re.sub(r"[^A-Za-z0-9._-]+", "_", f"{run_id}-{scenario}")
     return f"{safe}-{index:05d}"
@@ -271,11 +386,14 @@ async def run_scenario(
     admin_client: httpx.AsyncClient | None = None,
     use_semantic: bool = False,
     rerank: bool = False,
+    allow_real: bool = False,
+    warmup_experiment: str | None = None,
+    experiment: str | None = None,
 ) -> LoadRunSummary:
     """Issue scheduled requests through an already-constructed real pipeline."""
     client = getattr(pipeline, "client", None)
     config = getattr(client, "config", None)
-    if config is not None and getattr(config, "provider", "") != "standin":
+    if not allow_real and config is not None and getattr(config, "provider", "") != "standin":
         raise ValueError("loadgen only permits provider=standin; real Groq is disabled")
     arrivals = generate_arrivals(scenario, questions, seed=seed)
     loop = asyncio.get_running_loop()
@@ -286,6 +404,23 @@ async def run_scenario(
     gave_up_count = 0
     effective_active = 0
     effective_active_lock = asyncio.Lock()
+    committed = {"tokens": 0}  # tokens promised to requests that are still running
+    if scenario.ladder and client is not None and getattr(client, "limiter", None) is not None:
+        # A service that is already running has recent limit headers. One tiny call
+        # before the clock starts gives the limiter the same knowledge; without it
+        # the first arrivals of a burst are admitted blind. It is not a request row.
+        try:
+            await client.complete(
+                [{"role": "user", "content": "warm-up"}],
+                experiment=warmup_experiment or f"load-{name}-warmup",
+                model=getattr(pipeline, "model_by_step", {}).get("understand"),
+                approval=getattr(pipeline, "approval", None),
+                max_completion_tokens=16,
+            )
+        except Exception:  # the scenario itself will show any real problem
+            pass
+    run_start_monotonic = loop.time()
+    run_start_wall = datetime.now(timezone.utc)
 
     async def apply_limits() -> None:
         if not scenario.limit_changes:
@@ -305,10 +440,10 @@ async def run_scenario(
         await asyncio.sleep(max(0.0, scheduled_monotonic - loop.time()))
         request_id = _request_id(run_id, name, arrival.index)
         scheduled_start = _iso_utc(scheduled_wall)
-        deadline_seconds = scenario.deadline_ms / 1000
+        deadline_seconds = scenario.deadline_s(seed, arrival.index)
         deadline_monotonic = scheduled_monotonic + deadline_seconds
         deadline_wall = _iso_utc(scheduled_wall + timedelta(seconds=deadline_seconds))
-        patience_deadline = scheduled_monotonic + scenario.patience_ms / 1000
+        patience_deadline = scheduled_monotonic + scenario.patience_s(seed, arrival.index)
         gave_up = False
         nonlocal gave_up_count
         pipeline_result: PipelineResult | None = None
@@ -320,19 +455,26 @@ async def run_scenario(
             remaining_patience = max(0.0, patience_deadline - loop.time())
             if remaining_patience <= 0:
                 raise TimeoutError
-            scheduler_config = _load_yaml_mapping(PROJECT_ROOT / "config" / "scheduler.yaml")
-            estimates = scheduler_config.get("degradation", {})
-            degradation = choose_degradation(
-                remaining_s=max(0.0, deadline_monotonic - loop.time()),
-                estimates_s={
-                    "full": estimates.get("full_latency_s"),
-                    "lite": estimates.get("lite_latency_s"),
-                    "extractive": estimates.get("extractive_latency_s"),
-                },
-                allow_wait=False,
+            limiter = getattr(client, "limiter", None)
+            model = getattr(pipeline, "model_by_step", {}).get("understand", "standin")
+            level, limit_notice, ladder_info = await choose_level(
+                scenario=scenario,
+                limiter=limiter,
+                model=model,
+                slack_s=max(0.0, deadline_monotonic - loop.time()),
+                committed_tokens=committed["tokens"],
             )
-            if degradation.level == "drop":
-                raise TimeoutError("no configured answer path fits the request deadline")
+            promised = 0
+            if level == "drop":
+                raise TimeoutError("no answer path fits this request's remaining patience")
+            promised = int(ladder_info.get("promised_tokens", 0))
+            committed["tokens"] += promised
+            # "Delayed" class: this request fits only after the bucket refills a
+            # little. Hold it here, where waiting costs nothing, instead of letting
+            # it start, spend tokens on its first step and stall at its second.
+            hold_s = float(ladder_info.get(f"{level}_wait_s", 0.0)) if level in ("full", "lite") else 0.0
+            if hold_s > 0:
+                await asyncio.sleep(min(hold_s, max(0.0, patience_deadline - loop.time())))
             limiter = getattr(client, "limiter", None)
             model = getattr(pipeline, "model_by_step", {}).get("understand", "standin")
             if limiter is not None:
@@ -352,23 +494,30 @@ async def run_scenario(
                         scenario=name,
                         scheduled_arrival=scheduled_wall,
                         scheduled_arrival_monotonic=scheduled_monotonic,
+                        limit_notice=limit_notice,
+                        fallback_status=(
+                            "rate_limited" if ladder_info.get("reason") == "limit" else "timeout"
+                        ),
+                        ladder=ladder_info,
                     )
-                    if degradation.level == "extractive"
+                    if level == "extractive"
                     else pipeline.run(
                         arrival.question,
                         request_id=request_id,
-                        experiment=f"load-{name}",
+                        experiment=experiment or f"load-{name}",
                         deadline_monotonic=deadline_monotonic,
                         scenario=name,
                         use_semantic=use_semantic,
                         rerank=rerank,
                         scheduled_arrival=scheduled_wall,
                         scheduled_arrival_monotonic=scheduled_monotonic,
-                        degradation_level=degradation.level,
+                        degradation_level=level,
+                        ladder=ladder_info,
                     )
                 )
                 pipeline_result = await asyncio.wait_for(operation, timeout=remaining_patience)
             finally:
+                committed["tokens"] -= promised
                 if limiter is not None:
                     async with effective_active_lock:
                         effective_active = max(0, effective_active - 1)
@@ -499,7 +648,7 @@ async def run_scenario(
             await asyncio.sleep(max(0.0, scheduled_monotonic - loop.time()))
             request_id = _request_id(run_id, name, arrival.index)
             arrival_by_request_id[request_id] = arrival
-            deadline = scheduled_monotonic + scenario.deadline_ms / 1000
+            deadline = scheduled_monotonic + scenario.deadline_s(seed, arrival.index)
             admission = await queue.enqueue(
                 RequestEnvelope(
                     request_id=request_id,
@@ -572,6 +721,7 @@ def build_local_runtime(
     seed: int = 20261109,
     results_path: str | Path | None = None,
     trace_dir: str | Path | None = None,
+    ledger_path: str | Path | None = None,
 ) -> tuple[CitedAnswerPipeline, httpx.AsyncClient, Any]:
     """Create the real pipeline wired only to an in-process stand-in ASGI app."""
     runtime_config: AppConfig = load_runtime_config(runtime_config_path)
@@ -585,8 +735,16 @@ def build_local_runtime(
         additive_step=float(limiter_config.get("aimd_additive_step", 0.1)),
         multiplicative_decrease=float(limiter_config.get("aimd_multiplicative_decrease", 0.5)),
         freshness_seconds=float(limiter_config.get("snapshot_freshness_s", 60)),
+        continuous_refill=bool(limiter_config.get("continuous_refill", False)),
     )
-    client = LLMClient(runtime_config, transport=transport, limiter=limiter)
+    # Stand-in calls are logged beside the run's results, never in budget_ledger.csv,
+    # which is the record of real spending.
+    if ledger_path is None and results_path is not None:
+        ledger_path = Path(results_path).with_name(Path(results_path).stem + "_standin_ledger.csv")
+    client = LLMClient(
+        runtime_config, transport=transport, limiter=limiter, ledger_path=ledger_path,
+        reserve_bytes_per_token=float(limiter_config.get("reservation_bytes_per_token", 1)),
+    )
     setting_spec = next(
         (item for item in RETRIEVAL_SETTINGS if item.name == retrieval_setting), None
     )
@@ -634,11 +792,28 @@ def build_local_runtime(
         answer_cache=answer_cache,
         results_path=results_path,
         trace_dir=trace_dir,
+        **pipeline_kwargs_from_config(pipeline_config),
     )
     admin_client = httpx.AsyncClient(
         transport=httpx.ASGITransport(app=local_app), base_url="http://standin.local"
     )
     return pipeline, admin_client, local_app
+
+
+class NaiveRetryPolicy:
+    """Retry immediately on any retryable failure, ignoring retry-after."""
+
+    def __init__(self, *, max_attempts: int) -> None:
+        self.max_attempts = max_attempts
+
+    async def decide(self, *, attempt: int, status: str, deadline_monotonic: float,
+                     budget: Any, now_monotonic: float | None = None,
+                     retry_after_s: float | None = None) -> Any:
+        from relay.retry import RetryDecision
+
+        if status not in {"timeout", "rate_limited", "server_error"} or attempt >= self.max_attempts:
+            return RetryDecision(False, reason="naive policy: attempts used up")
+        return RetryDecision(True, delay_s=0.0, reason="naive policy: retry at once")
 
 
 async def run_from_settings(
@@ -682,13 +857,23 @@ async def run_from_settings(
             results_path=active_results,
             trace_dir=active_traces,
         )
+        scenario = settings.scenarios[name]
+        if not scenario.cache:
+            pipeline.answer_cache = None
+        if scenario.retry_mode == "naive":
+            # The policy this project argues against, kept runnable so its cost can be
+            # measured: retry at once, ignore retry-after, no shared retry budget, and
+            # no local admission control holding requests back.
+            pipeline.retry_policy = NaiveRetryPolicy(max_attempts=3)
+            pipeline.retry_budget = GlobalRetryBudget(10**9)
+            pipeline.client.limiter = None
         try:
             summaries.append(
                 await run_scenario(
                     pipeline,
                     name,
-                    settings.scenarios[name],
-                    settings.questions,
+                    scenario,
+                    settings.question_pool(),
                     seed=settings.seed if seed is None else seed,
                     run_id=active_run_id,
                     results_path=active_results,

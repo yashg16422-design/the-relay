@@ -1,6 +1,8 @@
 # AIMD policy knobs are UNVERIFIED defaults; tune from E1-E4 and S1-S3.
 aimd_additive_step: 0.1 # UNVERIFIED; recovery increment after a successful response
 aimd_multiplicative_decrease: 0.5 # UNVERIFIED; factor applied after HTTP 429
+continuous_refill: true # buckets refill steadily: results/raw/limit_refill_analysis.json (332 real responses)
+reservation_bytes_per_token: 3 # measured 3.4 (draft: 982 tokens) to 4.1 (E3: 2,929 tokens for 12 kB) bytes per token
 snapshot_freshness_s: 60 # UNVERIFIED display/admission freshness; stale header values become unknown
 
 # Provider limits stay unknown until returned by headers or measured in E2-E3.

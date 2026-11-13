@@ -12,7 +12,7 @@ from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
 from threading import Lock
-from typing import Any, Mapping
+from typing import Any, Literal, Mapping
 
 import yaml
 from fastapi import FastAPI, HTTPException
@@ -22,6 +22,8 @@ from pydantic import BaseModel, ConfigDict, Field
 
 STANDIN_DIR = Path(__file__).resolve().parent
 DEFAULT_CONFIG = STANDIN_DIR / "config.yaml"
+# The uncalibrated settings every run up to 2026-11-11 used; kept so those runs can be reproduced.
+LEGACY_CONFIG = STANDIN_DIR / "config.legacy-2026-11-11.yaml"
 MINUTE_WINDOW_S = 60.0
 DAY_WINDOW_S = 24 * 60 * 60.0
 
@@ -35,8 +37,29 @@ class RateLimits(BaseModel):
     tokens_per_day: int | None = Field(default=None, gt=0)
 
 
+class StepProfile(BaseModel):
+    """How one pipeline step behaves, fitted from real calls (results/calibration_fit.json)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    latency_mu: float  # lognormal of the whole call, in ln(ms); used for non-streamed steps
+    latency_sigma: float = Field(ge=0)
+    ttft_mu: float | None = None  # lognormal of time to first chunk; streamed steps only
+    ttft_sigma: float | None = Field(default=None, ge=0)
+    ms_per_output_token: float = Field(default=0, ge=0)
+    # Billed output tokens (answer + reasoning) are drawn uniformly from this list.
+    output_tokens: list[int] = Field(min_length=1)
+    slow_share: float = Field(default=0, ge=0, le=1)
+    slow_extra_ms: float = Field(default=0, ge=0)
+
+
 class StandinConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
+
+    # sliding_window = the pre-2026-11-12 behaviour; token_bucket = buckets that
+    # refill continuously, which is what the real headers show.
+    limit_model: Literal["sliding_window", "token_bucket"] = "sliding_window"
+    steps: dict[str, StepProfile] = Field(default_factory=dict)
 
     seed: int
     token_bytes_per_token: int = Field(gt=0)
@@ -69,6 +92,9 @@ class LimitUpdate(BaseModel):
     tokens_per_minute: int | None = Field(default=None, gt=0)
     requests_per_day: int | None = Field(default=None, gt=0)
     tokens_per_day: int | None = Field(default=None, gt=0)
+    # token_bucket only: set what is left in the daily token bucket right now,
+    # so a run can reach "daily budget exhausted" without spending 200,000 tokens.
+    remaining_tokens_day: int | None = Field(default=None, ge=0)
 
 
 def load_config(path: str | Path = DEFAULT_CONFIG) -> StandinConfig:
@@ -92,6 +118,97 @@ class RuntimeState:
         self.token_minute: deque[tuple[float, int]] = deque()
         self.request_day: deque[float] = deque()
         self.token_day: deque[tuple[float, int]] = deque()
+        # token_bucket state: how much is left in each bucket, and when it was last refilled.
+        self.levels: dict[str, float] = {}
+        self.refilled_at: float | None = None
+
+    _BUCKETS = (  # name, limit field, refill window in seconds
+        ("rpm", "requests_per_minute", MINUTE_WINDOW_S),
+        ("tpm", "tokens_per_minute", MINUTE_WINDOW_S),
+        ("rpd", "requests_per_day", DAY_WINDOW_S),
+        ("tpd", "tokens_per_day", DAY_WINDOW_S),
+    )
+
+    def _refill(self, now: float) -> None:
+        limits = self.config.limits
+        elapsed = 0.0 if self.refilled_at is None else max(0.0, now - self.refilled_at)
+        self.refilled_at = now
+        for name, field, window in self._BUCKETS:
+            capacity = getattr(limits, field)
+            if capacity is None:
+                self.levels.pop(name, None)
+                continue
+            level = self.levels.get(name, float(capacity))
+            self.levels[name] = min(float(capacity), level + elapsed * capacity / window)
+
+    def _bucket_check(self, tokens: int, now: float) -> tuple[bool, dict[str, str], int]:
+        """Token-bucket admission: take from every bucket, or from none and say how long to wait."""
+        self._refill(now)
+        limits = self.config.limits
+        waits: list[float] = []
+        for name, field, window in self._BUCKETS:
+            capacity = getattr(limits, field)
+            if capacity is None:
+                continue
+            need = tokens if name in ("tpm", "tpd") else 1
+            if need > capacity:
+                raise HTTPException(
+                    status_code=413,
+                    detail={
+                        "type": "invalid_request_error",
+                        "code": "request_exceeds_token_window",
+                        "message": "This request cannot fit in the configured token window, even after reset.",
+                    },
+                )
+            deficit = need - self.levels[name]
+            if deficit > 0:
+                waits.append(deficit * window / capacity)
+        if not waits:
+            for name, _field, _window in self._BUCKETS:
+                if name in self.levels:
+                    self.levels[name] -= tokens if name in ("tpm", "tpd") else 1
+        headers = self._bucket_headers()
+        return bool(waits), headers, (max(1, math.ceil(max(waits))) if waits else 0)
+
+    def _bucket_headers(self) -> dict[str, str]:
+        limits = self.config.limits
+        headers: dict[str, str] = {}
+        for name, field, window, key in (
+            ("rpd", "requests_per_day", DAY_WINDOW_S, "requests"),
+            ("tpm", "tokens_per_minute", MINUTE_WINDOW_S, "tokens"),
+            ("rpm", "requests_per_minute", MINUTE_WINDOW_S, "requests-minute"),
+            ("tpd", "tokens_per_day", DAY_WINDOW_S, "tokens-day"),
+        ):
+            capacity = getattr(limits, field)
+            if capacity is None:
+                headers[f"x-ratelimit-limit-{key}"] = "unlimited"
+                headers[f"x-ratelimit-remaining-{key}"] = "unlimited"
+                headers[f"x-ratelimit-reset-{key}"] = "0s"
+                continue
+            level = max(0.0, self.levels[name])
+            headers[f"x-ratelimit-limit-{key}"] = str(capacity)
+            headers[f"x-ratelimit-remaining-{key}"] = str(int(level))
+            # Same rule the real headers follow: reset = used / refill rate.
+            headers[f"x-ratelimit-reset-{key}"] = f"{(capacity - level) * window / capacity:.3f}s"
+        return headers
+
+    def draw_step(self, profile: StepProfile, cap: int | None) -> tuple[int, float, float]:
+        """Draw billed output tokens, time to first byte and total time (ms) for one call."""
+        with self.rng_lock:
+            tokens = self.rng.choice(profile.output_tokens)
+            total = self.rng.lognormvariate(profile.latency_mu, profile.latency_sigma)
+            first = (
+                self.rng.lognormvariate(profile.ttft_mu, profile.ttft_sigma or 0.0)
+                if profile.ttft_mu is not None else total
+            )
+            if self.rng.random() < profile.slow_share:
+                total += profile.slow_extra_ms
+                first += profile.slow_extra_ms
+        if cap is not None:
+            tokens = min(tokens, cap)
+        if profile.ttft_mu is not None:
+            total = first + tokens * profile.ms_per_output_token
+        return tokens, first, total
 
     def draw_scenario(self) -> tuple[float, float, float]:
         # Draw all outcomes together without an await, preserving reproducibility
@@ -116,6 +233,8 @@ class RuntimeState:
 
     async def check_and_record(self, input_tokens: int, now: float) -> tuple[bool, dict[str, str], int]:
         async with self.lock:
+            if self.config.limit_model == "token_bucket":
+                return self._bucket_check(input_tokens, now)
             self._prune(now)
             limits = self.config.limits
             if (
@@ -296,6 +415,21 @@ def _pipeline_reply(messages: list[dict[str, Any]]) -> str | None:
     return ""
 
 
+def _pipeline_step(messages: list[dict[str, Any]]) -> str | None:
+    """Which pipeline step sent this request, read from its system prompt."""
+    system = "\n".join(
+        str(message.get("content", "")) for message in messages if message.get("role") == "system"
+    )
+    if "Rewrite the user's question as one concise search query" in system:
+        return "understand"
+    if "Decide whether the evidence contains enough information" in system:
+        return "judge"
+    if "Answer only from the supplied passages" in system:
+        is_repair = _last_user_text(messages).startswith("Rewrite the answer to fix")
+        return "repair" if is_repair else "draft"
+    return None
+
+
 def _extract_evidence_payload(text: str) -> dict[str, Any] | None:
     """Read the JSON evidence object from a plain or repair-prefixed prompt."""
     decoder = json.JSONDecoder()
@@ -329,11 +463,18 @@ def create_app(config: StandinConfig | Mapping[str, Any] | None = None) -> FastA
     @app.post("/admin/limits")
     async def update_limits(update: LimitUpdate) -> dict[str, Any]:
         changes = update.model_dump(exclude_unset=True)
+        remaining_day = changes.pop("remaining_tokens_day", None)
         current = state.config.limits.model_dump()
         current.update(changes)
-        state.config = state.config.model_copy(
-            update={"limits": RateLimits.model_validate(current)}
-        )
+        async with state.lock:
+            state.config = state.config.model_copy(
+                update={"limits": RateLimits.model_validate(current)}
+            )
+            if state.config.limit_model == "token_bucket":
+                # A lowered limit takes effect at once: no bucket may hold more than its new size.
+                state._refill(time.monotonic())
+                if remaining_day is not None:
+                    state.levels["tpd"] = float(remaining_day)
         return {"limits": state.config.limits.model_dump()}
 
     @app.post("/v1/chat/completions")
@@ -363,6 +504,17 @@ def create_app(config: StandinConfig | Mapping[str, Any] | None = None) -> FastA
             if isinstance(choices, bool) or not isinstance(choices, int) or choices != 1:
                 raise HTTPException(status_code=400, detail="The stand-in supports n=1 only")
             output_tokens = _approx_tokens(answer, cfg.token_bytes_per_token)
+            profile = cfg.steps.get(_pipeline_step(request.messages) or "")
+            first_ms = total_ms = 0.0
+            reasoning_tokens = 0
+            if profile is not None:
+                # Bill what a real call of this step bills (answer + reasoning),
+                # not the length of the stand-in's one copied sentence.
+                billed, first_ms, total_ms = state.draw_step(
+                    profile, output_cap if isinstance(output_cap, int) else None
+                )
+                reasoning_tokens = max(0, billed - output_tokens)
+                output_tokens = max(output_tokens, billed)
             limited, rate_headers, retry_after = await state.check_and_record(
                 input_tokens + output_tokens, now
             )
@@ -386,6 +538,8 @@ def create_app(config: StandinConfig | Mapping[str, Any] | None = None) -> FastA
                 delay_ms += cfg.slow_success_extra_ms
             if hang_draw < cfg.hang_probability:
                 delay_ms += cfg.hang_duration_ms
+                        # Streamed steps wait for the first chunk here and pace the rest below.
+            delay_ms += first_ms if request.stream else total_ms
             if delay_ms > 0:
                 await asyncio.sleep(delay_ms / 1000)
 
@@ -408,7 +562,12 @@ def create_app(config: StandinConfig | Mapping[str, Any] | None = None) -> FastA
                 "prompt_tokens": input_tokens,
                 "completion_tokens": output_tokens,
                 "total_tokens": input_tokens + output_tokens,
+                "completion_tokens_details": {"reasoning_tokens": reasoning_tokens},
             }
+            chunk_delay_ms = cfg.stream_chunk_delay_ms
+            if profile is not None and request.stream:
+                chunks = max(1, math.ceil(len(answer) / cfg.chunk_chars))
+                chunk_delay_ms = max(0.0, total_ms - first_ms) / chunks
             if request.stream:
                 async def stream_body():
                     try:
@@ -419,7 +578,7 @@ def create_app(config: StandinConfig | Mapping[str, Any] | None = None) -> FastA
                             answer,
                             usage,
                             cfg.chunk_chars,
-                            cfg.stream_chunk_delay_ms,
+                            chunk_delay_ms,
                         ):
                             yield event
                     finally:

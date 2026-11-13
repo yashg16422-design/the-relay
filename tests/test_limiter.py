@@ -129,3 +129,30 @@ def test_missing_bucket_header_marks_snapshot_unknown() -> None:
     assert snapshot.source == "missing-or-invalid-header"
     assert admission.allowed is True
     assert "rpd" in admission.unknown_buckets
+
+
+def test_millisecond_reset_is_parsed_and_wait_is_proportional_to_the_shortfall() -> None:
+    import asyncio
+
+    from relay.limiter import AdaptiveLimiter, parse_duration
+
+    assert parse_duration("667ms") == 0.667
+    assert parse_duration("1m2.5s") == 62.5
+
+    async def run() -> None:
+        limiter = AdaptiveLimiter(additive_step=0.1, multiplicative_decrease=0.5,
+                                  freshness_seconds=60, continuous_refill=True)
+        headers = {"x-ratelimit-limit-tokens": "8000", "x-ratelimit-remaining-tokens": "2276",
+                   "x-ratelimit-reset-tokens": "42.93s"}  # 5,724 used / 133.3 per s
+        await limiter.observe("m", headers, status_code=200, now_monotonic=100.0, now_epoch=0.0)
+        # The real 429 of E3: 5,724 used, 2,945 requested -> "try again in 5.0175s".
+        wait, bucket = await limiter.predicted_wait("m", request_tokens=2945, now_monotonic=100.0)
+        assert bucket == "tpm" and abs(wait - 5.0175) < 0.01
+        # A full bucket still has a known refill rate (limit / 60 s).
+        full = {"x-ratelimit-limit-tokens": "8000", "x-ratelimit-remaining-tokens": "8000",
+                "x-ratelimit-reset-tokens": "0s"}
+        await limiter.observe("m", full, status_code=200, now_monotonic=200.0, now_epoch=0.0)
+        wait, _ = await limiter.predicted_wait("m", request_tokens=9000, now_monotonic=200.0)
+        assert abs(wait - 7.5) < 0.01
+
+    asyncio.run(run())

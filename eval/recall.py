@@ -64,7 +64,7 @@ def load_questions(path: str | Path = QUESTIONS_PATH) -> list[EvalQuestion]:
         answerable = item.get("answerable")
         if not question_id or question_id in seen:
             raise ValueError("question IDs must be non-empty and unique")
-        if not question or not question_type or not isinstance(answerable, bool):
+        if not question or not isinstance(answerable, bool):  # "type" is optional
             raise ValueError(f"question {question_id} is missing required fields")
         seen.add(question_id)
         gold_raw = item.get("gold_passages", [])

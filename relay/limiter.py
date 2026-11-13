@@ -42,10 +42,11 @@ def parse_duration(value: str) -> float | None:
         return max(0.0, seconds) if math.isfinite(seconds) else None
     except ValueError:
         pass
-    matches = list(re.finditer(r"(\d+(?:\.\d+)?)(d|h|m|s)", text))
+    # "ms" must be tried before "m" and "s": Groq reports short resets as e.g. "667ms".
+    matches = list(re.finditer(r"(\d+(?:\.\d+)?)(ms|d|h|m|s)", text))
     if not matches or "".join(match.group(0) for match in matches) != text:
         return None
-    factors = {"d": 86400, "h": 3600, "m": 60, "s": 1}
+    factors = {"d": 86400, "h": 3600, "m": 60, "s": 1, "ms": 0.001}
     return sum(float(match.group(1)) * factors[match.group(2)] for match in matches)
 
 
@@ -99,6 +100,7 @@ class AdaptiveLimiter:
         additive_step: float,
         multiplicative_decrease: float,
         freshness_seconds: float,
+        continuous_refill: bool = False,
     ) -> None:
         if not math.isfinite(additive_step) or not 0 < additive_step <= 1:
             raise ValueError("additive_step must be finite and in (0, 1]")
@@ -109,6 +111,10 @@ class AdaptiveLimiter:
         self.additive_step = additive_step
         self.multiplicative_decrease = multiplicative_decrease
         self.freshness_seconds = freshness_seconds
+        # False = treat the reset header as "the whole bucket comes back then".
+        # True = the bucket refills steadily, which is what 332 real responses
+        # show (results/raw/limit_refill_analysis.json): reset = used / refill rate.
+        self.continuous_refill = continuous_refill
         self._buckets: dict[str, dict[BucketName, BucketSnapshot]] = {}
         self._cooldown_until: dict[str, float] = {}
         self._concurrency_factor: dict[str, float] = {}
@@ -169,16 +175,17 @@ class AdaptiveLimiter:
                 if now - snapshot.observed_at > self.freshness_seconds:
                     unknown.append(name)
                     continue
-                remaining = snapshot.remaining
-                if snapshot.reset_at is not None and now >= snapshot.reset_at:
-                    remaining = snapshot.limit if snapshot.limit is not None else None
+                remaining, rate = self._remaining_and_rate(snapshot, now)
                 if remaining is None:
                     unknown.append(name)
                     continue
                 available = remaining - reserved.get(name, 0)
                 if available < cost:
                     blocked.append(name)
-                    if snapshot.reset_at is not None and snapshot.reset_at > now:
+                    if rate:
+                        # Wait only until the bucket holds this request, not until it is full.
+                        waits.append((cost - available) / rate)
+                    elif snapshot.reset_at is not None and snapshot.reset_at > now:
                         waits.append(snapshot.reset_at - now)
                 else:
                     normalized_costs[name] = cost
@@ -196,6 +203,63 @@ class AdaptiveLimiter:
             for name, cost in normalized_costs.items():
                 reserved[name] = reserved.get(name, 0) + cost
             return Admission(True, unknown_buckets=tuple(unknown), reservation_id=reservation_id)
+
+    def _remaining_and_rate(
+        self, snapshot: BucketSnapshot, now: float
+    ) -> tuple[float | None, float | None]:
+        """What the bucket holds now, and its refill rate per second when that is known."""
+        remaining: float | None = snapshot.remaining
+        if self.continuous_refill and snapshot.limit is not None and snapshot.remaining is not None:
+            # Refill rate: read it from the reset header when the bucket is not full
+            # (reset = used / rate); otherwise it is the limit spread over its window.
+            window = 60.0 if snapshot.name in ("rpm", "tpm") else 86400.0
+            rate = snapshot.limit / window
+            if (
+                snapshot.reset_at is not None
+                and snapshot.reset_at > snapshot.observed_at
+                and snapshot.limit > snapshot.remaining
+            ):
+                rate = (snapshot.limit - snapshot.remaining) / (snapshot.reset_at - snapshot.observed_at)
+            refilled = snapshot.remaining + rate * max(0.0, now - snapshot.observed_at)
+            return min(float(snapshot.limit), refilled), rate
+        if snapshot.reset_at is not None and now >= snapshot.reset_at:
+            remaining = snapshot.limit if snapshot.limit is not None else None
+        return remaining, None
+
+    async def predicted_wait(
+        self, model: str, *, request_tokens: int, now_monotonic: float | None = None
+    ) -> tuple[float, str | None]:
+        """Seconds until `request_tokens` would be admitted, and the bucket that decides it.
+
+        Reserves nothing. Unknown or stale buckets count as no wait: the limiter
+        does not invent a limit it has not seen.
+        """
+        now = now_monotonic if now_monotonic is not None else asyncio.get_running_loop().time()
+        async with self._lock:
+            worst, worst_name = 0.0, None
+            cooldown = self._cooldown_until.get(model)
+            if cooldown is not None and cooldown > now:
+                worst, worst_name = cooldown - now, "retry-after"
+            reserved = self._reserved.get(model, {})
+            for name, snapshot in self._buckets.get(model, {}).items():
+                if snapshot.remaining is None or now - snapshot.observed_at > self.freshness_seconds:
+                    continue
+                remaining, rate = self._remaining_and_rate(snapshot, now)
+                if remaining is None:
+                    continue
+                cost = request_tokens if name in ("tpm", "tpd") else 1
+                deficit = cost - (remaining - reserved.get(name, 0))
+                if deficit <= 0:
+                    continue
+                if rate:
+                    wait = deficit / rate
+                elif snapshot.reset_at is not None and snapshot.reset_at > now:
+                    wait = snapshot.reset_at - now
+                else:
+                    continue
+                if wait > worst:
+                    worst, worst_name = wait, name
+            return worst, worst_name
 
     async def admission(
         self,

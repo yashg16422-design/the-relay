@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import csv
 import json
+import math
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
@@ -49,6 +50,8 @@ class LLMResponse:
     usage: TokenUsage
     time_to_first_chunk_ms: float | None
     total_ms: float
+    # "stop", or "length" when the reply was cut off by max_completion_tokens.
+    finish_reason: str | None = None
 
 
 @dataclass(frozen=True)
@@ -272,7 +275,14 @@ class LLMClient:
         timeout: float | None = None,
         transport: httpx.AsyncBaseTransport | None = None,
         limiter: AdaptiveLimiter | None = None,
+        reserve_bytes_per_token: float = 1.0,
     ) -> None:
+        if reserve_bytes_per_token < 1:
+            raise ValueError("reserve_bytes_per_token must be at least 1")
+        # The approval budget (money) always uses the hard bound of one token per
+        # byte. The local limiter (admission) may use a measured ratio instead, or
+        # it refuses calls the provider would have accepted.
+        self.reserve_bytes_per_token = reserve_bytes_per_token
         self.config = config
         self.ledger_path = Path(ledger_path or PROJECT_ROOT / "budget_ledger.csv")
         self._ledger_lock = asyncio.Lock()
@@ -430,7 +440,7 @@ class LLMClient:
         input_estimate = self._input_token_upper_bound(payload)
         output_limit = self._output_limit(payload)
         limiter_reservation = await self._reserve_limits(
-            selected_model, input_estimate + output_limit
+            selected_model, math.ceil(input_estimate / self.reserve_bytes_per_token) + output_limit
         )
         try:
             await self._authorize(
@@ -505,6 +515,7 @@ class LLMClient:
         try:
             text = self._response_text(data)
             usage = self._usage(data.get("usage"))
+            finish_reason = data["choices"][0].get("finish_reason")
         except (TypeError, ValueError, KeyError, IndexError) as exc:
             await self._write_ledger(
                 experiment, selected_model, "error", response_headers, TokenUsage()
@@ -524,6 +535,7 @@ class LLMClient:
             usage=usage,
             time_to_first_chunk_ms=None,
             total_ms=elapsed_ms,
+            finish_reason=finish_reason if isinstance(finish_reason, str) else None,
         )
 
     async def stream(
@@ -541,7 +553,7 @@ class LLMClient:
         input_estimate = self._input_token_upper_bound(payload)
         output_limit = self._output_limit(payload)
         limiter_reservation = await self._reserve_limits(
-            selected_model, input_estimate + output_limit
+            selected_model, math.ceil(input_estimate / self.reserve_bytes_per_token) + output_limit
         )
         try:
             await self._authorize(
@@ -554,6 +566,7 @@ class LLMClient:
         first_chunk_ms: float | None = None
         chunks: list[str] = []
         usage = TokenUsage()
+        finish_reason: str | None = None
         response_headers: dict[str, str] = {}
         status_code = 0
         ledger_status = "error"
@@ -593,6 +606,8 @@ class LLMClient:
                     if event.get("usage") is not None:
                         usage = self._usage(event["usage"])
                     for choice in event.get("choices", []):
+                        if isinstance(choice.get("finish_reason"), str):
+                            finish_reason = choice["finish_reason"]
                         content = choice.get("delta", {}).get("content")
                         if isinstance(content, str) and content:
                             if first_chunk_ms is None:
@@ -624,6 +639,7 @@ class LLMClient:
                 usage=usage,
                 time_to_first_chunk_ms=first_chunk_ms,
                 total_ms=elapsed_ms,
+                finish_reason=finish_reason,
             )
 
     async def _authorize(
